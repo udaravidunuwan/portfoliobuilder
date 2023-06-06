@@ -23,7 +23,7 @@ session_start();
     <!-- FAVICON -->
     <link rel="icon" href="./assets/img/favicon_io/favicon.ico" type="image/x-icon">
 
-    <title>Portfolio Hub</title>
+    <title>Project Portfolio</title>
 </head>
 <body>
     <!-- HEADER -->
@@ -65,7 +65,7 @@ session_start();
                     </li>
                     <li class="nav__item">
                         <a  class="nav__link login__button-remake">
-                            <i class="uil uil-signin nav__icon"></i> Login
+                            <i class="uil uil-signin nav__icon"></i> Logout
                         </a>
                     </li>
                 </ul>

@@ -19,7 +19,7 @@
     <!-- FAVICON -->
     <link rel="icon" href="./assets/img/favicon_io/favicon.ico" type="image/x-icon">
 
-    <title>Portfolio Hub</title>
+    <title>Project Portfolio</title>
 </head>
 <body>
     <!-- HEADER -->
