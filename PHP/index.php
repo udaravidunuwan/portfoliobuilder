@@ -1,3 +1,7 @@
+<?php
+require_once 'config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -706,16 +710,16 @@
                     <h4 class="login-remake__model-title">Login</h4>
                     <i class="uil uil-times login-remake__model-close"></i>
 
-                    <form action="" class="login__form grid">
+                    <form action="" class="login__form grid" method="post">
                         <div class="login__inputs grid">
 
                             <div class="login-remake__content">
-                                <label for="email" class="login__label">Email</label>
-                                <input id="email" name="email" type="email" class="login__input email"  placeholder="Enter email here" autocomplete="off" required>
+                                <label for="loginEmail" class="login__label">Email</label>
+                                <input id="email" name="loginEmail" type="email" class="login__input email"  placeholder="Enter email here" autocomplete="off" required>
                             </div>
                             <div class="login-remake__content">
-                                <label for="password" class="login__label">Password</label>
-                                <input id="password" name="password" type="password" class="login__input password"  placeholder="Enter password here" required>
+                                <label for="LoginPassword" class="login__label">Password</label>
+                                <input id="password" name="LoginPassword" type="password" class="login__input password"  placeholder="Enter password here" required>
                             </div>
                             <div class="">
                                 <label for="showPassword" class="">Show password</label>
