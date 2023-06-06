@@ -16,7 +16,7 @@ require_once 'config.php';
     <link rel="stylesheet" href="./assets/css/styles.css">
 
     <!-- FAVICON -->
-    <link rel="icon" href="./assets/favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./assets/img/favicon_io/favicon.ico" type="image/x-icon">
 
     <title>Portfolio Hub</title>
 </head>
