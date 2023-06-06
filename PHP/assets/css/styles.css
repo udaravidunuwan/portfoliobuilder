@@ -279,6 +279,12 @@ img {
     box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
 }
 
+/* HEADER */
+.header__img {
+    height: auto;
+    width: 40px;
+}
+
 
 /* HOME */
 .home__container {
@@ -818,6 +824,14 @@ img {
     padding: .25rem .5rem .5rem 0;
 }
 
+/* LOGOUT */
+.logout__button {
+    cursor: pointer;
+    font-size: var(--small-font-size);
+}
+
+
+
 /* LOGIN REMAKE */
 .login__button-remake {
     cursor: pointer;
@@ -1021,6 +1035,11 @@ img {
 
     .nav__list {
         column-gap: 0;
+    }
+
+    .header__img {
+        height: 30px;
+        width: auto;
     }
 
     .home__content {

@@ -27,6 +27,7 @@
         <nav class="nav container">
             <!-- IF ANY USERNAME is stored in database fetch it and display -->
             <!-- IF NO USERNAME in database; then Keep as USER and once the username is given and saved below, fetch itand display -->
+            <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
             <a href="#" class="nav__logo">User</a>
             
             <div class="nav__menu" id="nav-menu">

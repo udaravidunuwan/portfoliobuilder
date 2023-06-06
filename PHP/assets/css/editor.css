@@ -279,6 +279,12 @@ img {
     box-shadow: 0 -1px 4px rgba(0, 0, 0, .15);
 }
 
+/* HEADER */
+.header__img {
+    height: auto;
+    width: 40px;
+}
+
 /* EDITOR REUSABLE  */
 .editor__container {
     gap: 1rem;
@@ -1150,6 +1156,11 @@ img {
 
     .nav__list {
         column-gap: 0;
+    }
+
+    .header__img {
+        height: 30px;
+        width: auto;
     }
 
     .home__content {

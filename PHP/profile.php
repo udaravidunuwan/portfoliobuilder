@@ -29,6 +29,7 @@ session_start();
     <!-- HEADER -->
     <header class="header" id="header">
         <nav class="nav container">
+            <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
             <a href="#" class="nav__logo">User Name</a>
             
             <div class="nav__menu" id="nav-menu">
@@ -63,8 +64,13 @@ session_start();
                             <i class="uil uil-comment-message nav__icon"></i> Contact me
                         </a>
                     </li>
-                    <li class="nav__item">
+                    <!-- <li class="nav__item">
                         <a  class="nav__link login__button-remake">
+                            <i class="uil uil-signin nav__icon"></i> Login
+                        </a>
+                    </li> -->
+                    <li class="nav__item">
+                        <a  class="nav__link logout__button">
                             <i class="uil uil-signin nav__icon"></i> Logout
                         </a>
                     </li>
@@ -712,7 +718,7 @@ session_start();
 
 
         <!-- LOGIN REMAKE -->
-        <section class="login-remake section" id="login-remake">
+        <!-- <section class="login-remake section" id="login-remake">
 
             <div class="login-remake__model">
                 <div class="login-remake__model-content">
@@ -746,7 +752,7 @@ session_start();
                 </div>
             </div>
 
-        </section>
+        </section> -->
 
 
     </main>
