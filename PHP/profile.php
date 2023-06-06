@@ -1,5 +1,10 @@
 <?php
-require_once 'config.php';
+session_start();
+
+    include("config.php");
+    // include("test.php");
+
+    // $user_data=check_login($connection);
 ?>
 
 <!DOCTYPE html>
