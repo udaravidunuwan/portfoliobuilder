@@ -43,6 +43,11 @@
                         </a>
                     </li>
                     <li class="nav__item">
+                        <a href="#qualifications" class="nav__link">
+                            <i class="uil uil-file-bookmark-alt nav__icon"></i> Qualifications
+                        </a>
+                    </li>
+                    <li class="nav__item">
                         <a href="#services" class="nav__link">
                             <i class="uil uil-file-lock-alt nav__icon"></i> Services
                         </a>
@@ -248,7 +253,7 @@
         </section>
         
         <!-- QUALIFICATION -->
-        <section class="qualification section">
+        <section class="qualification section" id="qualifications">
             <h2 class="section__title">Quaifications</h2>
             <span class="section__subtitle">My personal journey</span>
 

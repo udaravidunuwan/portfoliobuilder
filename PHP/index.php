@@ -21,7 +21,7 @@ require_once 'config.php';
     <!-- HEADER -->
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#" class="nav__logo">Udara Vidunuwan</a>
+            <a href="#" class="nav__logo">User Name</a>
             
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list grid">
@@ -41,6 +41,11 @@ require_once 'config.php';
                         </a>
                     </li>
                     <li class="nav__item">
+                        <a href="#qualifications" class="nav__link">
+                            <i class="uil uil-file-bookmark-alt nav__icon"></i> Qualifications
+                        </a>
+                    </li>
+                    <li class="nav__item">
                         <a href="#services" class="nav__link">
                             <i class="uil uil-file-lock-alt nav__icon"></i> Services
                         </a>
@@ -50,11 +55,6 @@ require_once 'config.php';
                             <i class="uil uil-comment-message nav__icon"></i> Contact me
                         </a>
                     </li>
-                    <!-- <li class="nav__item">
-                        <a  class="nav__link login__button">
-                            <i class="uil uil-signin nav__icon"></i> Login
-                        </a>
-                    </li> -->
                     <li class="nav__item">
                         <a  class="nav__link login__button-remake">
                             <i class="uil uil-signin nav__icon"></i> Login
@@ -324,7 +324,7 @@ require_once 'config.php';
         </section>
         
         <!-- QUALIFICATION -->
-        <section class="qualification section">
+        <section class="qualification section" id="qualifications">
             <h2 class="section__title">Quaifications</h2>
             <span class="section__subtitle">My personal journey</span>
 

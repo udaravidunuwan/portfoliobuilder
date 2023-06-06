@@ -13,9 +13,8 @@ if (!$connection) {
     die('Connection failed: ' .mysqli_connect_error());
 }
 
-echo 'Connected successfully';
 
-// Perform your database operations here
+// Database operations here
 
 // Close the connection
 mysqli_close($connection);
