@@ -12,9 +12,12 @@ require_once 'config.php';
     <!-- UNICONS -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="./assets/favicon_io/favicon.ico" type="image/x-icon">
+
     <title>Portfolio Hub</title>
 </head>
 <body>
@@ -129,6 +132,7 @@ require_once 'config.php';
             </div>
         </section>
 
+
         <!-- ABOUT -->
         <section class="about section" id="about">
             <h2 class="section__title">About Me</h2>
@@ -163,6 +167,7 @@ require_once 'config.php';
                 </div>
             </div>
         </section>
+
 
         <!-- SKiLLS -->
         <section class="skills section" id="skills">
@@ -323,6 +328,7 @@ require_once 'config.php';
             </div>
         </section>
         
+
         <!-- QUALIFICATION -->
         <section class="qualification section" id="qualifications">
             <h2 class="section__title">Quaifications</h2>
@@ -486,6 +492,7 @@ require_once 'config.php';
             </div>
         </section>
 
+
         <!-- SERVICES -->
         <section class="services section" id="services">
             <h2 class="section__title">Services</h2>
@@ -610,6 +617,7 @@ require_once 'config.php';
             </div>
         </section>
         
+
         <!-- PROJECT IN MIND -->
         <section class="project section">
             <div class="project__bg">
@@ -628,9 +636,6 @@ require_once 'config.php';
                 </div>
             </div>
         </section>
-
-
-        
 
 
         <!-- CONTCT ME -->
@@ -738,9 +743,6 @@ require_once 'config.php';
 
         </section>
 
-        <!-- <div class="alert-box">
-            <p class="alert">Message</p>
-        </div> -->
 
     </main>
 

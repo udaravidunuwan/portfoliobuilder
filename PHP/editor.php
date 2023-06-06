@@ -15,6 +15,10 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/editor.css">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="./assets/favicon_io/favicon.ico" type="image/x-icon">
+
     <title>Portfolio Hub</title>
 </head>
 <body>
