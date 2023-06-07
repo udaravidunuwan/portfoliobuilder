@@ -1,3 +1,9 @@
+<?php 
+session_start();
+
+    $_SESSION;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +78,7 @@
                     </div>
 
                     <div>
-                        <a href="" class="button button--flex">
+                        <a id="createNewPortfolio" href="" class="button button--flex">
                             Create New Portfolio 
                         </a>
                     </div>
@@ -111,6 +117,8 @@
                         <div>
                             <button type="submit" class="login-button" id="login-submit">Login</button>
                         </div>
+
+                        
                     </form>
 
                 </div>
@@ -153,6 +161,7 @@
                         <div>
                             <button type="submit" class="register-button" id="register-submit">Register</button>
                         </div>
+
                     </form>
 
                 </div>

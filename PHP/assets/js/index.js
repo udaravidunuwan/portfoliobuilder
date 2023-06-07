@@ -66,7 +66,7 @@ themeButton.addEventListener('click', () => {
 /* LOGIN MODEL REMAKE */
 const loginmodelremakeViews = document.querySelectorAll('.login-remake__model'),
 loginmodelremakeBtns = document.querySelectorAll('.login__button-remake'),
-loginmodelremakeCloses = document.querySelectorAll('.login-remake__model-close')
+loginmodelremakeCloses = document.querySelectorAll('.login-remake__model-close');
 
 let loginmodelremake = function(loginmodelremakeClick){
     loginmodelremakeViews[loginmodelremakeClick].classList.add('active-model-login-remake')
@@ -129,3 +129,20 @@ document.getElementById('showPasswordRegister').onclick = function() {
        document.getElementById('passwordRegisterConfirm').type = "password";
     }
 };
+
+/* CONFIRM PASSWORD */
+const form = document.querySelector('.register__form');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const password = document.getElementById('passwordRegister').value;
+  const confirmPassword = document.getElementById('passwordRegisterConfirm').value;
+
+  if (password === confirmPassword) {
+    form.submit();
+  } else {
+    alert('Passwords do not match. Please try again.');
+  }
+});
+

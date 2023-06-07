@@ -17,5 +17,5 @@ if (!$connection) {
 // Database operations here
 
 // Close the connection
-mysqli_close($connection);
-?>
+// mysqli_close($connection);
+

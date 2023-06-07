@@ -1,3 +1,10 @@
+<?php 
+session_start();
+
+    $_SESSION;
+?>
+
+
 <!-- The defalut template will be Jhon Doe -->
 <!-- No personal details yet -->
 <!DOCTYPE html>
