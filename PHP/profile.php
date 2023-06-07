@@ -6,7 +6,7 @@ session_start();
     include("config.php");
     include("function.php");
 
-    $user_data = check_login($connection);
+    // $user_data = check_login($connection);
 ?>
 
 <!DOCTYPE html>
@@ -72,8 +72,8 @@ session_start();
                         </a>
                     </li> -->
                     <li class="nav__item">
-                        <a  class="nav__link logout__button">
-                            <i class="uil uil-signin nav__icon"></i> Logout
+                        <a  class="nav__link edit__button">
+                            <i class="uil uil-signin nav__icon"></i> Edit
                         </a>
                     </li>
                 </ul>

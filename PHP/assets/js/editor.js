@@ -62,6 +62,8 @@ function linkAction(){
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
+
+
 /* SCROLL SECTIONS ACTIVE */
 const sections = document.querySelectorAll('section[id]')
 

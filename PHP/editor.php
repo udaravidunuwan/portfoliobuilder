@@ -72,8 +72,8 @@ session_start();
                     </li>
                     <!-- LOGOUT AND CLOSE SESSION; GO ABCK TO INDEX.HTML -->
                     <li class="nav__item">
-                        <a  class="nav__link logout__button" href="#">
-                            <i class="uil uil-signin nav__icon"></i> Logout
+                        <a  class="nav__link view__button">
+                            <i class="uil uil-signin nav__icon"></i> View
                         </a>
                     </li>
                     

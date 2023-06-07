@@ -1,7 +1,10 @@
 <?php 
 session_start();
 
-    $_SESSION;
+    include("config.php");
+    include("function.php");
+
+    // $_SESSION;
 ?>
 
 <!DOCTYPE html>
