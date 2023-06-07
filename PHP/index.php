@@ -1,10 +1,66 @@
 <?php 
 session_start();
 
-    include("config.php");
+    include("connection.php");
     include("function.php");
 
-    // $_SESSION;
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        
+        if (!isset($_POST['register-submit'])) {
+
+            $user_email_reg = $_POST['registerEmail'];
+            $user_password_reg = $_POST['registerPassword'];
+            $user_confirm_password_reg = $_POST['registerPasswordConfirm'];
+
+            if ($user_password_reg === $user_confirm_password_reg) {
+                if(!empty($user_email_reg) && !empty($user_password_reg)){
+                    $user_id = userIdGen(4);
+    
+                    $stmt = $connection->prepare("INSERT INTO users (user_id, user_email, user_password) VALUES (?, ?, ?)");
+                    $stmt->bind_param("iss", $user_id, $user_email_reg, $user_password_reg);
+                    $stmt->execute();
+    
+                    header("Location: index.php");
+                    die;
+
+                } else {
+                    $errorMessage = 'Invalid Information. Please try again.';
+                }
+              } else {
+                $errorMessage = 'Passwords do not match. Please try again.';
+              }
+
+        } elseif (!isset($_POST['login-submit'])) {
+
+            $user_email_log = $_POST['loginEmail'];
+            $user_password_log = $_POST['LoginPassword'];
+
+            if(!empty($user_email_log) && !empty($user_password_log)){
+                
+                $stmt = $connection->prepare("SELECT * FROM users WHERE user_email = ? limit 1");
+                $stmt->bind_param("s", $user_email_log);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows == 1) {
+                    $user_data = $result->fetch_assoc();
+                    
+                    if (password_verify($user_password_log, $user_data['user_password'])) {
+
+                        $_SESSION['user_id'] = $user_data['user_id'];
+                        header("Location: profile.php");
+                        echo "Login successful";
+                        
+                    }
+                }
+
+            } else {
+                $errorMessage = 'Invalid Information. Please try again.';
+            }
+          
+        }
+        
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +155,7 @@ session_start();
                     <h4 class="login-remake__model-title">Login</h4>
                     <i class="uil uil-times login-remake__model-close"></i>
 
-                    <form action="" class="login__form grid" method="post">
+                    <form action="" class="login__form grid" method="POST">
                         <div class="login__inputs grid">
 
                             <div class="login-remake__content">
@@ -139,7 +195,7 @@ session_start();
                     <h4 class="register__model-title">Register</h4>
                     <i class="uil uil-times register__model-close"></i>
 
-                    <form action="" class="register__form grid" method="post">
+                    <form action="" class="register__form grid" method="POST">
                         <div class="register__inputs grid">
 
                             <div class="register__content">

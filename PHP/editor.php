@@ -1,7 +1,6 @@
 <?php 
 session_start();
 
-    $_SESSION;
 ?>
 
 
@@ -70,7 +69,6 @@ session_start();
                             <i class="uil uil-comment-message nav__icon"></i> Contact me
                         </a>
                     </li>
-                    <!-- LOGOUT AND CLOSE SESSION; GO ABCK TO INDEX.HTML -->
                     <li class="nav__item">
                         <a  class="nav__link view__button">
                             <i class="uil uil-signin nav__icon"></i> View

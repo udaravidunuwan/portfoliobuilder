@@ -1,12 +1,10 @@
 <?php
 session_start();
 
-    $_SESSION;
-
-    include("config.php");
+    include("connection.php");
     include("function.php");
 
-    // $user_data = check_login($connection);
+    $user_data = check_login($connection);
 ?>
 
 <!DOCTYPE html>

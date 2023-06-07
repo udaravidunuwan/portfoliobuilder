@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once 'connection.php';
 
 // Get the email and password from the form submission
 $email = $_POST['loginEmail'];
