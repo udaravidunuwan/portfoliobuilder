@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2023 at 12:33 PM
+-- Generation Time: Jun 08, 2023 at 12:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -28,16 +28,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `id` bigint(255) NOT NULL,
+  `user_id` bigint(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`email`, `password`) VALUES
-('admin@pp.com', '*4ACFE3202A5FF5CF467898FC58AAB1D615029441');
+INSERT INTO `users` (`id`, `user_id`, `user_email`, `user_password`) VALUES
+(1, 4434, 'admin@test.com', 'admin'),
+(2, 7774, 'guest@test.com', 'guest'),
+(3, 2294, 'user@test.com', 'user'),
+(4, 2075, 'test@test.com', 'test'),
+(5, 8933, 'test@test.com', 'test'),
+(6, 6782, 'test1@test.com', 'test1'),
+(7, 8782, 'test2@test.com', 'test2'),
+(8, 5866, 'ftest@test.com', 'ftest'),
+(9, 3653, 'test3@test.com', 'test3'),
+(10, 5643, 'test5@test.com', 'test5');
 
 --
 -- Indexes for dumped tables
@@ -47,7 +58,20 @@ INSERT INTO `users` (`email`, `password`) VALUES
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`email`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `user_email` (`user_email`),
+  ADD KEY `user_password` (`user_password`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
