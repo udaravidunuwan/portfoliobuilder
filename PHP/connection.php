@@ -17,3 +17,4 @@ if (!$connection) {
 // Close the connection
 // mysqli_close($connection);
 
+?>

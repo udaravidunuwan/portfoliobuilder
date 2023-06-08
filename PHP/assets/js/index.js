@@ -131,18 +131,18 @@ document.getElementById('showPasswordRegister').onclick = function() {
 };
 
 /* CONFIRM PASSWORD */
-const form = document.querySelector('.register__form');
+// const form = document.querySelector('.register__form');
 
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
+// form.addEventListener('submit', function(event) {
+//   event.preventDefault();
 
-  const password = document.getElementById('passwordRegister').value;
-  const confirmPassword = document.getElementById('passwordRegisterConfirm').value;
+//   const password = document.getElementById('passwordRegister').value;
+//   const confirmPassword = document.getElementById('passwordRegisterConfirm').value;
 
-  if (password === confirmPassword) {
-    form.submit();
-  } else {
-    alert('Passwords do not match. Please try again.');
-  }
-});
+//   if (password === confirmPassword) {
+//     form.submit();
+//   } else {
+//     alert('Passwords do not match. Please try again.');
+//   }
+// });
 

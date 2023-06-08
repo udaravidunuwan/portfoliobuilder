@@ -1,5 +1,6 @@
 <?php
 require_once 'connection.php';
+require_once 'index.php';
 
 // Get the email and password from the form submission
 $email = $_POST['loginEmail'];
@@ -27,8 +28,8 @@ if ($result->num_rows == 1) {
 // If the credentials are invalid, redirect back to the login page
 // header("Location: index.php#login-remake");
 echo "Login failed";
-exit();
+// exit();
 
-$stmt->close();
-$connection->close();
+// $stmt->close();
+// $connection->close();
 ?>

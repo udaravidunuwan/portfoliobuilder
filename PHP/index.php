@@ -1,66 +1,76 @@
 <?php 
-session_start();
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 
-    include("connection.php");
-    include("function.php");
+// session_start();
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+include("connection.php");
+include("function.php");
+include("script.php");
+ 
+// if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
         
-        if (!isset($_POST['register-submit'])) {
+    //     if ($_POST['register-submit']) {
 
-            $user_email_reg = $_POST['registerEmail'];
-            $user_password_reg = $_POST['registerPassword'];
-            $user_confirm_password_reg = $_POST['registerPasswordConfirm'];
+    //         $user_email_reg = $_POST['registerEmail'];
+    //         $user_password_reg = $_POST['registerPassword'];
+    //         $user_confirm_password_reg = $_POST['registerPasswordConfirm'];
 
-            if ($user_password_reg === $user_confirm_password_reg) {
-                if(!empty($user_email_reg) && !empty($user_password_reg)){
-                    $user_id = userIdGen(4);
-    
-                    $stmt = $connection->prepare("INSERT INTO users (user_id, user_email, user_password) VALUES (?, ?, ?)");
-                    $stmt->bind_param("iss", $user_id, $user_email_reg, $user_password_reg);
-                    $stmt->execute();
-    
-                    header("Location: index.php");
-                    die;
+    //         if ($user_password_reg === $user_confirm_password_reg) {
+    //             if(!empty($user_email_reg) && !empty($user_password_reg)){
+    //                 $user_id = userIdGen(4);
 
-                } else {
-                    $errorMessage = 'Invalid Information. Please try again.';
-                }
-              } else {
-                $errorMessage = 'Passwords do not match. Please try again.';
-              }
+    //                 $stmt = $connection->prepare("INSERT INTO users (user_id, user_email, user_password) VALUES (?, ?, ?)");
+    //                 $stmt->bind_param("iss", $user_id, $user_email_reg, $user_password_reg);
+    //                 $stmt->execute();
 
-        } elseif (!isset($_POST['login-submit'])) {
+    //                 header("Location: index.php");
+    //                 die;
 
-            $user_email_log = $_POST['loginEmail'];
-            $user_password_log = $_POST['LoginPassword'];
+    //             } else {
+    //                 $errorMessage = 'Invalid Information. Please try again.';
+    //             }
+    //         } else {
+    //             $errorMessage = 'Passwords do not match. Please try again.';
+    //         }
 
-            if(!empty($user_email_log) && !empty($user_password_log)){
+    //     } else if ($_POST['login-submit']) {
+
+    //         $user_email_log = $_POST['loginEmail'];
+    //         $user_password_log = $_POST['LoginPassword'];
+
+    //         if(!empty($user_email_log) && !empty($user_password_log)){
                 
-                $stmt = $connection->prepare("SELECT * FROM users WHERE user_email = ? limit 1");
-                $stmt->bind_param("s", $user_email_log);
-                $stmt->execute();
-                $result = $stmt->get_result();
+    //             $stmt = $connection->prepare("SELECT * FROM users WHERE user_email = ? limit 1");
+    //             $stmt->bind_param("s", $user_email_log);
+    //             $stmt->execute();
+    //             $result = $stmt->get_result();
 
-                if ($result->num_rows == 1) {
-                    $user_data = $result->fetch_assoc();
+    //             if ($result->num_rows == 1) {
+    //                 $user_data = $result->fetch_assoc();
                     
-                    if (password_verify($user_password_log, $user_data['user_password'])) {
+    //                 if (password_verify($user_password_log, $user_data['user_password'])) {
 
-                        $_SESSION['user_id'] = $user_data['user_id'];
-                        header("Location: profile.php");
-                        echo "Login successful";
+    //                     $_SESSION['user_id'] = $user_data['user_id'];
+    //                     header("Location: profile.php");
+    //                     echo "Login successful";
                         
-                    }
-                }
+    //                 }
+    //             }
 
-            } else {
-                $errorMessage = 'Invalid Information. Please try again.';
-            }
-          
-        }
-        
-    } 
+    //         } else {
+    //             $errorMessage = 'Invalid Information. Please try again.';
+    //         }
+            
+    //     } else {    
+    //         echo "Error.\n";
+    //     }
+            
+    // } 
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -155,12 +165,12 @@ session_start();
                     <h4 class="login-remake__model-title">Login</h4>
                     <i class="uil uil-times login-remake__model-close"></i>
 
-                    <form action="" class="login__form grid" method="POST">
+                    <form autocomplete="off" action="" class="login__form grid" method="post" >
                         <div class="login__inputs grid">
-
+                            <input type="hidden" id="action" value="login" >
                             <div class="login-remake__content">
                                 <label for="loginEmail" class="login__label">Email</label>
-                                <input id="emailLogin" name="loginEmail" type="email" class="login__input email"  placeholder="Enter email here" autocomplete="off" required>
+                                <input id="emailLogin" name="loginEmail" type="email" class="login__input email"  placeholder="Enter email here" required>
                             </div>
                             <div class="login-remake__content">
                                 <label for="LoginPassword" class="login__label">Password</label>
@@ -174,9 +184,9 @@ session_start();
                         </div>
                         
                         <div>
-                            <button type="submit" class="login-button" id="login-submit">Login</button>
+                            <button type="button" class="login-button" id="login-submit"  onclick="submitData();">Login</button>
+                            <?php require 'script.php'; ?>
                         </div>
-
                         
                     </form>
 
@@ -195,12 +205,13 @@ session_start();
                     <h4 class="register__model-title">Register</h4>
                     <i class="uil uil-times register__model-close"></i>
 
-                    <form action="" class="register__form grid" method="POST">
+                    <form autocomplete="off" action="" class="register__form grid" method="post">
                         <div class="register__inputs grid">
+                            <input type="hidden" id="action" value="register" >
 
                             <div class="register__content">
                                 <label for="registerEmail" class="register__label">Email</label>
-                                <input id="emailRegister" name="registerEmail" type="email" class="register__input email"  placeholder="Enter email here" autocomplete="off" required>
+                                <input id="emailRegister" name="registerEmail" type="email" class="register__input email"  placeholder="Enter email here" required>
                             </div>
                             <div class="register__content">
                                 <label for="registerPassword" class="register__label">Password</label>
@@ -218,7 +229,8 @@ session_start();
                         </div>
                         
                         <div>
-                            <button type="submit" class="register-button" id="register-submit">Register</button>
+                            <button type="button" class="register-button" id="register-submit" onclick="submitData();">Register</button>
+                            <?php require 'script.php'; ?>
                         </div>
 
                     </form>
