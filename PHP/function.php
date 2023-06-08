@@ -57,12 +57,11 @@ if(isset($_POST["action"])){
 function register(){
     global $connection;
 
-    $user_email_reg = $_POST['registerEmail'];
-    $user_password_reg = $_POST['registerPassword'];
-    $user_confirm_password_reg = $_POST['registerPasswordConfirm'];
+    $user_email_reg = $_POST['email'];
+    $user_password_reg = $_POST['password'];
 
     if ($user_password_reg === $user_confirm_password_reg) {
-        if(!empty($user_email_reg) && !empty($user_password_reg) && !empty($user_confirm_password_reg)){
+        if(!empty($user_email_reg) && !empty($user_password_reg)){
 
             $user_id = userIdGen(4);
 
@@ -88,3 +87,37 @@ function register(){
         }
     }
 }
+// function register(){
+//     global $connection;
+
+//     $user_email_reg = $_POST['registerEmail'];
+//     $user_password_reg = $_POST['registerPassword'];
+//     $user_confirm_password_reg = $_POST['registerPasswordConfirm'];
+
+//     if ($user_password_reg === $user_confirm_password_reg) {
+//         if(!empty($user_email_reg) && !empty($user_password_reg) && !empty($user_confirm_password_reg)){
+
+//             $user_id = userIdGen(4);
+
+//             $checkStmt = $connection->prepare("SELECT * FROM users WHERE user_email = ?");
+//             $checkStmt->bind_param("s", $user_email_reg);
+//             $checkStmt->execute();
+
+//             if($checkStmt->rowCount() > 0) {
+//                 echo "A user with email " . $user_email_reg . " already exists";
+//                 exit;
+//             }
+            
+//             $stmt = $connection->prepare("INSERT INTO users (user_id, user_email, user_password) VALUES (?, ?, ?)");
+//             $stmt->bind_param("iss", $user_id, $user_email_reg, $user_password_reg);
+//             $stmt->execute();
+
+//             echo "Registered Successfully";
+
+
+//         } else {
+//             echo "Please fill out the Form";
+//             exit;
+//         }
+//     }
+// }
