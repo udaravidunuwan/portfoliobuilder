@@ -36,7 +36,7 @@ else{
     <header class="header" id="header">
         <nav class="nav container">
             <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
-            <a href="#" class="nav__logo"><?php echo $stmt["user_email"]; ?></a>
+            <a href="#" class="nav__logo"><?php echo $stmt["user_email"]; ?> </a>
             
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list grid">
@@ -812,9 +812,6 @@ else{
     <a href="#" class="scrollup" id="scroll-up">
         <i class="uil uil-arrow-up scrollup__icon"></i>
     </a>
-
-    <!-- SWIPER JS -->
-    <script src="./assets/js/swiper-bundle.min.js"></script>
 
     <!-- MAIN JS -->
     <script src="./assets/js/main.js"></script>

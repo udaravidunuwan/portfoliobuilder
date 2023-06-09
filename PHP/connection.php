@@ -5,6 +5,7 @@ $username = 'root';
 $password = '';
 $database = 'project_portfolio_db';
 
+global $connection;
 $connection = mysqli_connect($host, $username, $password, $database);
 
 if (!$connection) {

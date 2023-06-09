@@ -1,6 +1,16 @@
-<?php 
+<?php
+require 'function.php';
+if(isset($_SESSION["user_id"])){
+    $user_id = $_SESSION["user_id"];
 
+    $stmt = $connection->prepare("SELECT * FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
 
+}
+else{
+  header("Location: index.php");
+}
 ?>
 
 
