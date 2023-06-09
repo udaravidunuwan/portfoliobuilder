@@ -41,32 +41,22 @@ function userIdGen($length){
     return $text;
 }
 
-if(isset($_POST["actionLog"]) && isset($_POST["actionReg"])){
-    if($_POST["actionLog"] == "login"){
-        echo ($_POST["actionLog"]);
-        login();
-    } else if($_POST["actionReg"] == "register"){
-        echo ($_POST["actionReg"]);
+
+if(isset($_POST["action"])){
+    if($_POST["action"] == "register"){
         register();
+    } else if($_POST["action"] == "login"){
+        login();
     }
 }
-// function register(){
-//     echo "Registered Successful";
-// }
-// function login(){
-//     echo "Login Successful";
-//     exit;
-// }
+
 
 function register(){
     global $connection;
 
     $user_email_reg = $_POST['emailReg'];
-    echo "Check email: " . $user_email_reg;
     $user_password_reg = $_POST['passwordReg'];
-    echo "Check email: " . $user_password_reg;
     $user_confirm_password_reg = $_POST['confirmPasswordReg'];
-    echo "Check email: " . $user_confirm_password_reg;
 
     
     if(empty($user_email_reg) && empty($user_password_reg) && empty($user_confirm_password_reg)){
@@ -86,28 +76,16 @@ function register(){
     $checkStmt->execute();
     
     $checkStmt->store_result();
-    $checkStmt->bind_result($columns);
 
-    $rows = 0;
-    while ($checkStmt->fetch()) {
-        $rows++;
-    }
-
-    if ($rows > 0) {
+    if ($checkStmt->num_rows > 0) {
         echo "A user with email " . $user_email_reg . " already exists";
         exit;
     } else {
         echo "The email " . $user_email_reg . " is ready to be confirmed";
     }         
-    // if($checkStmt->rowCount() > 0) {
-    //     echo "A user with email " . $user_email_reg . " already exists";
-    //     exit;
-    // }
-
-    $user_password_hashed = password_hash($user_password_reg, PASSWORD_DEFAULT);
 
     $stmt = $connection->prepare("INSERT INTO users (user_id, user_email, user_password) VALUES (?, ?, ?)");
-    $stmt->bind_param("iss", $user_id, $user_email_reg, $user_password_hashed);
+    $stmt->bind_param("iss", $user_id, $user_email_reg, $user_password_reg);
     $stmt->execute();
 
     echo "Registered Successfully";
@@ -119,9 +97,9 @@ function login(){
     global $connection;
 
     $user_email_log = $_POST['emailLog'];
-    echo "Check email: " . $user_email_log;
+    // echo "Check email: " . $user_email_log;
     $user_password_log = $_POST['passwordLog'];
-    echo "Check password: " . $user_password_log;
+    // echo "Check password: " . $user_password_log;
 
     if(empty($user_email_log) && empty($user_password_log)){
         echo "Please fill out the Form";
@@ -137,7 +115,7 @@ function login(){
         $user = $result->fetch_assoc();
         
         $stored_password = $user['user_password'];
-        echo "stored passwprd is " . $user['user_password'];
+        // echo "stored passwprd is " . $user['user_password'];
 
         // if (password_verify($user_password_log, $user['user_password'])) {
         if ($user_password_log == $stored_password) {

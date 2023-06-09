@@ -1,9 +1,8 @@
 <?php 
-// require 'function.php';
-// require 'script.php';
-// if(isset($_SESSION["user_id"])){
-//   header("Location: profile.php");
-// }
+require 'function.php';
+if(isset($_SESSION["user_id"])){
+  header("Location: profile.php");
+}
 
 // echo "<pre>";
 // print_r($_POST);
