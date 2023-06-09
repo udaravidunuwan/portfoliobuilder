@@ -1,10 +1,16 @@
 <?php
-session_start();
+require 'function.php';
+if(isset($_SESSION["user_id"])){
+    $user_id = $_SESSION["user_id"];
 
-    include("connection.php");
-    include("function.php");
+    $stmt = $connection->prepare("SELECT * FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
 
-    // $user_data = check_login($connection);
+}
+else{
+  header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +36,7 @@ session_start();
     <header class="header" id="header">
         <nav class="nav container">
             <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
-            <a href="#" class="nav__logo">User Name</a>
+            <a href="#" class="nav__logo"><?php echo $stmt["user_email"]; ?></a>
             
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list grid">
@@ -70,8 +76,14 @@ session_start();
                         </a>
                     </li> -->
                     <li class="nav__item">
-                        <a  class="nav__link edit__button">
+                        <a href="editor.php" class="nav__link edit__button">
                             <i class="uil uil-signin nav__icon"></i> Edit
+                        </a>
+                    </li>
+                    
+                    <li class="nav__item">
+                        <a href="logout.php" class="nav__link logout__button">
+                            <i class="uil uil-signin nav__icon"></i> Logout
                         </a>
                     </li>
                 </ul>

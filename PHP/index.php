@@ -1,13 +1,18 @@
 <?php 
+require 'function.php';
+if(isset($_SESSION["user_id"])){
+  header("Location: profile.php");
+}
+
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
 
 // session_start();
 
-include("connection.php");
-include("function.php");
-include("script.php");
+// include("connection.php");
+// include("function.php");
+// include("script.php");
  
 // if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
         
@@ -92,7 +97,6 @@ include("script.php");
     <title>Project Portfolio</title>
 </head>
 <body>
-    <!-- HEADER -->
     <header class="header" id="header">
         <nav class="nav container">
             <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
@@ -118,7 +122,6 @@ include("script.php");
 
             <div class="nav__btns">
                 
-                <!-- Theme Change Button -->
                 <i class="uil uil-moon change-theme" id="theme-button"></i>
 
                 <div class="nav__toggle" id="nav-toggle">
@@ -128,7 +131,6 @@ include("script.php");
         </nav>
     </header>
 
-    <!-- MAIN -->
     <main class="main">
 
         <section class="section">
@@ -156,7 +158,6 @@ include("script.php");
         </section>
 
 
-        <!-- LOGIN REMAKE -->
         <section class="login-remake section" id="login-remake">
 
             <div class="login-remake__model">
@@ -196,7 +197,6 @@ include("script.php");
         </section>
 
 
-        <!-- REGISTER -->
         <section class="register section" id="register">
 
             <div class="register__model">
@@ -244,7 +244,6 @@ include("script.php");
     </main>
 
    
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer__bg">
             <div class="footer__container container grid">
@@ -270,7 +269,6 @@ include("script.php");
         </div>
     </footer>
 
-    <!-- MAIN JS -->
     <script src="./assets/js/index.js"></script>
 </body>
 

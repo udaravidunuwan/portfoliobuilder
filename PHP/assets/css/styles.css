@@ -825,7 +825,8 @@ img {
 }
 
 /* LOGOUT */
-.edit__button {
+.edit__button,
+.logout__button {
     cursor: pointer;
     font-size: var(--small-font-size);
 }

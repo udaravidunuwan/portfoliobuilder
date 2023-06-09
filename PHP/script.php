@@ -4,15 +4,18 @@
 <script type="text/javascript">
     function submitData(){
         $(document).ready(function(){
-            var data = {
-                email: $(.email).val(),
-                password: $(.password).val(),
+            var dataReg = {
+                emailReg: $(#emailRegister).val(),
+                passwordReg: $(#passwordRegister).val(),
+                confirmPasswordReg: $(#passwordRegisterConfirm).val(),
                 action: $(#action).val(),
+                emailLog: $(#emailLogin).val(),
+                passwordLog: $(#passwordLogin).val(),
             };
             $.ajax({
                 url: 'function.php',
                 type: 'post',
-                data: data,
+                data: dataReg,
                 success: function(response){
                     alert(response);
                     if(response == "Login Success"){

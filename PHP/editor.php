@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 
 ?>
 
@@ -70,7 +70,7 @@ session_start();
                         </a>
                     </li>
                     <li class="nav__item">
-                        <a  class="nav__link view__button">
+                        <a href="profile.php" class="nav__link view__button">
                             <i class="uil uil-signin nav__icon"></i> View
                         </a>
                     </li>
