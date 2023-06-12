@@ -1,13 +1,7 @@
 <?php
 require 'function.php';
-// require 'connection.php';
 if(isset($_SESSION["user_id"])){
     $user_id = $_SESSION["user_id"];
-
-    // $stmt = $connection->prepare("SELECT * FROM users WHERE user_id = ?");
-    // $stmt->bind_param("i", $user_id);
-    // $stmt->execute();
-
     $stmt = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id = $user_id"));
 
 }

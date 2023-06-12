@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 12:45 PM
+-- Generation Time: Jun 12, 2023 at 05:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,16 +39,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `user_email`, `user_password`) VALUES
-(1, 4434, 'admin@test.com', 'admin'),
-(2, 7774, 'guest@test.com', 'guest'),
-(3, 2294, 'user@test.com', 'user'),
-(4, 2075, 'test@test.com', 'test'),
-(5, 8933, 'test@test.com', 'test'),
-(6, 6782, 'test1@test.com', 'test1'),
-(7, 8782, 'test2@test.com', 'test2'),
-(8, 5866, 'ftest@test.com', 'ftest'),
-(9, 3653, 'test3@test.com', 'test3'),
-(10, 5643, 'test5@test.com', 'test5');
+(1, 9999, 'admin@admin.com', 'admin'),
+(2, 4951, 'asd@asd', 'asd'),
+(3, 7075, 'user@user.com', 'user'),
+(4, 2280, 'afg@afg', 'afg'),
+(5, 8531, 'test@test.lk', 'test'),
+(6, 3886, 'udara@test.com', 'udara'),
+(7, 428, 'tester@test.com', 'test'),
+(8, 1340, 'lol@lol.com', 'lol'),
+(9, 3481, 'zxc@zxc.com', 'zxc');
 
 --
 -- Indexes for dumped tables
@@ -71,7 +70,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

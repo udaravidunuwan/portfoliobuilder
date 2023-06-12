@@ -1,12 +1,7 @@
 <?php 
 require 'function.php';
-if(isset($_SESSION["user_id"])){
-  header("Location: profile.php");
+if(isset($_SESSION["user_id"])){ 
 }
-
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
 
 ?>
 

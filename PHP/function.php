@@ -80,15 +80,13 @@ function register(){
     if ($checkStmt->num_rows > 0) {
         echo "A user with email " . $user_email_reg . " already exists";
         exit;
-    } else {
-        echo "The email " . $user_email_reg . " is ready to be confirmed";
     }         
 
     $stmt = $connection->prepare("INSERT INTO users (user_id, user_email, user_password) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $user_id, $user_email_reg, $user_password_reg);
     $stmt->execute();
 
-    echo "Registered Successfully";
+    echo "The email ". $user_email_reg ." is Registered Successfully";
 
 }
 
@@ -97,9 +95,7 @@ function login(){
     global $connection;
 
     $user_email_log = $_POST['emailLog'];
-    // echo "Check email: " . $user_email_log;
     $user_password_log = $_POST['passwordLog'];
-    // echo "Check password: " . $user_password_log;
 
     if(empty($user_email_log) && empty($user_password_log)){
         echo "Please fill out the Form";
@@ -115,9 +111,7 @@ function login(){
         $user = $result->fetch_assoc();
         
         $stored_password = $user['user_password'];
-        // echo "stored passwprd is " . $user['user_password'];
 
-        // if (password_verify($user_password_log, $user['user_password'])) {
         if ($user_password_log == $stored_password) {
             echo "Login successful";
             $_SESSION["login"] = true;
