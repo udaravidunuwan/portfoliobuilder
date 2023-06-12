@@ -3,9 +3,8 @@ require 'function.php';
 if(isset($_SESSION["user_id"])){
     $user_id = $_SESSION["user_id"];
 
-    $stmt = $connection->prepare("SELECT * FROM users WHERE user_id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
+    
+    $stmt = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id = $user_id"));
 
 }
 else{
@@ -44,7 +43,13 @@ else{
             <!-- IF ANY USERNAME is stored in database fetch it and display -->
             <!-- IF NO USERNAME in database; then Keep as USER and once the username is given and saved below, fetch itand display -->
             <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
-            <a href="#" class="nav__logo">User</a>
+            <a href="#" class="nav__logo">
+            <?php if ($stmt) {
+                        echo $stmt["user_id"];
+                    } else {
+                        echo "User Name";
+                    } ?>
+            </a>
             
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list grid">
@@ -81,7 +86,7 @@ else{
                     </li>
                     <li class="nav__item">
                         <a href="profile.php" class="nav__link view__button">
-                            <i class="uil uil-signin nav__icon"></i> View
+                            <i class="uil uil-image-check nav__icon"></i> View
                         </a>
                     </li>
                     

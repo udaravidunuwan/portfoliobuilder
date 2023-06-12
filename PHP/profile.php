@@ -2,7 +2,11 @@
 require 'function.php';
 if(isset($_SESSION["user_id"])){
     $user_id = $_SESSION["user_id"];
+
     $stmt = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id = $user_id"));
+
+    $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
+    $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
 
 }
 else{
@@ -27,6 +31,8 @@ else{
     <link rel="icon" href="./assets/img/favicon_io/favicon.ico" type="image/x-icon">
 
     <title>Project Portfolio</title>
+
+    
 </head>
 <body>
     <!-- HEADER -->
@@ -34,7 +40,11 @@ else{
         <nav class="nav container">
             <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
             <a href="#" class="nav__logo"> Hi, 
-                <!-- <php? echo $stmt["user_email"];  ?> -->
+                <?php if ($stmt_hT) {
+                        echo $stmt_hT["hT_first_name"] . " " . $stmt_hT["hT_last_name"];
+                    } else {
+                        echo "User Name";
+                    } ?>
             </a>
             
             <div class="nav__menu" id="nav-menu">
@@ -69,14 +79,9 @@ else{
                             <i class="uil uil-comment-message nav__icon"></i> Contact me
                         </a>
                     </li>
-                    <!-- <li class="nav__item">
-                        <a  class="nav__link login__button-remake">
-                            <i class="uil uil-signin nav__icon"></i> Login
-                        </a>
-                    </li> -->
                     <li class="nav__item">
                         <a href="editor.php" class="nav__link edit__button">
-                            <i class="uil uil-signin nav__icon"></i> Edit
+                            <i class="uil uil-edit nav__icon"></i> Edit
                         </a>
                     </li>
                     
@@ -109,10 +114,22 @@ else{
             <div class="home__container container grid">
                 <div class="home__content grid">
                     <div class="home__social">
-                        <a href="https://www.linkedin.com/in/udara-vidunuwan-431493210" target="_blank" class="home__social-icon">
+                        <a href="
+                        <?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_linkedIn_url"];
+                            } else {
+                                echo "https://www.linkedin.com/?original_referer=";
+                            } ?>
+                            " target="_blank" class="home__social-icon">
                             <i class="uil uil-linkedin-alt"></i>
                         </a>
-                        <a href="https://github.com/udaravidunuwan/" target="_blank" class="home__social-icon">
+                        <a href="
+                        <?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_github_url"];
+                            } else {
+                                echo "https://github.com/";
+                            } ?>
+                        " target="_blank" class="home__social-icon">
                             <i class="uil uil-github-alt"></i>
                         </a>
                     </div>
@@ -130,15 +147,39 @@ else{
                                 165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403  
                                 129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
                                 -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                                <image class="home__blob-img" x="12" y="24" xlink:href="./assets/img/profile.png"/>
+                                <image class="home__blob-img" x="12" y="24" xlink:href="
+                                <?php if ($stmt_hT) {
+                                        echo base64_encode($stmt_hT["hT_profile_pic"]);
+                                    } else {
+                                        echo "./assets/img/site/blob.svg";
+                                    } ?>
+                                "/>
                             </g>
                         </svg>
                     </div>
 
                     <div class="home__data">
-                        <h1 class="home__title">Hi, I'm Udara</h1>
-                        <h3 class="home__subtitle">Data Capture Associate</h3>
-                        <p class="home__description">Good knowladge and experience in software development. Aspiring to be a game developer. </p>
+                        <h1 class="home__title">Hi, I'm 
+                        <?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_first_name"];
+                            } else {
+                                echo "User";
+                            } ?>
+                        </h1>
+                        <h3 class="home__subtitle">
+                        <?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_designation"];
+                            } else {
+                                echo "User Designation";
+                            } ?>
+                        </h3>
+                        <p class="home__description">
+                        <?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_self_introduction"];
+                            } else {
+                                echo "User Self Introduction";
+                            } ?>
+                        </p>
                         <a href="#contactme" class="button button--flex">
                             Contact Me<i class="uil uil-message button__icon"></i>
                         </a>
@@ -160,23 +201,48 @@ else{
             <h2 class="section__title">About Me</h2>
             <span class="section__subtitle">My Introduction</span>
             <div class="about__container container grid">
-                <img src="./assets/img/about.jpg" alt="" class="about__img">
+                <img src="
+                <?php if ($stmt_aT) {
+                        echo base64_encode($stmt_aT["aT_about_img"]);
+                    } else {
+                        echo "./assets/img/site/about2.jpg";
+                    } ?>
+                " alt="" class="about__img">
 
                 <div class="about__data">
                     <p class="about__description">
-                        I am a driven and enthusiastic software developer with a passion for creating engaging and immersive gaming experiences. With over 3 years of experience in developing applications using C# and C++, I am constantly honing my skills and working towards my dreams.
+                    <?php if ($stmt_aT) {
+                        echo $stmt_aT["aT_about_user"];
+                    } else {
+                        echo "About the User";
+                    } ?>    
                     </p>
                     <div class="about__info">
                         <div>
-                            <span class="about__info-title">08+</span>
+                            <span class="about__info-title">
+                            <?php if ($stmt_aT) {
+                                echo $stmt_aT["aT_Yo_Exp"];
+                            } else {
+                                echo "00";
+                            } ?>+</span>
                             <span class="about__info-name">Years <br> experience</span>
                         </div>
                         <div>
-                            <span class="about__info-title">10+</span>
+                            <span class="about__info-title">
+                            <?php if ($stmt_aT) {
+                                echo $stmt_aT["aT_No_Projects"];
+                            } else {
+                                echo "00";
+                            } ?>+</span>
                             <span class="about__info-name">Completed <br> projects</span>
                         </div>
                         <div>
-                            <span class="about__info-title">04+</span>
+                            <span class="about__info-title">
+                            <?php if ($stmt_aT) {
+                                echo $stmt_aT["aT_No_companies"];
+                            } else {
+                                echo "00";
+                            } ?>+</span>
                             <span class="about__info-name">Companies <br> worked</span>
                         </div>
                     </div>

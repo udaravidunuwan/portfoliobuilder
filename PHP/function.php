@@ -69,7 +69,7 @@ function register(){
         exit;
     }
     
-    $user_id = userIdGen(4);
+    $user_id = userIdGen(6);
     
     $checkStmt = $connection->prepare("SELECT * FROM users WHERE user_email = ?");
     $checkStmt->bind_param("s", $user_email_reg);
