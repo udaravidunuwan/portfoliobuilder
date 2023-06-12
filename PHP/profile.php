@@ -41,7 +41,7 @@ else{
     <header class="header" id="header">
         <nav class="nav container">
             <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
-            <a href="#" class="nav__logo"> Hi, 
+            <a href="#" class="nav__logo">
                 <?php if ($stmt_hT) {
                         echo $stmt_hT["hT_first_name"] . " " . $stmt_hT["hT_last_name"];
                     } else {

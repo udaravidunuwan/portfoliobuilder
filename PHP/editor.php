@@ -549,8 +549,22 @@ else{
             <div class="footer__container container grid">
                 <div>
                     <!-- Fetch data from database else site as User: default -->
-                    <h1 class="footer__title">User</h1>
-                    <span class="footer__subtitle">Data Capture Associate</span>
+                    <h1 class="footer__title">
+                    <?php if ($stmt_hT) {
+                        echo $stmt_hT["hT_first_name"];
+                    } else {
+                        echo "User Name";
+                    } ?>
+                    </h1>
+                    <span class="footer__subtitle">
+                    <?php 
+                        if ($stmt_hT) {
+                            echo $stmt_hT["hT_designation"];
+                        } else {
+                            echo "User Designation";
+                        } 
+                    ?>
+                    </span>
                 </div>
 
                 <ul class="footer__links">
