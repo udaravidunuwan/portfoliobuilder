@@ -153,7 +153,7 @@ else{
                                 <?php if ($stmt_hT) {
                                         echo base64_encode($stmt_hT["hT_profile_pic"]);
                                     } else {
-                                        echo "./assets/img/site/blob.svg";
+                                        echo "./assets/img/site/profile1.png";
                                     } ?>
                                 "/>
                             </g>
@@ -814,45 +814,6 @@ else{
                 </form>
             </div>
         </section>
-
-
-        <!-- LOGIN REMAKE -->
-        <!-- <section class="login-remake section" id="login-remake">
-
-            <div class="login-remake__model">
-                <div class="login-remake__model-content">
-
-                    <h4 class="login-remake__model-title">Login</h4>
-                    <i class="uil uil-times login-remake__model-close"></i>
-
-                    <form action="" class="login__form grid" method="post">
-                        <div class="login__inputs grid">
-
-                            <div class="login-remake__content">
-                                <label for="loginEmail" class="login__label">Email</label>
-                                <input id="email" name="loginEmail" type="email" class="login__input email"  placeholder="Enter email here" autocomplete="off" required>
-                            </div>
-                            <div class="login-remake__content">
-                                <label for="LoginPassword" class="login__label">Password</label>
-                                <input id="password" name="LoginPassword" type="password" class="login__input password"  placeholder="Enter password here" required>
-                            </div>
-                            <div class="">
-                                <label for="showPassword" class="">Show password</label>
-                                <input type="checkbox" id="showPassword" class="">
-                            </div>
-
-                        </div>
-                        
-                        <div>
-                            <button type="submit" class="login-button" id="login-submit">Login</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-
-        </section> -->
-
 
     </main>
 

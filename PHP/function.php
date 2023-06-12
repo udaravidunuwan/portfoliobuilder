@@ -122,7 +122,7 @@ function login(){
             exit;
         }
     } else {
-        echo "No users found with email " . $user_email_log ;
+        echo "No users found with email " . $user_email_log . " in the database";
         exit;
     }
 }

@@ -5,6 +5,7 @@ if(isset($_SESSION["user_id"])){
 
     
     $stmt = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id = $user_id"));
+    $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
 
 }
 else{
@@ -39,12 +40,10 @@ else{
     <!-- HEADER -->
     <header class="header" id="header">
         <nav class="nav container">
-            <!-- IF ANY USERNAME is stored in database fetch it and display -->
-            <!-- IF NO USERNAME in database; then Keep as USER and once the username is given and saved below, fetch itand display -->
             <img src="./assets/img/favicon_io/apple-touch-icon.png" alt="" class="header__img">
             <a href="#" class="nav__logo">
-            <?php if ($stmt) {
-                        echo $stmt["user_id"];
+            <?php if ($stmt_hT) {
+                        echo $stmt_hT["hT_first_name"] . " " . $stmt_hT["hT_last_name"];
                     } else {
                         echo "User Name";
                     } ?>
@@ -113,7 +112,13 @@ else{
             <div class="editor__container container ">
         
                 <div class="home__data">
-                    <h1 class="home__title">Hi, User</h1>
+                    <h1 class="home__title">Hi, 
+                    <?php if ($stmt_hT) {
+                        echo $stmt_hT["hT_first_name"] . " " . $stmt_hT["hT_last_name"];
+                    } else {
+                        echo "User Name";
+                    } ?>
+                    </h1>
                     <h3 class="home__subtitle">Welcome to Editor</h3>
                     <p class="home__description">Add or Update your data as you wish.</p>
                 </div>
@@ -474,14 +479,14 @@ else{
                             </div>
                         </div>
                         <div class="editor__save__button">
-                            <!-- <a href="#" class="button button--flex" id="project__save__btn" >
+                            <a href="#" class="button button--flex" id="project__save__btn" onclick="">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
-                            </a> -->
-                            <button type="submit" name="submit" class="button button--flex" id="project__save__btn" value="Upload">
+                            </a>
+                            <!-- <button type="submit" name="submit" class="button button--flex" id="project__save__btn" value="Upload">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     
@@ -585,7 +590,7 @@ else{
     
 
     <!-- MAIN JS -->
-    <script src="assets/js/editor.js"></script>
+    <script src="./assets/js/editor.js"></script>
 </body>
 
 </html>

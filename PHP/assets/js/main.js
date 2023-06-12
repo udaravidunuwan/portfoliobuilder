@@ -98,29 +98,6 @@ modelCloses.forEach((modelClose) => {
 })
 
 
-/* LOGIN MODEL REMAKE */
-const loginmodelremakeViews = document.querySelectorAll('.login-remake__model'),
-loginmodelremakeBtns = document.querySelectorAll('.login__button-remake'),
-loginmodelremakeCloses = document.querySelectorAll('.login-remake__model-close')
-
-let loginmodelremake = function(loginmodelremakeClick){
-    loginmodelremakeViews[loginmodelremakeClick].classList.add('active-model-login-remake')
-}
-
-loginmodelremakeBtns.forEach((loginmodeleremakeBtn, i) => {
-    loginmodeleremakeBtn.addEventListener('click', () => {
-    loginmodelremake(i)
-})
-})
-
-loginmodelremakeCloses.forEach((loginmodelremakeClose) => {
-    loginmodelremakeClose.addEventListener('click', () => {
-        loginmodelremakeViews.forEach((loginmodelremakeView) => {
-            loginmodelremakeView.classList.remove('active-model-login-remake')
-    })
-})
-})
-
 /* LOGIN PASSWORD VISIBILITY TOGGLE */
 document.getElementById('showPassword').onclick = function() {
     if ( this.checked ) {
@@ -167,6 +144,7 @@ function scrollUp(){
     if(this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
 }
 window.addEventListener('scroll', scrollUp)
+
 
 /* DARK LIGHT THEME */
 const themeButton = document.getElementById('theme-button')
