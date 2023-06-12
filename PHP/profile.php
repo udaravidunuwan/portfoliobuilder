@@ -7,6 +7,8 @@ if(isset($_SESSION["user_id"])){
 
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
+    $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
+    $stmt_pT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM project_tab_tb WHERE pT_user_id = $user_id"));
 
 }
 else{
@@ -147,7 +149,7 @@ else{
                                 165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403  
                                 129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
                                 -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z"/>
-                                <image class="home__blob-img" x="12" y="24" xlink:href="
+                                <image class="home__blob-img" x="12" y="24" xlink:href="data:image/png;charset=UTF-8;base64,
                                 <?php if ($stmt_hT) {
                                         echo base64_encode($stmt_hT["hT_profile_pic"]);
                                     } else {
@@ -720,7 +722,12 @@ else{
                         </a>
                     </div>
 
-                    <img src="./assets/img/project.png" alt="" class="project__img">
+                    <img src="data:image/png;charset=UTF-8;base64,
+                    <?php if ($stmt_pT) {
+                            echo base64_encode($stmt_pT["pT_img"]);
+                        } else {
+                            echo "Img Not Found";
+                        } ?>" alt="" class="project__img">
                 </div>
             </div>
         </section>
@@ -739,7 +746,12 @@ else{
 
                         <div>
                             <h3 class="contact__title">Call me</h3>
-                            <span class="contact__subtitle">+94 75 449 9926</span>
+                            <span class="contact__subtitle">
+                                <?php if ($stmt_cT) {
+                                    echo $stmt_cT["cT_mobile"];
+                                } else {
+                                    echo "+00000000000";
+                                } ?></span>
                         </div>
                     </div>
                     
@@ -748,7 +760,12 @@ else{
 
                         <div>
                             <h3 class="contact__title">Email</h3>
-                            <span class="contact__subtitle">udara.somapala@pro-account.lk</span>
+                            <span class="contact__subtitle">
+                                <?php if ($stmt_cT) {
+                                    echo $stmt_cT["cT_email"];
+                                } else {
+                                    echo "defaultemail@email.com";
+                                } ?></span>
                         </div>
                     </div>
 
@@ -757,7 +774,12 @@ else{
 
                         <div>
                             <h3 class="contact__title">Location</h3>
-                            <span class="contact__subtitle">Pro Account Lanka, Access Towers 1, Level 6, No 278, Union Place, Colombo 2</span>
+                            <span class="contact__subtitle">
+                            <?php if ($stmt_cT) {
+                                    echo $stmt_cT["cT_location"];
+                                } else {
+                                    echo "defaultLocation.";
+                                } ?></span>
                         </div>
                     </div>
 
@@ -840,8 +862,20 @@ else{
         <div class="footer__bg">
             <div class="footer__container container grid">
                 <div>
-                    <h1 class="footer__title">Udara Vidunuwan</h1>
-                    <span class="footer__subtitle">Data Capture Associate</span>
+                    <h1 class="footer__title">
+                    <?php if ($stmt_hT) {
+                        echo $stmt_hT["hT_first_name"] . " " . $stmt_hT["hT_last_name"];
+                    } else {
+                        echo "User Name";
+                    } ?>
+                    </h1>
+                    <span class="footer__subtitle">
+                    <?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_designation"];
+                            } else {
+                                echo "User Designation";
+                            } ?>
+                    </span>
                 </div>
 
                 <ul class="footer__links">

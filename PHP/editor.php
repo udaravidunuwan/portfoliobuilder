@@ -25,8 +25,7 @@ else{
     <!-- UNICONS -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
-    <!-- SWIPER CSS -->
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" >
+    
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/editor.css">
@@ -463,19 +462,26 @@ else{
             <div class="editor__container container ">
 
 
-                <form action="" class="editor__form editor__border">
+                <form action="" class="editor__form editor__border" method="post">
                     <div class="editor__inputs ">
                         
                         <div class="editor__content ">
-                            <input type="file" id="photoInput" class="editor__input file__upload__button" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__new-project'))">
+                            <?php if(!empty($statusMsg)){ ?>
+                                <p class="status <?php echo $status; ?>"><?php echo $statusMsg; ?></p>
+                                <?php  } ?>
+                            <input type="file" name="image" id="photoInput" class="editor__input file__upload__button" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__new-project'))">
                             <div id="photoPreview__new-project" class="photo__preview__circle">
                             </div>
                         </div>
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex">
+                            <!-- <a href="#" class="button button--flex" id="project__save__btn" >
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
-                            </a>
+                            </a> -->
+                            <button type="submit" name="submit" class="button button--flex" id="project__save__btn" value="Upload">
+                                  Save Changes
+                                  <i class="uil uil-save button__icon"></i>
+                            </button>
                         </div>
                     </div>
                     
@@ -576,8 +582,7 @@ else{
         <i class="uil uil-arrow-up scrollup__icon"></i>
     </a>
 
-    <!-- SWIPER JS -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    
 
     <!-- MAIN JS -->
     <script src="assets/js/editor.js"></script>
