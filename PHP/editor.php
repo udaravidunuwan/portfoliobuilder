@@ -5,6 +5,8 @@ if(isset($_SESSION["user_id"])){
 
     $stmt = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id = $user_id"));
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
+    $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
+    $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
 
 }
 else{
@@ -120,37 +122,67 @@ else{
                 </div>
                 
                     
-                <form action="" class="editor__form editor__border">
+                <form action="" class="editor__form editor__border" autocomplete="off">
                     <div class="editor__inputs ">
                         <div class="editor__content">
                             <i class="uil uil-user-circle editor-icon" ></i>
                             <label for="" class="editor__label">First Name</label>
-                            <input type="text" class="editor__input" placeholder="Enter First Name here" autocomplete="off">
+                            <input type="text" class="editor__input" placeholder="Enter First Name here" 
+                            value="<?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_first_name"];
+                            } else {
+                                echo "User";
+                            } ?>">
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-user-circle editor-icon" ></i>
                             <label for="" class="editor__label">Last Name</label>
-                            <input type="text" class="editor__input" placeholder="Enter Last Name here" autocomplete="off">
+                            <input type="text" class="editor__input" placeholder="Enter Last Name here" 
+                            value="<?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_last_name"];
+                            } else {
+                                echo "User";
+                            } ?>">
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-sitemap editor-icon" ></i>
                             <label for="" class="editor__label">Designation</label>
-                            <input type="text" class="editor__input" placeholder="Enter Designation here" autocomplete="off">
+                            <input type="text" class="editor__input" placeholder="Enter Designation here" 
+                            value="<?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_designation"];
+                            } else {
+                                echo "User Designation";
+                            } ?>">
                         </div>
                         <div class="editor__content editor-icon">
                             <i class="uil uil-book-reader"></i>
                             <label for="" class="editor__label">Self Introduction</label>
-                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter Self Introduction here" autocomplete="off"></textarea>
+                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter Self Introduction here"  
+                            value="<?php if ($stmt_hT) {
+                                echo $stmt_hT["hT_self_introduction"];
+                            } else {
+                                echo "User Self Introduction";
+                            } ?>"></textarea>
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-linkedin-alt editor-icon" ></i>
                             <label for="" class="editor__label">LinkedIn</label>
-                            <input type="text" class="editor__input" placeholder="Enter URL here" autocomplete="off">
+                            <input type="text" class="editor__input" placeholder="Enter URL here"  
+                            value="<?php if ($stmt_hT) {
+                                        echo $stmt_hT["hT_linkedIn_url"];
+                                    } else {
+                                        echo "URL not available";
+                                    } ?>">
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-github-alt editor-icon"></i>
                             <label for="" class="editor__label">Github</label>
-                            <input type="text" class="editor__input" placeholder="Enter URL here" autocomplete="off">
+                            <input type="text" class="editor__input" placeholder="Enter URL here"  
+                            value="<?php if ($stmt_hT) {
+                                        echo $stmt_hT["hT_github_url"];
+                                    } else {
+                                        echo "URL not available";
+                                    } ?>">
                         </div>
                         <div class="editor__content ">
                             <input type="file" id="photoInput" class="editor__input" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__home'))">
@@ -178,27 +210,47 @@ else{
             <div class="editor__container container ">
 
 
-                <form action="" class="editor__form editor__border">
+                <form action="" class="editor__form editor__border" autocomplete="off">
                     <div class="editor__inputs ">
                         <div class="editor__content ">
                             <i class="uil uil-book-reader editor-icon"></i>
                             <label for="" class="editor__label">About User</label>
-                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter About User here" autocomplete="off"></textarea>
+                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter About User here"
+                            ><?php if ($stmt_aT) {
+                                    echo $stmt_aT["aT_about_user"];
+                                } else {
+                                    echo "About the User";
+                                } ?></textarea>
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-3-plus editor-icon" ></i>
                             <label for="" class="editor__label">Years of Experience</label>
-                            <input type="number" min="0" class="editor__input" placeholder="Enter No. of years here" autocomplete="off" oninput="validateNumberInput(this)">
+                            <input type="number" min="0" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
+                            value="<?php if ($stmt_aT) {
+                                echo $stmt_aT["aT_Yo_Exp"];
+                            } else {
+                                echo "00";
+                            } ?>">
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-notebooks editor-icon" ></i>
                             <label for="" class="editor__label">Completed Projects</label>
-                            <input type="number" class="editor__input" placeholder="Enter No. of years here" autocomplete="off" oninput="validateNumberInput(this)">
+                            <input type="number" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
+                            value="<?php if ($stmt_aT) {
+                                echo $stmt_aT["aT_No_Projects"];
+                            } else {
+                                echo "00";
+                            } ?>">
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-building editor-icon" ></i>
                             <label for="" class="editor__label">Companies Worked</label>
-                            <input type="number" class="editor__input" placeholder="Enter No. of years here" autocomplete="off" oninput="validateNumberInput(this)">
+                            <input type="number" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
+                            value="<?php if ($stmt_aT) {
+                                echo $stmt_aT["aT_No_companies"];
+                            } else {
+                                echo "00";
+                            } ?>">
                         </div>
                 
                         <div class="editor__content ">
@@ -338,7 +390,7 @@ else{
                                 
                             </div>
 
-                            <i class="uil uil-plus editor-icon add__button">Add New Qualification</i>
+                            <i class="uil uil-plus editor-icon add__button add-edu-qualification-button">Add New Qualification</i>
                             <div class="editor__save__button">
                                 <a href="#" class="button button--flex">
                                         Save Changes
@@ -391,7 +443,7 @@ else{
                                 </div>
                             </div>
 
-                            <i class="uil uil-plus editor-icon add__button">Add New Qualification</i>
+                            <i class="uil uil-plus editor-icon add__button add-work-qualification-button">Add New Qualification</i>
                             <div class="editor__save__button">
                                 <a href="#" class="button button--flex">
                                         Save Changes
@@ -435,10 +487,10 @@ else{
                                     <input type="text" class="editor__input" placeholder="Enter Service here" autocomplete="off">
                                 </div>
                             </div>
-                            <i class="uil uil-plus editor-icon add__button">Add New Service</i>
+                            <i class="uil uil-plus editor-icon add__button add-service-button">Add New Service</i>
 
                         </div>
-                        <i class="uil uil-plus editor-icon add__button">Add New Service Type</i>
+                        <i class="uil uil-plus editor-icon add__button add-type-button">Add New Service Type</i>
 
                         <div class="editor__save__button">
                             <a href="#" class="button button--flex">
@@ -499,24 +551,40 @@ else{
             <div class="editor__container container ">
 
 
-                <form id="contactme__form" action="" class="editor__form editor__border">
+                <form id="contactme__form" action="" class="editor__form editor__border" autocomplete="off">
                     <div class="editor__inputs ">
                         
                         <div class="editor__content">
                             <i class="uil uil-3-plus editor-icon" ></i>
                             <label for="" class="editor__label">Mobile Number</label>
-                            <input type="text" id="contactme__mobile-number" class="editor__input" placeholder="+94XXXXXXXXX" autocomplete="off">
+                            <input type="text" id="contactme__mobile-number" class="editor__input" placeholder="+94XXXXXXXXX" 
+                            value="<?php if ($stmt_cT) {
+                                    echo $stmt_cT["cT_mobile"];
+                                } else {
+                                    echo "+00000000000";
+                                } ?>">
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-notebooks editor-icon" ></i>
                             <label for="" class="editor__label">Email</label>
-                            <input type="email" class="editor__input" placeholder="Enter Email here" autocomplete="off">
+                            <input type="email" class="editor__input" placeholder="Enter Email here" 
+                            value="<?php if ($stmt_cT) {
+                                    echo $stmt_cT["cT_email"];
+                                } else {
+                                    echo "defaultemail@email.com";
+                                } ?>">
                         </div>
 
                         <div class="editor__content ">
                             <i class="uil uil-book-reader editor-icon"></i>
                             <label for="" class="editor__label">Location</label>
-                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter About User here" autocomplete="off"></textarea>
+                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter About User here" 
+                            ><?php if ($stmt_cT) {
+                                    echo $stmt_cT["cT_location"];
+                                } else {
+                                    echo "defaultLocation.";
+                                } ?>
+                            </textarea>
                         </div>
                 
                        
