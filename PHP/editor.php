@@ -1,5 +1,5 @@
 <?php
-require 'function.php';
+require 'functionEditor.php';
 if(isset($_SESSION["user_id"])){
     $user_id = $_SESSION["user_id"];
 
@@ -7,7 +7,7 @@ if(isset($_SESSION["user_id"])){
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
     $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
-
+    
 }
 else{
   header("Location: index.php");
@@ -210,8 +210,9 @@ else{
             <div class="editor__container container ">
 
 
-                <form action="" class="editor__form editor__border" autocomplete="off">
+                <form action="" class="editor__form editor__border" method="post" autocomplete="off">
                     <div class="editor__inputs ">
+                    <input type="hidden" id="actionAbout" value="about" >
                         <div class="editor__content ">
                             <i class="uil uil-book-reader editor-icon"></i>
                             <label for="" class="editor__label">About User</label>
@@ -259,7 +260,7 @@ else{
                             </div>
                         </div>
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex" onclick="submitAboutData();">
+                            <a href="#" id="about_submit" class="button button--flex" onclick="event.preventDefault(); submitAboutData();">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
                             </a>
@@ -665,7 +666,7 @@ else{
         <i class="uil uil-arrow-up scrollup__icon"></i>
     </a>
 
-    <?php require 'script.php'?>
+    <?php require 'scriptEditor.php'?>
     <script src="./assets/js/editor.js"></script>
 </body>
 
