@@ -210,7 +210,7 @@ else{
             <div class="editor__container container ">
 
 
-                <form action="" class="editor__form editor__border" autocomplete="off">
+                <form action="update.php" class="editor__form editor__border" autocomplete="off">
                     <div class="editor__inputs ">
                         <div class="editor__content ">
                             <i class="uil uil-book-reader editor-icon"></i>

@@ -2,6 +2,7 @@
 </script>
 
 <script type="text/javascript">
+    
     function submitData(){
         $(document).ready(function(){
             var data = {
@@ -32,23 +33,8 @@
             });
         });
     }
-
-    // function skills(){
-    //     $(document).ready(function(){
-    //         var skillData = {
-    //             addSkillCategory: $('.add-category-button'), 
-    //             addSkill: $('.add-skill-button'), 
-    //         };
-
-    //         $.ajax({
-    //             url: 'function.php',
-    //             type: 'post',
-    //             data: skillData,
-                
-    //         });
-    //     });
-    // }
     
+
     // ADD SKILL CATEGORY BUTTON
     $(document).ready(function() {
         
@@ -154,7 +140,6 @@
             $(this).before(categoryHtml);
         });
     });
-    
     
     // ADD WORK QUALIFICATION BUTTON
     $(document).ready(function() {
