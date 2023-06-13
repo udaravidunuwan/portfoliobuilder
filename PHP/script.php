@@ -2,7 +2,8 @@
 </script>
 
 <script type="text/javascript">
-    
+    // index.php
+    // LOGIN AND REGISTER 
     function submitData(){
         $(document).ready(function(){
             var data = {
@@ -35,6 +36,8 @@
     }
     
 
+    // editor.php
+    // HTML append functions
     // ADD SKILL CATEGORY BUTTON
     $(document).ready(function() {
         
@@ -230,6 +233,41 @@
             $(this).before(skillHtml);
         });
     });
+
+    function submitAboutData(){
+        alert("Clicked");
+        document.preventsDefault();
+        alert("Prevented");
+        
+        // $(document).ready(function(){
+        //     var data = {
+        //         action: '',
+        //         emailReg: $('#emailRegister').val(),
+        //         passwordReg: $('#passwordRegister').val(),
+        //         confirmPasswordReg: $('#passwordRegisterConfirm').val(),
+        //         emailLog: $('#emailLogin').val(),
+        //         passwordLog: $('#passwordLogin').val(),
+        //     };
+
+        //     if ($('#register-submit').is(':focus')) {
+        //         data.action = $('#actionReg').val();
+        //     } else if ($('#login-submit').is(':focus')) {
+        //         data.action = $('#actionLog').val();
+        //     }
+
+        //     $.ajax({
+        //         url: 'function.php',
+        //         type: 'post',
+        //         data: data,
+        //         success: function(response){
+        //             alert(response);
+        //             if(response == "Login successful"){
+        //                 window.location.reload();
+        //             } 
+        //         }
+        //     });
+        // });
+    }
 
 
 </script>

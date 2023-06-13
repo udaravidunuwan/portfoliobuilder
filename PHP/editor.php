@@ -210,12 +210,12 @@ else{
             <div class="editor__container container ">
 
 
-                <form action="update.php" class="editor__form editor__border" autocomplete="off">
+                <form action="" class="editor__form editor__border" autocomplete="off">
                     <div class="editor__inputs ">
                         <div class="editor__content ">
                             <i class="uil uil-book-reader editor-icon"></i>
                             <label for="" class="editor__label">About User</label>
-                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter About User here"
+                            <textarea name="about_user" id="about_user" cols="0" rows="7" class="editor__input" placeholder="Enter About User here"
                             ><?php if ($stmt_aT) {
                                     echo $stmt_aT["aT_about_user"];
                                 } else {
@@ -224,8 +224,8 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-3-plus editor-icon" ></i>
-                            <label for="" class="editor__label">Years of Experience</label>
-                            <input type="number" min="0" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
+                            <label for="years_of_experience" class="editor__label">Years of Experience</label>
+                            <input id="years_of_experience" type="number" min="0" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
                             value="<?php if ($stmt_aT) {
                                 echo $stmt_aT["aT_Yo_Exp"];
                             } else {
@@ -234,8 +234,8 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-notebooks editor-icon" ></i>
-                            <label for="" class="editor__label">Completed Projects</label>
-                            <input type="number" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
+                            <label for="completed_projects" class="editor__label">Completed Projects</label>
+                            <input id="completed_projects" type="number" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
                             value="<?php if ($stmt_aT) {
                                 echo $stmt_aT["aT_No_Projects"];
                             } else {
@@ -244,22 +244,22 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-building editor-icon" ></i>
-                            <label for="" class="editor__label">Companies Worked</label>
-                            <input type="number" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
+                            <label for="companies_worked" class="editor__label">Companies Worked</label>
+                            <input id="companies_worked" type="number" class="editor__input" placeholder="Enter No. of years here" oninput="validateNumberInput(this)"
                             value="<?php if ($stmt_aT) {
                                 echo $stmt_aT["aT_No_companies"];
                             } else {
                                 echo "00";
                             } ?>">
                         </div>
-                
+                <!-- NOT TAKEN INTO UPDATION UNTIL THE PHOTO ISSUE IS RESOLVED -->
                         <div class="editor__content ">
                             <input type="file" id="photoInput" class="editor__input file__upload__button" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__about'))">
                             <div id="photoPreview__about" class="photo__preview__circle">
                             </div>
                         </div>
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex">
+                            <a href="#" class="button button--flex" onclick="submitAboutData();">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
                             </a>
