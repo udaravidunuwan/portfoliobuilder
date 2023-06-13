@@ -13,13 +13,13 @@
                             <i class="uil uil-times editor-icon remove__button" ></i>
                             <div class="editor__content">
                                 <i class="uil uil-books editor-icon"></i>
-                                <label for="" class="editor__label">Skill Category</label>
-                                <input type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off">
+                                <label for="skill_category" class="editor__label">Skill Category</label>
+                                <input id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off">
                             </div>
                             <div class="editor__content">
                                 <i class="uil uil-3-plus editor-icon"></i>
-                                <label for="" class="editor__label">No. of Years</label>
-                                <input type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)">
+                                <label for="no_of_years" class="editor__label">No. of Years</label>
+                                <input id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)">
                             </div>
 
                             <!-- Skill -->
@@ -27,13 +27,13 @@
                                 <i class="uil uil-times editor-icon remove__button"></i>
                                 <div class="editor__content">
                                     <i class="uil uil-book editor-icon"></i>
-                                    <label for="" class="editor__label">Skill Name</label>
-                                    <input type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
+                                    <label for="skill" class="editor__label">Skill Name</label>
+                                    <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
                                 </div>
                                 <div class="editor__content">
                                     <i class="uil uil-percentage editor-icon"></i>
-                                    <label for="" class="editor__label">Proficiency in Percentage</label>
-                                    <input type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
+                                    <label for="percentage" class="editor__label">Proficiency in Percentage</label>
+                                    <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
                                 </div>
                             </div>
                             <i class="uil uil-plus editor-icon add__button add-skill-button">Add New Skill</i>
@@ -52,13 +52,13 @@
                                 <i class="uil uil-times editor-icon remove__button"></i>
                                 <div class="editor__content">
                                     <i class="uil uil-book editor-icon"></i>
-                                    <label for="" class="editor__label">Skill Name</label>
-                                    <input type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
+                                    <label for="skill" class="editor__label">Skill Name</label>
+                                    <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
                                 </div>
                                 <div class="editor__content">
                                     <i class="uil uil-percentage editor-icon"></i>
-                                    <label for="" class="editor__label">Proficiency in Percentage</label>
-                                    <input type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
+                                    <label for="percentage" class="editor__label">Proficiency in Percentage</label>
+                                    <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
                                 </div>
                             </div>`;
             $(this).before(skillHtml);
@@ -200,6 +200,7 @@
         });
     });
 
+    // UPDATE HOME DATABASE TABLE
     function submitHomeData(){
         $(document).ready(function(){
             var dataHome = {
@@ -227,6 +228,7 @@
             });
         });
     }
+
     // UPDATE ABOUT DATABASE TABLE
     function submitAboutData(){
         $(document).ready(function(){
@@ -251,9 +253,34 @@
             });
         });
     }
-    
-    
 
+    // UPDATE SKILL DATABASE TABLE
+    function submitSkillsData(){
+        $(document).ready(function(){
+            // EDIT this 
+            var dataAbout = {
+                action: $('#actionSkills').val(),
+                about_user: $('#about_user').val(),
+                years_of_experience: $('#years_of_experience').val(),
+                completed_projects: $('#completed_projects').val(),
+                companies_worked: $('#companies_worked').val(),
+            };
+        
+            $.ajax({
+                url: 'functionEditor.php',
+                type: 'post',
+                data: dataAbout,
+                success: function(response){
+                    alert(response);
+                    if(response == "Saved Successfully"){
+                        window.location.reload();
+                    } 
+                }
+            });
+        });
+    }
+    
+    // UPDATE CONTACT DATABASE TABLE
     function submitContantData(){
         $(document).ready(function(){
             var dataAbout = {
@@ -276,5 +303,7 @@
             });
         });
     }
+
+    
 
 </script>

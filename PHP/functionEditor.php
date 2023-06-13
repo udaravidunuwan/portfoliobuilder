@@ -11,6 +11,8 @@ if(isset($_POST["action"])){
         updateHome($user_id);
     } else if($_POST["action"] == "contact"){
         updateContact($user_id);
+    } else if($_POST["action"] == "skills"){
+        updateSkills($user_id);
     }
 }
 
@@ -36,6 +38,22 @@ function updateHome($user_id){
 function updateAbout($user_id){
     global $connection;
 
+    $aboutUser = $_POST["about_user"];
+    $yearsOfExperience = $_POST["years_of_experience"];
+    $completedProjects = $_POST["completed_projects"];
+    $companiesWorked = $_POST["companies_worked"];
+
+    $stmt = $connection->prepare("UPDATE about_tab_tb SET aT_about_user = ?, aT_Yo_Exp = ?, aT_No_Projects = ?, aT_No_companies = ? WHERE aT_user_id = ?");
+    $stmt->bind_param("ssssi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $user_id);
+    $stmt->execute();
+
+    echo "Saved Successfully";
+
+}
+
+function updateSkills($user_id){
+    global $connection;
+// Edit this
     $aboutUser = $_POST["about_user"];
     $yearsOfExperience = $_POST["years_of_experience"];
     $completedProjects = $_POST["completed_projects"];

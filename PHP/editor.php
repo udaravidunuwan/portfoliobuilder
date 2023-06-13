@@ -281,8 +281,9 @@ else{
 
             <div class="editor__container container">
                 
-                <form action="" class="editor__form editor__border">
+                <form action="" class="editor__form editor__border" method="post">
                     <div class="editor__inputs ">
+                    <input type="hidden" id="actionSkills" value="skills" >
                         
                         <!-- Skill Subject Category -->
                         <div class="skill__subject editor__border">
@@ -290,13 +291,13 @@ else{
                             <i class="uil uil-times editor-icon remove__button" ></i>
                             <div class="editor__content">
                                 <i class="uil uil-books editor-icon"></i>
-                                <label for="" class="editor__label">Skill Category</label>
-                                <input type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off">
+                                <label for="skill_category" class="editor__label">Skill Category</label>
+                                <input id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off">
                             </div>
                             <div class="editor__content">
                                 <i class="uil uil-3-plus editor-icon"></i>
-                                <label for="" class="editor__label">No. of Years</label>
-                                <input type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)">
+                                <label for="no_of_years" class="editor__label">No. of Years</label>
+                                <input id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)">
                             </div>
 
                             <!-- Skill -->
@@ -304,13 +305,13 @@ else{
                                 <i class="uil uil-times editor-icon remove__button"></i>
                                 <div class="editor__content">
                                     <i class="uil uil-book editor-icon"></i>
-                                    <label for="" class="editor__label">Skill Name</label>
-                                    <input type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
+                                    <label for="skill" class="editor__label">Skill Name</label>
+                                    <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
                                 </div>
                                 <div class="editor__content">
                                     <i class="uil uil-percentage editor-icon"></i>
-                                    <label for="" class="editor__label">Proficiency in Percentage</label>
-                                    <input type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
+                                    <label for="percentage" class="editor__label">Proficiency in Percentage</label>
+                                    <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
                                 </div>
                             </div>
                             <i class="uil uil-plus editor-icon add__button add-skill-button">Add New Skill</i>
@@ -319,7 +320,7 @@ else{
                         <i class="uil uil-plus editor-icon add__button add-category-button">Add New Skill Category</i>
 
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex">
+                            <a href="#" class="button button--flex"  onclick="event.preventDefault(); submitSkillsData();">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
                             </a>
