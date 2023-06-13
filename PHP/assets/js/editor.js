@@ -216,3 +216,5 @@ document.getElementById("contact__saveBtn").addEventListener("click", function(e
     mobileInput.value = "+94";
   }
 });
+
+// SKILLS APPEND NEW SKILL CATEGORIES AND NEW SKILL

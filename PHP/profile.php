@@ -4,7 +4,6 @@ if(isset($_SESSION["user_id"])){
     $user_id = $_SESSION["user_id"];
 
     $stmt = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id = $user_id"));
-
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
     $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));

@@ -3,7 +3,6 @@ require 'function.php';
 if(isset($_SESSION["user_id"])){
     $user_id = $_SESSION["user_id"];
 
-    
     $stmt = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id = $user_id"));
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
 
@@ -13,9 +12,6 @@ else{
 }
 ?>
 
-
-<!-- The defalut template will be Jhon Doe -->
-<!-- No personal details yet -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -236,7 +232,7 @@ else{
                         <!-- Skill Subject Category -->
                         <div class="skill__subject editor__border">
                             
-                            <i class="uil uil-times editor-icon remove__button"></i>
+                            <i class="uil uil-times editor-icon remove__button" ></i>
                             <div class="editor__content">
                                 <i class="uil uil-books editor-icon"></i>
                                 <label for="" class="editor__label">Skill Category</label>
@@ -262,10 +258,10 @@ else{
                                     <input type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
                                 </div>
                             </div>
-                            <i class="uil uil-plus editor-icon add__button">Add New Skill</i>
+                            <i class="uil uil-plus editor-icon add__button add-skill-button">Add New Skill</i>
 
                         </div>
-                        <i class="uil uil-plus editor-icon add__button">Add New Skill Category</i>
+                        <i class="uil uil-plus editor-icon add__button add-category-button">Add New Skill Category</i>
 
                         <div class="editor__save__button">
                             <a href="#" class="button button--flex">
@@ -601,9 +597,7 @@ else{
         <i class="uil uil-arrow-up scrollup__icon"></i>
     </a>
 
-    
-
-    <!-- MAIN JS -->
+    <?php require 'script.php'?>
     <script src="./assets/js/editor.js"></script>
 </body>
 
