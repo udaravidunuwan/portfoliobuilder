@@ -200,9 +200,35 @@
         });
     });
 
+    function submitHomeData(){
+        $(document).ready(function(){
+            var dataHome = {
+                action: $('#actionHome').val(),
+                first_name: $('#first_name').val(),
+                last_name: $('#last_name').val(),
+                designation: $('#designation').val(),
+                self_intro: $('#self_intro').val(),
+                linkedin: $('#linkedin').val(),
+                github: $('#github').val(),
+            };
+            
+            alert(dataHome.action);
+
+            $.ajax({
+                url: 'functionEditor.php',
+                type: 'post',
+                data: dataHome,
+                success: function(response){
+                    alert(response);
+                    if(response == "Saved Successfully"){
+                        window.location.reload();
+                    } 
+                }
+            });
+        });
+    }
     // UPDATE ABOUT DATABASE TABLE
     function submitAboutData(){
-        alert("Clicked about ");
         $(document).ready(function(){
             var dataAbout = {
                 action: $('#actionAbout').val(),
@@ -211,12 +237,32 @@
                 completed_projects: $('#completed_projects').val(),
                 companies_worked: $('#companies_worked').val(),
             };
-            
-            // if ($('#about_submit').is(':focus')) {
-            //     dataAbout.action = $('#actionAbout').val();
-            // }
-            alert(dataAbout.action);
+        
+            $.ajax({
+                url: 'functionEditor.php',
+                type: 'post',
+                data: dataAbout,
+                success: function(response){
+                    alert(response);
+                    if(response == "Saved Successfully"){
+                        window.location.reload();
+                    } 
+                }
+            });
+        });
+    }
+    
+    
 
+    function submitContantData(){
+        $(document).ready(function(){
+            var dataAbout = {
+                action: $('#actionContact').val(),
+                mobile: $('#mobile').val(),
+                email: $('#email').val(),
+                location: $('#location').val(),
+            };
+        
             $.ajax({
                 url: 'functionEditor.php',
                 type: 'post',

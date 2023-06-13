@@ -124,10 +124,11 @@ else{
                     
                 <form action="" class="editor__form editor__border" autocomplete="off">
                     <div class="editor__inputs ">
+                    <input type="hidden" id="actionHome" value="home" >
                         <div class="editor__content">
                             <i class="uil uil-user-circle editor-icon" ></i>
-                            <label for="" class="editor__label">First Name</label>
-                            <input type="text" class="editor__input" placeholder="Enter First Name here" 
+                            <label for="first_name" class="editor__label">First Name</label>
+                            <input id="first_name" type="text" class="editor__input" placeholder="Enter First Name here" 
                             value="<?php if ($stmt_hT) {
                                 echo $stmt_hT["hT_first_name"];
                             } else {
@@ -136,8 +137,8 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-user-circle editor-icon" ></i>
-                            <label for="" class="editor__label">Last Name</label>
-                            <input type="text" class="editor__input" placeholder="Enter Last Name here" 
+                            <label for="last_name" class="editor__label">Last Name</label>
+                            <input id="last_name" type="text" class="editor__input" placeholder="Enter Last Name here" 
                             value="<?php if ($stmt_hT) {
                                 echo $stmt_hT["hT_last_name"];
                             } else {
@@ -146,8 +147,8 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-sitemap editor-icon" ></i>
-                            <label for="" class="editor__label">Designation</label>
-                            <input type="text" class="editor__input" placeholder="Enter Designation here" 
+                            <label for="designation" class="editor__label">Designation</label>
+                            <input id="designation" type="text" class="editor__input" placeholder="Enter Designation here" 
                             value="<?php if ($stmt_hT) {
                                 echo $stmt_hT["hT_designation"];
                             } else {
@@ -156,8 +157,8 @@ else{
                         </div>
                         <div class="editor__content editor-icon">
                             <i class="uil uil-book-reader"></i>
-                            <label for="" class="editor__label">Self Introduction</label>
-                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter Self Introduction here"  
+                            <label for="self_intro" class="editor__label">Self Introduction</label>
+                            <textarea name="" id="self_intro" cols="0" rows="7" class="editor__input" placeholder="Enter Self Introduction here"  
                             value="<?php if ($stmt_hT) {
                                 echo $stmt_hT["hT_self_introduction"];
                             } else {
@@ -166,8 +167,8 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-linkedin-alt editor-icon" ></i>
-                            <label for="" class="editor__label">LinkedIn</label>
-                            <input type="text" class="editor__input" placeholder="Enter URL here"  
+                            <label for="linkedin" class="editor__label">LinkedIn</label>
+                            <input id="linkedin" type="text" class="editor__input" placeholder="Enter URL here"  
                             value="<?php if ($stmt_hT) {
                                         echo $stmt_hT["hT_linkedIn_url"];
                                     } else {
@@ -176,14 +177,15 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-github-alt editor-icon"></i>
-                            <label for="" class="editor__label">Github</label>
-                            <input type="text" class="editor__input" placeholder="Enter URL here"  
+                            <label for="github" class="editor__label">Github</label>
+                            <input id="github" type="text" class="editor__input" placeholder="Enter URL here"  
                             value="<?php if ($stmt_hT) {
                                         echo $stmt_hT["hT_github_url"];
                                     } else {
                                         echo "URL not available";
                                     } ?>">
                         </div>
+                        <!-- LETTING THIS OUT FOR NOW -->
                         <div class="editor__content ">
                             <input type="file" id="photoInput" class="editor__input" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__home'))">
                             <div id="photoPreview__home" class="photo__preview__circle">
@@ -191,7 +193,7 @@ else{
                             </div>
                         </div>
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex">
+                            <a href="#" class="button button--flex" onclick="event.preventDefault(); submitHomeData();">
                                     Save Changes
                                     <i class="uil uil-save button__icon"></i>
                             </a>
@@ -260,7 +262,7 @@ else{
                             </div>
                         </div>
                         <div class="editor__save__button">
-                            <a href="#" id="about_submit" class="button button--flex" onclick="event.preventDefault(); submitAboutData();">
+                            <a href="#" class="button button--flex" onclick="event.preventDefault(); submitAboutData();">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
                             </a>
@@ -554,11 +556,12 @@ else{
 
                 <form id="contactme__form" action="" class="editor__form editor__border" autocomplete="off">
                     <div class="editor__inputs ">
+                    <input type="hidden" id="actionContact" value="contact" >
                         
                         <div class="editor__content">
                             <i class="uil uil-3-plus editor-icon" ></i>
-                            <label for="" class="editor__label">Mobile Number</label>
-                            <input type="text" id="contactme__mobile-number" class="editor__input" placeholder="+94XXXXXXXXX" 
+                            <label for="mobile" class="editor__label">Mobile Number</label>
+                            <input id="mobile" type="text" id="contactme__mobile-number" class="editor__input" placeholder="+94XXXXXXXXX" 
                             value="<?php if ($stmt_cT) {
                                     echo $stmt_cT["cT_mobile"];
                                 } else {
@@ -567,8 +570,8 @@ else{
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-notebooks editor-icon" ></i>
-                            <label for="" class="editor__label">Email</label>
-                            <input type="email" class="editor__input" placeholder="Enter Email here" 
+                            <label for="email" class="editor__label">Email</label>
+                            <input id="email" type="email" class="editor__input" placeholder="Enter Email here" 
                             value="<?php if ($stmt_cT) {
                                     echo $stmt_cT["cT_email"];
                                 } else {
@@ -578,8 +581,8 @@ else{
 
                         <div class="editor__content ">
                             <i class="uil uil-book-reader editor-icon"></i>
-                            <label for="" class="editor__label">Location</label>
-                            <textarea name="" id="" cols="0" rows="7" class="editor__input" placeholder="Enter About User here" 
+                            <label for="location" class="editor__label">Location</label>
+                            <textarea name="" id="location" cols="0" rows="7" class="editor__input" placeholder="Enter About User here" 
                             ><?php if ($stmt_cT) {
                                     echo $stmt_cT["cT_location"];
                                 } else {
@@ -590,7 +593,7 @@ else{
                 
                        
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex" id="contact__saveBtn">
+                            <a href="#" class="button button--flex" id="contact__saveBtn" onclick="event.preventDefault(); submitContantData();">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
                             </a>
