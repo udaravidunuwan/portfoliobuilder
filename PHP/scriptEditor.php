@@ -255,30 +255,51 @@
     }
 
     // UPDATE SKILL DATABASE TABLE
-    function submitSkillsData(){
-        $(document).ready(function(){
-            // EDIT this 
-            var dataAbout = {
+    function submitSkillsData() {
+        $(document).ready(function () {
+            var skillCategories = $('.skill__subject');
+            var skillsData = [];
+
+            skillCategories.each(function () {
+                var skillCategory = $(this);
+                var categoryData = {
+                    skill_category: skillCategory.find('#skill_category_<?php echo $stmt_scT['category_id']; ?>').val(),
+                    no_of_years: skillCategory.find('#no_of_years_<?php echo $stmt_scT['category_id']; ?>').val(),
+                    skills: []
+                };
+
+                var skills = skillCategory.find('.skill__subject__skill');
+                skills.each(function () {
+                    var skill = $(this);
+                    var skillData = {
+                        skill_name: skill.find('#skill').val(),
+                        proficiency_percentage: skill.find('#percentage').val()
+                    };
+                    categoryData.skills.push(skillData);
+                });
+
+                skillsData.push(categoryData);
+            });
+
+            var dataSkills = {
                 action: $('#actionSkills').val(),
-                skill_category: $('#skill_category').val(),
-                no_of_years: $('#no_of_years').val(),
-                skill: $('#skill').val(),
-                percentage: $('#percentage').val(),
+                skills_data: JSON.stringify(skillsData)
             };
-        
+
             $.ajax({
                 url: 'functionEditor.php',
                 type: 'post',
-                data: dataAbout,
-                success: function(response){
+                data: dataSkills,
+                success: function (response) {
                     alert(response);
-                    if(response == "Saved Successfully"){
+                    if (response == "Saved Successfully") {
                         window.location.reload();
-                    } 
+                    }
                 }
             });
         });
     }
+
     
     // UPDATE CONTACT DATABASE TABLE
     function submitContantData(){

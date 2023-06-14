@@ -54,55 +54,41 @@ function updateAbout($user_id){
 function updateSkills($user_id){
     global $connection;
 
-    $categoryNames = $_POST['skill_category'];
-    $yearsOfExperience = $_POST['no_of_years'];
+    $skillsData = json_decode($_POST['skills_data'], true);
 
-    for ($i = 0; $i < count($categoryNames); $i++) {
-        $categoryName = $conn->real_escape_string($categoryNames[$i]);
-        $years = $conn->real_escape_string($yearsOfExperience[$i]);
-    
-        $stmt = $connection->prepare("UPDATE skill_categories_tab_tb SET category_name = ?, years_of_experience = ? WHERE category_user_id = ?");
-        $stmt->bind_param("ssi", $categoryNames, $yearsOfExperience, $user_id);
-        $stmt->execute();
+    foreach ($skillsData as $categoryData) {
+        $categoryName = $connection->real_escape_string($_POST['skill_category_' . $categoryId]);
+        $yearsOfExperience = $connection->real_escape_string($_POST['no_of_years_' . $categoryId]);
 
-        // if ($connection->query($stmt) !== true) {
-        //     echo "Error inserting skill category: " . $connection->error;
-        // }
-        if ($stmt->execute() === false) {
-            echo "Error updating skill category: " . $stmt->error;
+
+        // Update skill category
+        $stmtCategory = $connection->prepare("UPDATE skill_categories_tab_tb SET category_name = ?, years_of_experience = ? WHERE category_user_id = ?");
+        $stmtCategory->bind_param("ssi", $categoryName, $yearsOfExperience, $user_id);
+        if (!$stmtCategory->execute()) {
+            echo "Error updating skill category: " . $stmtCategory->error;
+            return;
         }
-    
+
         // Retrieve the auto-generated category ID
-        $categoryId = $connection->insert_id;
-    
-        // Retrieve skill data for the current category
-        $skillNames = $_POST['skill'][$i];
-        $proficiencyPercentages = $_POST['percentage'][$i];
-    
-        // Loop through the skills
-        for ($j = 0; $j < count($skillNames); $j++) {
-            $skillName = $conn->real_escape_string($skillNames[$j]);
-            $percentage = $conn->real_escape_string($proficiencyPercentages[$j]);
+        $categoryId = $stmtCategory->insert_id;
 
-            $stmtSkill = $connection->prepare("UPDATE skills_tab_tb SET category_id = ?, skill_name = ?, proficiency_percentage = ? WHERE skills_user_id = ?");
-            $stmtSkill->bind_param("isii", $categoryId, $skillName, $percentage, $user_id);
-            $stmtSkill->execute();
-    
-            // Insert the skill into the database and associate it with the category
-            // $sql = "INSERT INTO skills (category_id, skill_name, proficiency_percentage) VALUES ('$categoryId', '$skillName', '$percentage')";
-            // if ($conn->query($sql) !== true) {
-            //     echo "Error inserting skill: " . $conn->error;
-            // }
+        foreach ($categoryData['skills'] as $skillData) {
+            $skillName = $connection->real_escape_string($skillData['skill_name']);
+            $proficiencyPercentage = $connection->real_escape_string($skillData['proficiency_percentage']);
 
-            if ($stmtSkill->execute() === false) {
-                echo "Error updating skills : " . $stmtSkill->error;
+            // Update skill
+            $stmtSkill = $connection->prepare("UPDATE skills_tab_tb SET skill_name = ?, proficiency_percentage = ? WHERE skills_user_id = ? AND category_id = ?");
+            $stmtSkill->bind_param("ssii", $skillName, $proficiencyPercentage, $user_id, $categoryId);
+            if (!$stmtSkill->execute()) {
+                echo "Error updating skills: " . $stmtSkill->error;
+                return;
             }
         }
     }
-
     echo "Saved Successfully";
 
 }
+
 
 function updateContact($user_id){
     global $connection;

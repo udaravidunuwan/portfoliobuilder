@@ -181,40 +181,40 @@ generateYearOptions(startYear, new Date().getFullYear(), selectWorkYearFrom);
 generateYearOptions(startYear, new Date().getFullYear(), selectWorkYearTo);
 
 
-/* Mobile number prefix */
-var mobileInput = document.getElementById("contactme__mobile-number");
+// /* Mobile number prefix */
+// var mobileInput = document.getElementById("contactme__mobile-number");
 
-// Handle focus event to reapply the prefix if removed
-mobileInput.addEventListener("focus", function() {
-  if (!mobileInput.value.startsWith("+94")) {
-    mobileInput.value = "+94" + mobileInput.value;
-  }
-});
+// // Handle focus event to reapply the prefix if removed
+// mobileInput.addEventListener("focus", function() {
+//   if (!mobileInput.value.startsWith("+94")) {
+//     mobileInput.value = "+94" + mobileInput.value;
+//   }
+// });
 
-// Handle input event to prevent deleting the prefix
-mobileInput.addEventListener("input", function() {
-  if (!mobileInput.value.startsWith("+94")) {
-    mobileInput.value = "+94" + mobileInput.value.substring(3);
-  }
-});
+// // Handle input event to prevent deleting the prefix
+// mobileInput.addEventListener("input", function() {
+//   if (!mobileInput.value.startsWith("+94")) {
+//     mobileInput.value = "+94" + mobileInput.value.substring(3);
+//   }
+// });
 
-/* Mobile number validity */
-document.getElementById("contact__saveBtn").addEventListener("click", function(event) {
-  event.preventDefault(); // Prevent form submission
+// /* Mobile number validity */
+// document.getElementById("contact__saveBtn").addEventListener("click", function(event) {
+//   event.preventDefault(); // Prevent form submission
 
-  var mobileNumber = document.getElementById("contactme__mobile-number").value;
-  var pattern = /^\+94\d{9}$/; // Regular expression for "+94" followed by 9 digits
+//   var mobileNumber = document.getElementById("contactme__mobile-number").value;
+//   var pattern = /^\+94\d{9}$/; // Regular expression for "+94" followed by 9 digits
 
-  if (pattern.test(mobileNumber)) {
-    // Mobile number is valid
-    alert("Mobile number is valid!");
-    // Here, you can proceed with further actions like submitting the form or making an AJAX request
-    // THE MAGIC STARTS HERE==========================================================================================================>>>
-  } else {
-    // Mobile number is invalid
-    alert("Please enter a valid mobile number in the format +94XXXXXXXXX!");
-    mobileInput.value = "+94";
-  }
-});
+//   if (pattern.test(mobileNumber)) {
+//     // Mobile number is valid
+//     alert("Mobile number is valid!");
+//     // Here, you can proceed with further actions like submitting the form or making an AJAX request
+//     // THE MAGIC STARTS HERE==========================================================================================================>>>
+//   } else {
+//     // Mobile number is invalid
+//     alert("Please enter a valid mobile number in the format +94XXXXXXXXX!");
+//     mobileInput.value = "+94";
+//   }
+// });
 
 // SKILLS APPEND NEW SKILL CATEGORIES AND NEW SKILL
