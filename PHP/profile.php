@@ -8,13 +8,22 @@ if(isset($_SESSION["user_id"])){
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
     $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
     $stmt_pT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM project_tab_tb WHERE pT_user_id = $user_id"));
-    $stmt_scT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id"));
-    $stmt_sT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id"));
+    // $stmt_scT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id"));
+    // $stmt_sT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id"));
+    // Retrieve all skill categories for the user
+    $skillCategoriesQuery = mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id");
+    $skillCategories = mysqli_fetch_all($skillCategoriesQuery, MYSQLI_ASSOC);
+
+    // Retrieve all skills for the user
+    $skillsQuery = mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id");
+    $skills = mysqli_fetch_all($skillsQuery, MYSQLI_ASSOC);
+
 
 }
 else{
   header("Location: index.php");
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -266,172 +275,38 @@ else{
             <span class="section__subtitle">My technical level</span>
 
             <div class="skills__container container grid">
+            <?php foreach ($skillCategories as $category) { ?>
                 <div>
-                    <!-- SKILL1 -->
+                    <!-- SKILL -->
                     <div class="skills__content skills__open">
                         <div class="skills__header">
-                            <i class="uil uil-brackets-curly skills__icon"></i>
+                            <i class="uil uil-list-ul skills__icon"></i>
 
                             <div>
-                                <h1 class="skills__title"><?php if ($stmt_scT) {
-                                echo $stmt_scT["category_name"];
-                            } else {
-                                echo "Category Name";
-                            } ?></h1>
-                                <span class="skills__subtitle">More than <?php if ($stmt_scT) {
-                                echo $stmt_scT["years_of_experience"];
-                            } else {
-                                echo "00";
-                            } ?> years</span>
+                                <h1 class="skills__title"><?php echo $category["category_name"]; ?></h1>
+                                <span class="skills__subtitle">More than <?php echo $category["years_of_experience"]; ?> years</span>
                             </div>
 
                             <i class="uil uil-angle-down skills__arrow"></i>
                         </div>
 
                         <div class="skills__list grid">
-
+                        <?php foreach ($skills as $skill) {
+                        if ($skill["category_id"] === $category["category_id"]) { ?>
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name"><?php if ($stmt_sT) {
-                                echo $stmt_sT["skill_name"];
-                            } else {
-                                echo "Skill Name";
-                            } ?></h3>
-                                    <span class="skills__number"><?php if ($stmt_sT) {
-                                echo $stmt_sT["proficiency_percentage"];
-                            } else {
-                                echo "00";
-                            } ?>%</span>
+                                    <h3 class="skills__name"><?php echo $skill["skill_name"]; ?></h3>
+                                    <span class="skills__number"
+                                    ><?php echo $skill["proficiency_percentage"]; ?>%</span>
                                 </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__value"></span>
-                                </div>
+                                
                             </div>
-
-                            <!-- <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">CSS</h3>
-                                    <span class="skills__number">60%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__css"></span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">JS</h3>
-                                    <span class="skills__number">80%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__js"></span>
-                                </div>
-                            </div> -->
-
+                            <?php }
+                        } ?>
                         </div>
                     </div>
                 </div>
-
-                <!--<div>
-                    
-                     <div class="skills__content skills__close">
-                        <div class="skills__header">
-                            <i class="uil uil-server-network skills__icon"></i>
-
-                            <div>
-                                <h1 class="skills__title">Backend development</h1>
-                                <span class="skills__subtitle">More than 2 years</span>
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">PHP</h3>
-                                    <span class="skills__number">40%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__php"></span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Node Js</h3>
-                                    <span class="skills__number">30%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__nodejs"></span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Firebase</h3>
-                                    <span class="skills__number">70%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__firebase"></span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div>
-                    
-                    <div class="skills__content skills__close">
-                        <div class="skills__header">
-                            <i class="uil uil-swatchbook skills__icon"></i>
-
-                            <div>
-                                <h1 class="skills__title">Designer</h1>
-                                <span class="skills__subtitle">More than 3 years</span>
-                            </div>
-                            
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Figma</h3>
-                                    <span class="skills__number">80%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__figma"></span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Sketch</h3>
-                                    <span class="skills__number">85%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__sketch"></span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Photoshop</h3>
-                                    <span class="skills__number">75%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__photoshop"></span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                <div> -->
-
-                
+            <?php } ?>    
             </div>
         </section>
         

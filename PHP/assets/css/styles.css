@@ -509,7 +509,7 @@ img {
     font-size: var(--noraml-font-size);
     font-weight: var(--font-medium);
 }
-
+/* 
 .skills__bar,
 .skills__percentage {
     height: 5px;
@@ -525,12 +525,11 @@ img {
     background-color: var(--first-color);
 }
 
-.skills__value {
-    width: 30%;
+.skills__value {width: 50%;width: 50%;width: 80%;width: 80%;width: 80%;
 }
-
+ */
 /* Remove from */
-.skills__html {
+/* .skills__html {
     width: 30%;
 }
 
@@ -562,7 +561,7 @@ img {
 }
 .skills__photoshop {
     width: 75%;
-}
+} */
 /* upto here */
 
 .skills__close .skills__list {
