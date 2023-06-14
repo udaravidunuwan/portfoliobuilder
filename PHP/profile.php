@@ -304,7 +304,7 @@ else{
                             } ?>%</span>
                                 </div>
                                 <div class="skills__bar">
-                                    <span class="skills__percentage skills__html"></span>
+                                    <span class="skills__percentage skills__value"></span>
                                 </div>
                             </div>
 
