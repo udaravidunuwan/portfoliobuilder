@@ -7,6 +7,8 @@ if(isset($_SESSION["user_id"])){
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
     $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
+    $stmt_scT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id"));
+    $stmt_sT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id"));
     
 }
 else{
@@ -292,12 +294,22 @@ else{
                             <div class="editor__content">
                                 <i class="uil uil-books editor-icon"></i>
                                 <label for="skill_category" class="editor__label">Skill Category</label>
-                                <input id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off">
+                                <input id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off" 
+                                value="<?php if ($stmt_scT) {
+                                    echo $stmt_scT["category_name"];
+                                } else {
+                                    echo "Category Name";
+                                } ?>">
                             </div>
                             <div class="editor__content">
                                 <i class="uil uil-3-plus editor-icon"></i>
                                 <label for="no_of_years" class="editor__label">No. of Years</label>
-                                <input id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)">
+                                <input id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)"
+                                value="<?php if ($stmt_scT) {
+                                    echo $stmt_scT["years_of_experience"];
+                                } else {
+                                    echo "00";
+                                } ?>">
                             </div>
 
                             <!-- Skill -->

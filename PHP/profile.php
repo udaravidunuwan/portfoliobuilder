@@ -8,6 +8,8 @@ if(isset($_SESSION["user_id"])){
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
     $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
     $stmt_pT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM project_tab_tb WHERE pT_user_id = $user_id"));
+    $stmt_scT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id"));
+    $stmt_sT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id"));
 
 }
 else{
@@ -271,8 +273,16 @@ else{
                             <i class="uil uil-brackets-curly skills__icon"></i>
 
                             <div>
-                                <h1 class="skills__title">Frontend development</h1>
-                                <span class="skills__subtitle">More than 3 years</span>
+                                <h1 class="skills__title"><?php if ($stmt_scT) {
+                                echo $stmt_scT["category_name"];
+                            } else {
+                                echo "Category Name";
+                            } ?></h1>
+                                <span class="skills__subtitle">More than <?php if ($stmt_scT) {
+                                echo $stmt_scT["years_of_experience"];
+                            } else {
+                                echo "00";
+                            } ?> years</span>
                             </div>
 
                             <i class="uil uil-angle-down skills__arrow"></i>
@@ -282,15 +292,23 @@ else{
 
                             <div class="skills__data">
                                 <div class="skills__titles">
-                                    <h3 class="skills__name">HTML</h3>
-                                    <span class="skills__number">90%</span>
+                                    <h3 class="skills__name"><?php if ($stmt_sT) {
+                                echo $stmt_sT["skill_name"];
+                            } else {
+                                echo "Skill Name";
+                            } ?></h3>
+                                    <span class="skills__number"><?php if ($stmt_sT) {
+                                echo $stmt_sT["proficiency_percentage"];
+                            } else {
+                                echo "00";
+                            } ?>%</span>
                                 </div>
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__html"></span>
                                 </div>
                             </div>
 
-                            <div class="skills__data">
+                            <!-- <div class="skills__data">
                                 <div class="skills__titles">
                                     <h3 class="skills__name">CSS</h3>
                                     <span class="skills__number">60%</span>
@@ -308,15 +326,15 @@ else{
                                 <div class="skills__bar">
                                     <span class="skills__percentage skills__js"></span>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <!-- SKILL2 -->
-                    <div class="skills__content skills__close">
+                <!--<div>
+                    
+                     <div class="skills__content skills__close">
                         <div class="skills__header">
                             <i class="uil uil-server-network skills__icon"></i>
 
@@ -362,9 +380,9 @@ else{
 
                         </div>
                     </div>
-                </div>
-                <div>
-                    <!-- SKILL3 -->
+                </div> -->
+                <!-- <div>
+                    
                     <div class="skills__content skills__close">
                         <div class="skills__header">
                             <i class="uil uil-swatchbook skills__icon"></i>
@@ -411,7 +429,7 @@ else{
 
                         </div>
                     </div>
-                <div>
+                <div> -->
 
                 
             </div>

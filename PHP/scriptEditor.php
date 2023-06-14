@@ -260,10 +260,10 @@
             // EDIT this 
             var dataAbout = {
                 action: $('#actionSkills').val(),
-                about_user: $('#about_user').val(),
-                years_of_experience: $('#years_of_experience').val(),
-                completed_projects: $('#completed_projects').val(),
-                companies_worked: $('#companies_worked').val(),
+                skill_category: $('#skill_category').val(),
+                no_of_years: $('#no_of_years').val(),
+                skill: $('#skill').val(),
+                percentage: $('#percentage').val(),
             };
         
             $.ajax({

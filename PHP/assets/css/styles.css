@@ -525,8 +525,13 @@ img {
     background-color: var(--first-color);
 }
 
+.skills__value {
+    width: 30%;
+}
+
+/* Remove from */
 .skills__html {
-    width: 90%;
+    width: 30%;
 }
 
 .skills__css {
@@ -558,6 +563,7 @@ img {
 .skills__photoshop {
     width: 75%;
 }
+/* upto here */
 
 .skills__close .skills__list {
     height: 0;
