@@ -5,65 +5,65 @@
     // editor.php
     // HTML append functions
     // ADD SKILL CATEGORY BUTTON
-    $(document).ready(function() {
+    // $(document).ready(function() {
         
-        $(".add-category-button").click(function() {
-            var categoryHtml = `<div class="skill__subject editor__border">
+    //     $(".add-category-button").click(function() {
+    //         var categoryHtml = `<div class="skill__subject editor__border">
                             
-                            <i class="uil uil-times editor-icon remove__button" ></i>
-                            <div class="editor__content">
-                                <i class="uil uil-books editor-icon"></i>
-                                <label for="skill_category" class="editor__label">Skill Category</label>
-                                <input id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off">
-                            </div>
-                            <div class="editor__content">
-                                <i class="uil uil-3-plus editor-icon"></i>
-                                <label for="no_of_years" class="editor__label">No. of Years</label>
-                                <input id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)">
-                            </div>
+    //                         <i class="uil uil-times editor-icon remove__button" ></i>
+    //                         <div class="editor__content">
+    //                             <i class="uil uil-books editor-icon"></i>
+    //                             <label for="skill_category" class="editor__label">Skill Category</label>
+    //                             <input id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off">
+    //                         </div>
+    //                         <div class="editor__content">
+    //                             <i class="uil uil-3-plus editor-icon"></i>
+    //                             <label for="no_of_years" class="editor__label">No. of Years</label>
+    //                             <input id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)">
+    //                         </div>
 
-                            <!-- Skill -->
-                            <div class="skill__subject__skill editor__border">
-                                <i class="uil uil-times editor-icon remove__button"></i>
-                                <div class="editor__content">
-                                    <i class="uil uil-book editor-icon"></i>
-                                    <label for="skill" class="editor__label">Skill Name</label>
-                                    <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
-                                </div>
-                                <div class="editor__content">
-                                    <i class="uil uil-percentage editor-icon"></i>
-                                    <label for="percentage" class="editor__label">Proficiency in Percentage</label>
-                                    <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
-                                </div>
-                            </div>
-                            <i class="uil uil-plus editor-icon add__button add-skill-button">Add New Skill</i>
+    //                         <!-- Skill -->
+    //                         <div class="skill__subject__skill editor__border">
+    //                             <i class="uil uil-times editor-icon remove__button"></i>
+    //                             <div class="editor__content">
+    //                                 <i class="uil uil-book editor-icon"></i>
+    //                                 <label for="skill" class="editor__label">Skill Name</label>
+    //                                 <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
+    //                             </div>
+    //                             <div class="editor__content">
+    //                                 <i class="uil uil-percentage editor-icon"></i>
+    //                                 <label for="percentage" class="editor__label">Proficiency in Percentage</label>
+    //                                 <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
+    //                             </div>
+    //                         </div>
+    //                         <i class="uil uil-plus editor-icon add__button add-skill-button">Add New Skill</i>
 
-                        </div>`;
-            $(this).before(categoryHtml);
-        });
+    //                     </div>`;
+    //         $(this).before(categoryHtml);
+    //     });
 
-    });
+    // });
     
     // ADD SKILL BUTTON
-    $(document).ready(function() {
+    // $(document).ready(function() {
         
-        $(document).on("click", ".add-skill-button", function() {
-            var skillHtml = `<div class="skill__subject__skill editor__border">
-                                <i class="uil uil-times editor-icon remove__button"></i>
-                                <div class="editor__content">
-                                    <i class="uil uil-book editor-icon"></i>
-                                    <label for="skill" class="editor__label">Skill Name</label>
-                                    <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
-                                </div>
-                                <div class="editor__content">
-                                    <i class="uil uil-percentage editor-icon"></i>
-                                    <label for="percentage" class="editor__label">Proficiency in Percentage</label>
-                                    <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
-                                </div>
-                            </div>`;
-            $(this).before(skillHtml);
-        });
-    });
+    //     $(document).on("click", ".add-skill-button", function() {
+    //         var skillHtml = `<div class="skill__subject__skill editor__border">
+    //                             <i class="uil uil-times editor-icon remove__button"></i>
+    //                             <div class="editor__content">
+    //                                 <i class="uil uil-book editor-icon"></i>
+    //                                 <label for="skill" class="editor__label">Skill Name</label>
+    //                                 <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off"> 
+    //                             </div>
+    //                             <div class="editor__content">
+    //                                 <i class="uil uil-percentage editor-icon"></i>
+    //                                 <label for="percentage" class="editor__label">Proficiency in Percentage</label>
+    //                                 <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0"  max="100">
+    //                             </div>
+    //                         </div>`;
+    //         $(this).before(skillHtml);
+    //     });
+    // });
     
     // ADD EDUCATIONAL QUALIFICATION BUTTON
     $(document).ready(function() {
@@ -212,8 +212,6 @@
                 linkedin: $('#linkedin').val(),
                 github: $('#github').val(),
             };
-            
-            alert(dataHome.action);
 
             $.ajax({
                 url: 'functionEditor.php',
@@ -255,49 +253,56 @@
     }
 
     // UPDATE SKILL DATABASE TABLE
-    function submitSkillsData() {
-        $(document).ready(function () {
-            var skillCategories = $('.skill__subject');
-            var skillsData = [];
+    function submitSkillsData() {    
+    
+    // $(document).ready(function () {
+        
+    //         var skillCategories = $('.skill__subject');
+    //         var skillsData = [];
 
-            skillCategories.each(function () {
-                var skillCategory = $(this);
-                var categoryData = {
-                    skill_category: skillCategory.find('#skill_category_<?php echo $stmt_scT['category_id']; ?>').val(),
-                    no_of_years: skillCategory.find('#no_of_years_<?php echo $stmt_scT['category_id']; ?>').val(),
-                    skills: []
-                };
+    //         skillCategories.each(function () {
+    //             var skillCategory = $(this);
+    //             var categoryData = {
+    //                 // category_id: $category_id,
+    //                 skill_category: skillCategory.find('#skill_category').val(),
+    //                 no_of_years: skillCategory.find('#no_of_years').val(),
+    //                 skills: []
+    //             };
+    //             // alert($category_id);
+    //             // alert(categoryData.category_id);
+    //             // alert(categoryData.skill_category);
+    //             // alert(categoryData.no_of_years);
 
-                var skills = skillCategory.find('.skill__subject__skill');
-                skills.each(function () {
-                    var skill = $(this);
-                    var skillData = {
-                        skill_name: skill.find('#skill').val(),
-                        proficiency_percentage: skill.find('#percentage').val()
-                    };
-                    categoryData.skills.push(skillData);
-                });
+    //             var skills = skillCategory.find('.skill__subject__skill');
+    //             skills.each(function () {
+    //                 var skill = $(this);
+    //                 var skillData = {
+    //                     skill_name: skill.find('#skill').val(),
+    //                     proficiency_percentage: skill.find('#percentage').val()
+    //                 };
+    //                 categoryData.skills.push(skillData);
+    //             });
 
-                skillsData.push(categoryData);
-            });
+    //             skillsData.push(categoryData);
+    //         });
 
-            var dataSkills = {
-                action: $('#actionSkills').val(),
-                skills_data: JSON.stringify(skillsData)
-            };
+    //         var dataSkills = {
+    //             action: $('#actionSkills').val(),
+    //             skills_data: JSON.stringify(skillsData)
+    //         };
 
-            $.ajax({
-                url: 'functionEditor.php',
-                type: 'post',
-                data: dataSkills,
-                success: function (response) {
-                    alert(response);
-                    if (response == "Saved Successfully") {
-                        window.location.reload();
-                    }
-                }
-            });
-        });
+    //         $.ajax({
+    //             url: 'functionEditor.php',
+    //             type: 'post',
+    //             data: dataSkills,
+    //             success: function (response) {
+    //                 alert(response);
+    //                 if (response == "Saved Successfully") {
+    //                     window.location.reload();
+    //                 }
+    //             }
+    //         });
+    //     });
     }
 
     

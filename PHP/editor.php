@@ -161,12 +161,11 @@ else{
                         <div class="editor__content editor-icon">
                             <i class="uil uil-book-reader"></i>
                             <label for="self_intro" class="editor__label">Self Introduction</label>
-                            <textarea name="" id="self_intro" cols="0" rows="7" class="editor__input" placeholder="Enter Self Introduction here"  
-                            value="<?php if ($stmt_hT) {
+                            <textarea name="" id="self_intro" cols="0" rows="7" class="editor__input" placeholder="Enter Self Introduction here"><?php if ($stmt_hT) {
                                 echo $stmt_hT["hT_self_introduction"];
                             } else {
                                 echo "User Self Introduction";
-                            } ?>"></textarea>
+                            } ?></textarea>
                         </div>
                         <div class="editor__content">
                             <i class="uil uil-linkedin-alt editor-icon" ></i>
@@ -302,14 +301,14 @@ else{
                             <i class="uil uil-times editor-icon remove__button"></i>
                             <div class="editor__content">
                                 <i class="uil uil-books editor-icon"></i>
-                                <label for="skill_category_<?php echo $stmt_scT['category_id']; ?>" class="editor__label">Skill Category</label>
-                                <input name="skill_category_<?php echo $stmt_scT['category_id']; ?>" id="skill_category_<?php echo $stmt_scT['category_id']; ?>" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off" value="<?php echo $category_name; ?>">
+                                <label for="skill_category" class="editor__label">Skill Category</label>
+                                <input name="skill_category" id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off" value="<?php echo $category_name; ?>">
                                 
                             </div>
                             <div class="editor__content">
                                 <i class="uil uil-3-plus editor-icon"></i>
-                                <label for="no_of_years_<?php echo $stmt_scT['category_id']; ?>" class="editor__label">No. of Years</label>
-                                <input name="no_of_years_<?php echo $stmt_scT['category_id']; ?>" id="no_of_years_<?php echo $stmt_scT['category_id']; ?>" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)" value="<?php echo $years_of_experience; ?>">
+                                <label for="no_of_years" class="editor__label">No. of Years</label>
+                                <input name="no_of_years" id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)" value="<?php echo $years_of_experience; ?>">
                             </div>
 
                             <?php
@@ -612,8 +611,7 @@ else{
                                     echo $stmt_cT["cT_location"];
                                 } else {
                                     echo "defaultLocation.";
-                                } ?>
-                            </textarea>
+                                } ?></textarea>
                         </div>
                 
                        
