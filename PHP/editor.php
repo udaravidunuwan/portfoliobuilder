@@ -282,79 +282,87 @@ else{
             <span class="section__subtitle">My technical level</span>
 
             <div class="editor__container container">
-                
+
                 <form action="" class="editor__form editor__border" method="post">
-                    <div class="editor__inputs ">
-                    <input type="hidden" id="actionSkills" value="skills" >
-                        
-                    <?php
-                    // Fetch skill categories
-                    $result_categories = mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id");
-                    while ($stmt_scT = mysqli_fetch_assoc($result_categories)) {
-                        $category_name = $stmt_scT["category_name"];
-                        $years_of_experience = $stmt_scT["years_of_experience"];
-                        ?>
+                    <div class="editor__inputs">
+                        <input type="hidden" id="actionSkills" value="skills">
 
-                        <!-- Skill Subject Category -->
-                        <div class="skill__subject editor__border">
+                        <?php
+                        // Fetch skill categories
+                        $result_categories = mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id");
+                        $categoryCounter = 1;
+                        while ($stmt_scT = mysqli_fetch_assoc($result_categories)) {
+                            $category_name = $stmt_scT["category_name"];
+                            $years_of_experience = $stmt_scT["years_of_experience"];
+                            ?>
 
-                            <i class="uil uil-times editor-icon remove__button"></i>
-                            <div class="editor__content">
-                                <i class="uil uil-books editor-icon"></i>
-                                <label for="skill_category" class="editor__label">Skill Category</label>
-                                <input name="skill_category" id="skill_category" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off" value="<?php echo $category_name; ?>">
-                                
-                            </div>
-                            <div class="editor__content">
-                                <i class="uil uil-3-plus editor-icon"></i>
-                                <label for="no_of_years" class="editor__label">No. of Years</label>
-                                <input name="no_of_years" id="no_of_years" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)" value="<?php echo $years_of_experience; ?>">
-                            </div>
+                            <!-- Skill Subject Category -->
+                            <div class="skill__subject editor__border">
 
-                            <?php
-                            // Fetch skills for the current category
-                            $result_skills = mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id AND category_id = $stmt_scT[category_id]");
-                            while ($stmt_sT = mysqli_fetch_assoc($result_skills)) {
-                                $skill_name = $stmt_sT["skill_name"];
-                                $proficiency_percentage = $stmt_sT["proficiency_percentage"];
+                                <i class="uil uil-times editor-icon remove__button"></i>
+                                <div class="editor__content">
+                                    <i class="uil uil-books editor-icon"></i>
+                                    <label for="skill_category_<?php echo $categoryCounter; ?>" class="editor__label">Skill Category</label>
+                                    <input name="skill_category_<?php echo $categoryCounter; ?>" id="skill_category_<?php echo $categoryCounter; ?>" type="text" class="editor__input" placeholder="Enter Skill Category Name here" autocomplete="off" value="<?php echo $category_name; ?>">
+
+                                </div>
+                                <div class="editor__content">
+                                    <i class="uil uil-3-plus editor-icon"></i>
+                                    <label for="no_of_years_<?php echo $categoryCounter; ?>" class="editor__label">No. of Years</label>
+                                    <input name="no_of_years_<?php echo $categoryCounter; ?>" id="no_of_years_<?php echo $categoryCounter; ?>" type="number" class="editor__input" placeholder="Enter No. of Years here" autocomplete="off" oninput="validateNumberInput(this)" value="<?php echo $years_of_experience; ?>">
+                                </div>
+
+                                <?php
+                                // Fetch skills for the current category
+                                $result_skills = mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id AND category_id = $stmt_scT[category_id]");
+                                $skillCounter = 1;
+                                while ($stmt_sT = mysqli_fetch_assoc($result_skills)) {
+                                    $skill_name = $stmt_sT["skill_name"];
+                                    $proficiency_percentage = $stmt_sT["proficiency_percentage"];
+                                    ?>
+
+                                    <!-- Skill -->
+                                    <div class="skill__subject__skill editor__border">
+                                        <i class="uil uil-times editor-icon remove__button"></i>
+                                        <div class="editor__content">
+                                            <i class="uil uil-book editor-icon"></i>
+                                            <label for="skill_<?php echo $categoryCounter; ?>_<?php echo $skillCounter; ?>" class="editor__label">Skill Name</label>
+                                            <input id="skill_<?php echo $categoryCounter; ?>_<?php echo $skillCounter; ?>" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off" value="<?php echo $skill_name; ?>">
+                                        </div>
+                                        <div class="editor__content">
+                                            <i class="uil uil-percentage editor-icon"></i>
+                                            <label for="percentage_<?php echo $categoryCounter; ?>_<?php echo $skillCounter; ?>" class="editor__label">Proficiency in Percentage</label>
+                                            <input id="percentage_<?php echo $categoryCounter; ?>_<?php echo $skillCounter; ?>" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0" max="100" value="<?php echo $proficiency_percentage; ?>">
+                                        </div>
+                                    </div>
+                                    <?php
+                                    $skillCounter++;
+                                }
                                 ?>
 
-                                <!-- Skill -->
-                                <div class="skill__subject__skill editor__border">
-                                    <i class="uil uil-times editor-icon remove__button"></i>
-                                    <div class="editor__content">
-                                        <i class="uil uil-book editor-icon"></i>
-                                        <label for="skill" class="editor__label">Skill Name</label>
-                                        <input id="skill" type="text" class="editor__input" placeholder="Enter Skill Name here" autocomplete="off" value="<?php echo $skill_name; ?>"> 
-                                    </div>
-                                    <div class="editor__content">
-                                        <i class="uil uil-percentage editor-icon"></i>
-                                        <label for="percentage" class="editor__label">Proficiency in Percentage</label>
-                                        <input id="percentage" type="number" class="editor__input" placeholder="Enter percentage here" autocomplete="off" oninput="validateNumberInput(this); validatePercentageInput();" min="0" max="100" value="<?php echo $proficiency_percentage; ?>">
-                                    </div>
-                                </div>
-                            <?php } ?>
+                                <i class="uil uil-plus editor-icon add__button add-skill-button">Add New Skill</i>
+                            </div>
+                            <?php
+                            $categoryCounter++;
+                        }
+                        ?>
 
-                            <i class="uil uil-plus editor-icon add__button add-skill-button">Add New Skill</i>
-                        </div>
-                    <?php } ?>
-
-                    <i class="uil uil-plus editor-icon add__button add-category-button">Add New Skill Category</i>
-
+                        <i class="uil uil-plus editor-icon add__button add-category-button">Add New Skill Category</i>
 
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex"  onclick="event.preventDefault(); submitSkillsData();">
-                                  Save Changes
-                                  <i class="uil uil-save button__icon"></i>
+                            <a href="#" class="button button--flex" onclick="event.preventDefault(); submitSkillsData();">
+                                Save Changes
+                                <i class="uil uil-save button__icon"></i>
                             </a>
                         </div>
                     </div>
-                    
+
                 </form>
-                
-                
+
+
             </div>
         </section>
+
         
         <!-- QUALIFICATION -->
         <section class="qualification section" id="qualifications">
