@@ -503,8 +503,9 @@ else{
 
             <div class="editor__container container">
                 
-                <form action="" class="editor__form editor__border">
+                <form action="" class="editor__form editor__border" method="post">
                     <div class="editor__inputs ">
+                        <input type="hidden" id="actionServices" value="services">
                         
                         <!-- Service Category -->
                         <div class="service__category editor__border">

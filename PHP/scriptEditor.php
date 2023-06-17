@@ -297,16 +297,6 @@
             });
         });
     });
-    
-    // // REMOVE CATEGORY BUTTON
-    // $(document).on("click", ".remove_skill_subject__button", function() {
-    //     $(this).closest(".skill__subject").remove();
-    // });
-    
-    // // REMOVE SKILL BUTTON
-    // $(document).on("click", ".remove_skill__button", function() {
-    //     $(this).closest(".skill__subject__skill").remove();
-    // });
 
     // UPDATE SKILL DATABASE TABLE
     function submitSkillsData() {
@@ -352,7 +342,6 @@
         });
     }
 
-    
     // UPDATE CONTACT DATABASE TABLE
     function submitContantData(){
         $(document).ready(function(){

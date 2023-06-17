@@ -202,23 +202,6 @@ function removeSkill(){
     }
 }
 
-// function removeSkillCategory(){
-//     global $connection;
-//     $id = $_POST['idCategory'];
-
-//     $stmtDelete = $connection->prepare("DELETE FROM skill_categories_tab_tb WHERE category_id = ?");
-//     $stmtDelete->bind_param("i", $id);
-//     $stmtDelete->execute();
-//     // $result = $stmtDelete->get_result();
-
-//     if ($stmtDelete->affected_rows > 0) {
-//         echo 'Removed Successfully';
-//     } else {
-//         // echo 'Removing Empty Skill';
-//     }
-// }
-
-
 function removeSkillCategory(){
     global $connection;
     $id = $_POST['idCategory'];
