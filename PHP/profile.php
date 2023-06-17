@@ -278,7 +278,7 @@ else{
             <?php foreach ($skillCategories as $category) { ?>
                 <div>
                     <!-- SKILL -->
-                    <div class="skills__content skills__open">
+                    <div class="skills__content skills__close">
                         <div class="skills__header">
                             <i class="uil uil-list-ul skills__icon"></i>
 

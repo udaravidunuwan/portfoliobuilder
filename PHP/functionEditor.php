@@ -16,6 +16,14 @@ if(isset($_POST["action"])){
     }
 }
 
+if (isset($_POST['idSkill'])) {
+    removeSkill();
+}
+
+if (isset($_POST['idCategory'])) {
+    removeSkillCategory();
+}
+
 
 function updateHome($user_id){
     global $connection;
@@ -26,10 +34,25 @@ function updateHome($user_id){
     $self_intro = $_POST["self_intro"];
     $linkedin = $_POST["linkedin"];
     $github = $_POST["github"];
-    
-    $stmt = $connection->prepare("UPDATE home_tab_tb SET hT_first_name = ?, hT_last_name = ?, hT_designation = ?, hT_self_introduction = ?, hT_linkedIn_url = ?, hT_github_url = ? WHERE hT_user_id = ?");
-    $stmt->bind_param("ssssssi", $first_name, $last_name, $designation, $self_intro, $linkedin, $github, $user_id);
-    $stmt->execute();
+
+    $stmtHome = $connection->prepare("SELECT * FROM home_tab_tb WHERE hT_user_id = ?");
+    $stmtHome->bind_param("i", $user_id);
+    $stmtHome->execute();
+    $result = $stmtHome->get_result();
+
+    if ($result->num_rows > 0) {
+        
+        $stmt = $connection->prepare("UPDATE home_tab_tb SET hT_first_name = ?, hT_last_name = ?, hT_designation = ?, hT_self_introduction = ?, hT_linkedIn_url = ?, hT_github_url = ? WHERE hT_user_id = ?");
+        $stmt->bind_param("ssssssi", $first_name, $last_name, $designation, $self_intro, $linkedin, $github, $user_id);
+        $stmt->execute();
+        
+    } else {
+        
+        $stmt = $connection->prepare("INSERT INTO home_tab_tb (hT_first_name, hT_last_name, hT_designation, hT_self_introduction, hT_linkedIn_url, hT_github_url, hT_user_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssi", $first_name, $last_name, $designation, $self_intro, $linkedin, $github, $user_id);
+        $stmt->execute();
+
+    }
     
     echo "Saved Successfully";
     
@@ -37,15 +60,30 @@ function updateHome($user_id){
 
 function updateAbout($user_id){
     global $connection;
-
+    
     $aboutUser = $_POST["about_user"];
     $yearsOfExperience = $_POST["years_of_experience"];
     $completedProjects = $_POST["completed_projects"];
     $companiesWorked = $_POST["companies_worked"];
 
-    $stmt = $connection->prepare("UPDATE about_tab_tb SET aT_about_user = ?, aT_Yo_Exp = ?, aT_No_Projects = ?, aT_No_companies = ? WHERE aT_user_id = ?");
-    $stmt->bind_param("ssssi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $user_id);
-    $stmt->execute();
+    $stmtAbout = $connection->prepare("SELECT * FROM about_tab_tb WHERE aT_user_id = ?");
+    $stmtAbout->bind_param("i", $user_id);
+    $stmtAbout->execute();
+    $result = $stmtAbout->get_result();
+
+    if ($result->num_rows > 0) {
+        
+        $stmt = $connection->prepare("UPDATE about_tab_tb SET aT_about_user = ?, aT_Yo_Exp = ?, aT_No_Projects = ?, aT_No_companies = ? WHERE aT_user_id = ?");
+        $stmt->bind_param("ssssi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $user_id);
+        $stmt->execute();
+        
+    } else {
+        
+        $stmt = $connection->prepare("INSERT INTO about_tab_tb (aT_about_user, aT_Yo_Exp, aT_No_Projects, aT_No_companies, aT_user_id) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $user_id);
+        $stmt->execute();
+
+    }
 
     echo "Saved Successfully";
 
@@ -148,7 +186,68 @@ function updateSkills($user_id){
     echo "Saved Successfully";
 }
 
+function removeSkill(){
+    global $connection;
+    $id = $_POST['idSkill'];
 
+    $stmtDelete = $connection->prepare("DELETE FROM skills_tab_tb WHERE skill_id = ?");
+    $stmtDelete->bind_param("i", $id);
+    $stmtDelete->execute();
+    // $result = $stmtDelete->get_result();
+
+    if ($stmtDelete->affected_rows > 0) {
+        echo 'Removed Successfully';
+    } else {
+        // echo 'Removing Empty Skill';
+    }
+}
+
+// function removeSkillCategory(){
+//     global $connection;
+//     $id = $_POST['idCategory'];
+
+//     $stmtDelete = $connection->prepare("DELETE FROM skill_categories_tab_tb WHERE category_id = ?");
+//     $stmtDelete->bind_param("i", $id);
+//     $stmtDelete->execute();
+//     // $result = $stmtDelete->get_result();
+
+//     if ($stmtDelete->affected_rows > 0) {
+//         echo 'Removed Successfully';
+//     } else {
+//         // echo 'Removing Empty Skill';
+//     }
+// }
+
+
+function removeSkillCategory(){
+    global $connection;
+    $id = $_POST['idCategory'];
+
+    $stmtSelect = $connection->prepare("SELECT skill_id FROM skills_tab_tb WHERE category_id = ?");
+    $stmtSelect->bind_param("i", $id);
+    $stmtSelect->execute();
+    $result = $stmtSelect->get_result();
+
+    $skillsToDelete = array();
+    while ($row = $result->fetch_assoc()) {
+        $skillsToDelete[] = $row['skill_id'];
+    }
+
+    if (!empty($skillsToDelete)) {
+        $stmtDeleteSkills = $connection->prepare("DELETE FROM skills_tab_tb WHERE skill_id IN (".implode(',', $skillsToDelete).")");
+        $stmtDeleteSkills->execute();
+    }
+
+    $stmtDeleteCategory = $connection->prepare("DELETE FROM skill_categories_tab_tb WHERE category_id = ?");
+    $stmtDeleteCategory->bind_param("i", $id);
+    $stmtDeleteCategory->execute();
+
+    if ($stmtDeleteCategory->affected_rows > 0) {
+        echo 'Removed Successfully';
+    } else {
+        // echo 'Removing Empty Skill';
+    }
+}
 
 function updateContact($user_id){
     global $connection;
@@ -157,10 +256,25 @@ function updateContact($user_id){
     $email = $_POST["email"];
     $location = $_POST["location"];
 
-    $stmt = $connection->prepare("UPDATE contact_tab_tb SET cT_mobile = ?, cT_email = ?, cT_location = ? WHERE cT_user_id = ?");
-    $stmt->bind_param("sssi", $mobile, $email, $location, $user_id);
-    $stmt->execute();
+    $stmtContact = $connection->prepare("SELECT * FROM contact_tab_tb WHERE cT_user_id = ?");
+    $stmtContact->bind_param("i", $user_id);
+    $stmtContact->execute();
+    $result = $stmtContact->get_result();
 
+    if ($result->num_rows > 0) {
+        
+        $stmt = $connection->prepare("UPDATE contact_tab_tb SET cT_mobile = ?, cT_email = ?, cT_location = ? WHERE cT_user_id = ?");
+        $stmt->bind_param("sssi", $mobile, $email, $location, $user_id);
+        $stmt->execute();
+            
+    } else {
+        
+        $stmt = $connection->prepare("INSERT INTO contact_tab_tb (cT_mobile, cT_email, cT_location, cT_user_id) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sssi", $mobile, $email, $location, $user_id);
+        $stmt->execute();
+
+    }
+    
     echo "Saved Successfully";
 
 }

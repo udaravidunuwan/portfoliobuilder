@@ -151,6 +151,13 @@
                 github: $('#github').val(),
             };
 
+            // alert(dataHome.action);
+            // alert(dataHome.first_name);
+            // alert(dataHome.last_name);
+            // alert(dataHome.designation);
+            // alert(dataHome.self_intro);
+            // alert(dataHome.linkedin);
+            // alert(dataHome.github);
             $.ajax({
                 url: 'functionEditor.php',
                 type: 'post',
@@ -192,11 +199,11 @@
 
     // ADD AND REMOVE SKILLS BUTTON
     $(document).ready(function() {
-        
+        // ADD CATEGORY BUTTON
         $(document).on("click", ".add-category-button", function() {
             var categoryHtml = `<div class="skill__subject editor__border">
                             
-                            <i class="uil uil-times editor-icon remove_skill_subject__button" ></i>
+                            <i class="uil uil-times editor-icon remove__button remove_skill_subject__button"  data-id="<?php echo $category_id; ?>"></i>
                             <input type="hidden" name="category_id" id="categoryId" value="<?php echo $category_id; ?>">
                             <div class="editor__content">
                                 <i class="uil uil-books editor-icon"></i>
@@ -211,7 +218,7 @@
 
                             <!-- Skill -->
                             <div class="skill__subject__skill editor__border">
-                                <i class="uil uil-times editor-icon remove_skill__button"></i>
+                                <i class="uil uil-times editor-icon remove__button remove_skill__button"  data-id="<?php echo $skill_id; ?>"></i>
                                 <div class="editor__content">
                                     <i class="uil uil-book editor-icon"></i>
                                     <label for="skill" class="editor__label">Skill Name</label>
@@ -229,9 +236,10 @@
             $(this).before(categoryHtml);
         });
 
+        // ADD SKILL BUTTON
         $(document).on("click", ".add-skill-button", function() {
             var skillHtml = `<div class="skill__subject__skill editor__border">
-                                <i class="uil uil-times editor-icon remove_skill__button"></i>
+                                <i class="uil uil-times editor-icon remove__button remove_skill__button"  data-id="<?php echo $skill_id; ?>"></i>
                                 <div class="editor__content">
                                     <i class="uil uil-book editor-icon"></i>
                                     <label for="skill" class="editor__label">Skill Name</label>
@@ -245,15 +253,60 @@
                             </div>`;
             $(this).before(skillHtml);
         });
+        
+        // REMOVE SKILL BUTTON
+        $(document).on("click", ".remove_skill__button", function() {
+            var id = $(this).data("id");
+            var elementSkill = $(this).closest(".skill__subject__skill");
+            
+            $.ajax({
+                url: "functionEditor.php",
+                method: "POST",
+                data: { idSkill: id},
+                success: function(response) {
+                    if (response === "Removed Successfully") {
+                        alert(response);
+                    }
 
-        $(document).on("click", ".remove_skill_subject__button", function() {
-            $(this).closest(".skill__subject").remove();
+                    elementSkill.remove();
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         });
         
-        $(document).on("click", ".remove_skill__button", function() {
-            $(this).closest(".skill__subject__skill").remove();
+        // REMOVE CATEGORY BUTTON
+        $(document).on("click", ".remove_skill_subject__button", function() {
+            var id = $(this).data("id");
+            var elementCategory = $(this).closest(".skill__subject");
+            
+            $.ajax({
+                url: "functionEditor.php",
+                method: "POST",
+                data: { idCategory: id },
+                success: function(response) {
+                    if (response === "Removed Successfully") {
+                        alert(response);
+                    }
+                    elementCategory.remove();
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         });
     });
+    
+    // // REMOVE CATEGORY BUTTON
+    // $(document).on("click", ".remove_skill_subject__button", function() {
+    //     $(this).closest(".skill__subject").remove();
+    // });
+    
+    // // REMOVE SKILL BUTTON
+    // $(document).on("click", ".remove_skill__button", function() {
+    //     $(this).closest(".skill__subject__skill").remove();
+    // });
 
     // UPDATE SKILL DATABASE TABLE
     function submitSkillsData() {
@@ -295,7 +348,6 @@
                 if (response == "Saved Successfully") {
                     window.location.reload();
                 }
-                window.location.reload();
             }
         });
     }

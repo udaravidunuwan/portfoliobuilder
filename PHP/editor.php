@@ -301,7 +301,7 @@ else{
                             <!-- Skill Subject Category -->
                             <div class="skill__subject editor__border">
 
-                                <i class="uil uil-times editor-icon remove_skill_subject__button"></i>
+                                <i class="uil uil-times editor-icon remove__button remove_skill_subject__button" data-id="<?php echo $category_id; ?>"></i></i>
                                 <input type="hidden" name="category_id" id="categoryId" value="<?php echo $category_id++; ?>">
                                 <div class="editor__content">
                                     <i class="uil uil-books editor-icon"></i>
@@ -327,8 +327,8 @@ else{
 
                                     <!-- Skill -->
                                     <div class="skill__subject__skill editor__border">
-                                        <i class="uil uil-times editor-icon remove_skill__button"></i>
-                                        <input type="hidden" name="skill_id" id="skill_id" value="<?php echo $category_id; ?>">
+                                        <i class="uil uil-times editor-icon remove__button remove_skill__button"  data-id="<?php echo $skill_id; ?>"></i>
+                                        <input type="hidden" name="skill_id" id="skill_id" value="<?php echo $skill_id++; ?>">
                                         <div class="editor__content">
                                             <i class="uil uil-book editor-icon"></i>
                                             <label for="skill" class="editor__label">Skill Name</label>

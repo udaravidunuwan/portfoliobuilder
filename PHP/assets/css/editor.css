@@ -493,8 +493,7 @@ img {
     color: var(--first-color-alt);
 }
 
-.remove_skill_subject__button,
-.remove_skill__button  {
+.remove__button  {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--first-color);
@@ -503,8 +502,7 @@ img {
     margin: var(--mb-1);
 }
 
-.remove_skill_subject__button,
-.remove_skill__button :hover {
+.remove__button :hover {
     color: var(--first-color-alt);
 }
 
