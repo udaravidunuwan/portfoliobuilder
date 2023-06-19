@@ -388,49 +388,60 @@ else{
                 <div class="qualification__sections"> 
                     <div class="qualification__content qualification__active " data-content id="education">
                         
-                        <form action="" class="editor__form editor__border">
+                        <form action="" class="editor__form editor__border" method="post">
+                            <input type="hidden" id="actionQualificationEducation" value="qualification_education">  
+                            <?php
+                        $result_qualification_education = mysqli_query($connection, "SELECT * FROM qualification_education_tab_tb WHERE edu_qua_user_id = $user_id");
+                        while ($stmt_eduQuaT = mysqli_fetch_assoc($result_qualification_education)) {
+                            $edu_qua_id = $stmt_eduQuaT["edu_qua_id"];
+                            $edu_qua_qualification = $stmt_eduQuaT["edu_qua_qualification"];
+                            $edu_qua_institution = $stmt_eduQuaT["edu_qua_institution"];
+                            $edu_qua_city = $stmt_eduQuaT["edu_qua_city"];
+                            $edu_qua_year_from = $stmt_eduQuaT["edu_qua_year_from"];
+                            $edu_qua_year_to = $stmt_eduQuaT["edu_qua_year_to"];
+                            ?>
+                            <div class="qualification__data editor__border education_qualification__data">
 
-                            <div class="qualification__data editor__border">
-
-                                <i class="uil uil-times editor-icon remove__button"></i>
+                                <i class="uil uil-times editor-icon remove__button remove_qua_edu__button" data-id="<?php echo $edu_qua_id; ?>"></i>
+                                <input type="hidden" name="edu_qua_id" id="edu_qua_id" value="<?php echo $edu_qua_id++; ?>">
                                 <div class="editor__inputs ">
                                     <div class="editor__content ">
                                         <i class="uil uil-book-reader editor-icon"></i>
-                                        <label for="" class="editor__label">Education Qualification</label>
-                                        <input type="text" class="editor__input" placeholder="Enter Qualifiacation here" autocomplete="off">
+                                        <label for="edu_qua_qualification" class="editor__label">Education Qualification</label>
+                                        <input name="edu_qua_qualification" id="edu_qua_qualification" type="text" class="editor__input" placeholder="Enter Qualifiacation here" autocomplete="off" value="<?php echo $edu_qua_qualification; ?>">
                                     </div>
                                     <div class="editor__content ">
                                         <i class="uil uil-university editor-icon"></i>
-                                        <label for="" class="editor__label">Institution</label>
-                                        <input type="text" class="editor__input" placeholder="Enter Institution here" autocomplete="off">
+                                        <label for="edu_qua_institution" class="editor__label">Institution</label>
+                                        <input name="edu_qua_institution" id="edu_qua_institution"  type="text" class="editor__input" placeholder="Enter Institution here" autocomplete="off" value="<?php echo $edu_qua_institution; ?>">
                                     </div>
                                     <div class="editor__content ">
                                         <i class="uil uil-map-marker-alt editor-icon"></i>
-                                        <label for="" class="editor__label">City</label>
-                                        <input type="text" class="editor__input" placeholder="Enter City here" autocomplete="off">
+                                        <label for="edu_qua_city" class="editor__label">City</label>
+                                        <input name="edu_qua_city" id="edu_qua_city"  type="text" class="editor__input" placeholder="Enter City here" autocomplete="off" value="<?php echo $edu_qua_city; ?>">
                                     </div>
                                     <div class="editor__content">
                                         <i class="uil uil-3-plus editor-icon" ></i>
-                                        <label for="yearFrom" class="editor__label">Year From</label>
-                                        <select id="Education__yearFrom" name="yearFrom" class="editor__input year__from__to" > 
-                                            <option value="" selected>Select</option>
-                                        </select>
+                                        <label for="edu_qua_year_from" class="editor__label">Year From</label>
+                                        <input name="edu_qua_year_from" id="edu_qua_year_from" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023" value="<?php echo $edu_qua_year_from; ?>">
+                                        
                                     </div>
                                     <div class="editor__content">
                                         <i class="uil uil-3-plus editor-icon" ></i>
-                                        <label for="yearTo" class="editor__label">Year To</label>
-                                        <select id="Education__yearTo" name="yearTo" class="editor__input year__from__to"> 
-                                            <option value="" selected>Select</option>
-                                        </select>
+                                        <label for="edu_qua_year_to" class="editor__label">Year To</label>
+                                        <input name="edu_qua_year_to" id="edu_qua_year_to" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023" value="<?php echo $edu_qua_year_to; ?>">
+                                        
                                     </div>
                                     
                                 </div>
                                 
                             </div>
-
+                            <?php
+                                }
+                                ?>
                             <i class="uil uil-plus editor-icon add__button add-edu-qualification-button">Add New Qualification</i>
                             <div class="editor__save__button">
-                                <a href="#" class="button button--flex">
+                                <a href="#" class="button button--flex" onclick="event.preventDefault(); submitEducationQualificationData();">
                                         Save Changes
                                         <i class="uil uil-save button__icon"></i>
                                 </a>
@@ -465,17 +476,15 @@ else{
                                     </div>
                                     <div class="editor__content">
                                         <i class="uil uil-3-plus editor-icon" ></i>
-                                        <label for="yearFrom" class="editor__label">Year From</label>
-                                        <select id="Work__yearFrom" name="yearFrom" class="editor__input year__from__to"> 
-                                            <option value="">Select</option>
-                                        </select>
+                                        <label for="work_year_from" class="editor__label">Year From</label>
+                                        <input name="work_year_from" id="work_year_from" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023" value="">
+                                        
                                     </div>
                                     <div class="editor__content">
                                         <i class="uil uil-3-plus editor-icon" ></i>
-                                        <label for="yearTo" class="editor__label">Year To</label>
-                                        <select id="Work__yearTo" name="yearTo" class="editor__input year__from__to"> 
-                                            <option value="">Select</option>
-                                        </select>
+                                        <label for="work_year_to" class="editor__label">Year To</label>
+                                        <input name="work_year_to" id="work_year_to" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023" value="">
+                                        
                                     </div>
                                     
                                 </div>

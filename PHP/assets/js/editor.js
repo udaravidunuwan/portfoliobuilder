@@ -157,28 +157,28 @@ tabs.forEach(tab =>{
     })
 })
 
-/* FOR SELECT YEARS IN QUALIFICATIONS */
-function generateYearOptions(startYear, endYear, selectElement) {
-  var currentYear = new Date().getFullYear();
+// /* FOR SELECT YEARS IN QUALIFICATIONS */
+// function generateYearOptions(startYear, endYear, selectElement) {
+//   var currentYear = new Date().getFullYear();
 
-  for (var year = startYear; year <= endYear; year++) {
-    var option = document.createElement("option");
-    option.value = year;
-    option.text = year;
-    selectElement.appendChild(option);
-  }
-}
+//   for (var year = startYear; year <= endYear; year++) {
+//     var option = document.createElement("option");
+//     option.value = year;
+//     option.text = year;
+//     selectElement.appendChild(option);
+//   }
+// }
 
-var selectEduYearFrom = document.getElementById("Education__yearFrom");
-var selectEduYearTo = document.getElementById("Education__yearTo");
-var selectWorkYearFrom = document.getElementById("Work__yearFrom");
-var selectWorkYearTo = document.getElementById("Work__yearTo");
-var startYear = 2012;
+// var selectEduYearFrom = document.getElementById("Education__yearFrom");
+// var selectEduYearTo = document.getElementById("Education__yearTo");
+// var selectWorkYearFrom = document.getElementById("Work__yearFrom");
+// var selectWorkYearTo = document.getElementById("Work__yearTo");
+// var startYear = 2000;
 
-generateYearOptions(startYear, new Date().getFullYear(), selectEduYearFrom);
-generateYearOptions(startYear, new Date().getFullYear(), selectEduYearTo);
-generateYearOptions(startYear, new Date().getFullYear(), selectWorkYearFrom);
-generateYearOptions(startYear, new Date().getFullYear(), selectWorkYearTo);
+// generateYearOptions(startYear, new Date().getFullYear(), selectEduYearFrom);
+// generateYearOptions(startYear, new Date().getFullYear(), selectEduYearTo);
+// generateYearOptions(startYear, new Date().getFullYear(), selectWorkYearFrom);
+// generateYearOptions(startYear, new Date().getFullYear(), selectWorkYearTo);
 
 
 // /* Mobile number prefix */

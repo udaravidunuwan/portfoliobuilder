@@ -21,11 +21,14 @@ if(isset($_SESSION["user_id"])){
     // Retrieve all service categories for the user
     $serviceCategoriesQuery = mysqli_query($connection, "SELECT * FROM services_categories_tab_tb WHERE category_user_id = $user_id");
     $serviceCategories = mysqli_fetch_all($serviceCategoriesQuery, MYSQLI_ASSOC);
-
+    
     // Retrieve all services for the user
     $servicesQuery = mysqli_query($connection, "SELECT * FROM services_tab_tb WHERE service_user_id = $user_id");
     $services = mysqli_fetch_all($servicesQuery, MYSQLI_ASSOC);
-
+    
+    // Retrieve all education qualifications for the user
+    $educationQualificationQuery = mysqli_query($connection, "SELECT * FROM qualification_education_tab_tb WHERE edu_qua_user_id = $user_id");
+    $educationQualification = mysqli_fetch_all($educationQualificationQuery, MYSQLI_ASSOC);
 
 }
 else{
@@ -338,16 +341,16 @@ else{
                 </div>
         
                 <div class="qualification__sections">
-                    <!-- QUALIFICATION CONTENT 1 -->
+                <?php foreach ($educationQualification as $eduQua) { ?>
                     <div class="qualification__content qualification__active " data-content id="education">
-                        <!-- QUALIFICATION 1 -->
+
                         <div class="qualification__data">
                             <div>
-                                <h3 class="qualification__title">DiTec</h3>
-                                <span class="qualification__subtitle">Bandarawela - ESOFT Metro Campus</span>
+                                <h3 class="qualification__title"><?php echo $eduQua["edu_qua_qualification"]; ?></h3>
+                                <span class="qualification__subtitle"><?php echo $eduQua["edu_qua_city"]; ?> - <?php echo $eduQua["edu_qua_institution"]; ?></span>
                                 <div class="qualification__calendar">
                                     <i class="uil uil-calendar-alt"></i>
-                                    2015 - 2016
+                                    <?php echo $eduQua["edu_qua_year_from"]; ?> - <?php echo $eduQua["edu_qua_year_to"]; ?>
                                 </div>
                             </div>
     
@@ -356,8 +359,8 @@ else{
                                 <span class="qualification__line"></span>
                             </div>
                         </div>
-    
-                        <!-- QUALIFICATION 2 -->
+                        
+                    <!--     
                         <div class="qualification__data">
                             <div></div>
                             
@@ -378,7 +381,6 @@ else{
                             
                         </div>
     
-                        <!-- QUALIFICATION 3 -->
                         <div class="qualification__data">
                             <div>
                                 <h3 class="qualification__title">HND in Software Development</h3>
@@ -395,13 +397,12 @@ else{
                             </div>
                         </div>
                         
-                        <!-- QUALIFICATION 4 -->
                         <div class="qualification__data">
                             <div></div>
     
                             <div>
                                 <span class="qualification__rounder"></span>
-                                <!-- <span class="qualification__line"></span> -->
+                                <span class="qualification__line"></span>
                             </div>
                             
                             <div>
@@ -414,8 +415,9 @@ else{
                             </div>
     
                             
-                        </div>
+                    </div> -->
                     </div>
+                <?php } ?>
                     
                     
                     <!-- QUALIFICATION CONTENT 2 -->

@@ -15,6 +15,8 @@ if(isset($_POST["action"])){
         updateSkills($user_id);
     } else if($_POST["action"] == "services"){
         updateServices($user_id);
+    } else if($_POST["action"] == "qualification_education"){
+        updateQualificationEducation($user_id);
     }
 }
 
@@ -32,6 +34,10 @@ if (isset($_POST['idService'])) {
 
 if (isset($_POST['idServiceCategory'])) {
     removeServiceCategory();
+}
+
+if (isset($_POST['idEduQua'])) {
+    removeEducationQualification();
 }
 
 
@@ -375,6 +381,72 @@ function removeServiceCategory(){
     $stmtDeleteCategory->execute();
 
     if ($stmtDeleteCategory->affected_rows > 0) {
+        echo 'Removed Successfully';
+    } else {
+        // echo 'Removing Empty Skill';
+    }
+}
+
+function updateQualificationEducation($user_id){
+    global $connection;
+
+    $eduQuaData = json_decode($_POST['edu_qua_data'], true);
+
+    foreach ($eduQuaData as $qualificationEduData) {
+        $edu_qua_qualification = $connection->real_escape_string($qualificationEduData['edu_qua_qualification']);
+        $edu_qua_institution = $connection->real_escape_string($qualificationEduData['edu_qua_institution']);
+        $edu_qua_city = $connection->real_escape_string($qualificationEduData['edu_qua_city']);
+        $edu_qua_year_from = $connection->real_escape_string($qualificationEduData['edu_qua_year_from']);
+        $edu_qua_year_to = $connection->real_escape_string($qualificationEduData['edu_qua_year_to']);
+
+        // Check if the category already exists or needs to be inserted as a new category
+        if (isset($qualificationEduData['edu_qua_id'])) {
+            $edu_qua_id = $connection->real_escape_string($qualificationEduData['edu_qua_id']);
+            
+            $stmtQuaEdu = $connection->prepare("SELECT * FROM qualification_education_tab_tb WHERE edu_qua_id = ?");
+            $stmtQuaEdu->bind_param("i", $edu_qua_id);
+            $stmtQuaEdu->execute();
+            $result = $stmtQuaEdu->get_result();
+
+            if ($result->num_rows > 0) {
+                $stmtQuaEdu = $connection->prepare("UPDATE qualification_education_tab_tb SET edu_qua_qualification = ?, edu_qua_institution = ?, edu_qua_city = ?, edu_qua_year_from = ?, edu_qua_year_to = ? WHERE edu_qua_id = ? AND edu_qua_user_id = ?");
+                $stmtQuaEdu->bind_param("sssiiii", $edu_qua_qualification, $edu_qua_institution, $edu_qua_city, $edu_qua_year_from, $edu_qua_year_to, $edu_qua_id, $user_id);
+                if (!$stmtQuaEdu->execute()) {
+                        echo "Error updating skill category: " . $stmtQuaEdu->error;
+                        return;
+                    }
+
+                } else {
+                // echo "Go to add new skill category";
+                // echo "Insert skill category name " . $categoryName  . " ";
+                // echo "Insert skill category yoExp " . $yearsOfExperience  . " ";
+                // Category ID doesn't exist, perform an insert
+                // Insert new skill category
+                $stmtQuaEdu = $connection->prepare("INSERT INTO qualification_education_tab_tb (edu_qua_user_id, edu_qua_qualification, edu_qua_institution, edu_qua_city, edu_qua_year_from, edu_qua_year_to) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmtQuaEdu->bind_param("isssii", $user_id, $edu_qua_qualification, $edu_qua_institution, $edu_qua_city, $edu_qua_year_from, $edu_qua_year_to);
+                if (!$stmtQuaEdu->execute()) {
+                    echo "Error inserting skill category: " . $stmtQuaEdu->error;
+                    return;
+                }
+                $edu_qua_id = $stmtQuaEdu->insert_id;
+            }
+            
+        }
+        
+    }
+
+    echo "Saved Successfully";
+}
+
+function removeEducationQualification(){
+    global $connection;
+    $id = $_POST['idEduQua'];
+
+    $stmtDeleteEduQua = $connection->prepare("DELETE FROM qualification_education_tab_tb WHERE edu_qua_id = ?");
+    $stmtDeleteEduQua->bind_param("i", $id);
+    $stmtDeleteEduQua->execute();
+
+    if ($stmtDeleteEduQua->affected_rows > 0) {
         echo 'Removed Successfully';
     } else {
         // echo 'Removing Empty Skill';
