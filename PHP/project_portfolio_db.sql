@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2023 at 07:25 AM
+-- Generation Time: Jun 19, 2023 at 12:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -112,6 +112,69 @@ INSERT INTO `project_tab_tb` (`pT_id`, `pT_user_id`, `pT_img`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `qualification_education_tab_tb`
+--
+
+CREATE TABLE `qualification_education_tab_tb` (
+  `edu_qua_id` int(255) NOT NULL,
+  `edu_qua_user_id` int(255) NOT NULL,
+  `edu_qua_qualification` varchar(255) NOT NULL,
+  `edu_qua_institution` varchar(255) NOT NULL,
+  `edu_qua_city` varchar(255) NOT NULL,
+  `edu_qua_year_from` int(255) NOT NULL,
+  `edu_qua_year_to` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `qualification_education_tab_tb`
+--
+
+INSERT INTO `qualification_education_tab_tb` (`edu_qua_id`, `edu_qua_user_id`, `edu_qua_qualification`, `edu_qua_institution`, `edu_qua_city`, `edu_qua_year_from`, `edu_qua_year_to`) VALUES
+(2, 9999, 'test qua', 'testint', 'testcity', 2012, 2023);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_categories_tab_tb`
+--
+
+CREATE TABLE `services_categories_tab_tb` (
+  `category_id` int(255) NOT NULL,
+  `category_user_id` int(255) NOT NULL,
+  `category_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `services_categories_tab_tb`
+--
+
+INSERT INTO `services_categories_tab_tb` (`category_id`, `category_user_id`, `category_name`) VALUES
+(3, 9999, 'test service cat 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services_tab_tb`
+--
+
+CREATE TABLE `services_tab_tb` (
+  `service_id` int(255) NOT NULL,
+  `service_user_id` int(255) NOT NULL,
+  `service_point` varchar(255) NOT NULL,
+  `category_id` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `services_tab_tb`
+--
+
+INSERT INTO `services_tab_tb` (`service_id`, `service_user_id`, `service_point`, `category_id`) VALUES
+(4, 9999, 'test service 1', 3),
+(5, 9999, 'test service 2', 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `skills_tab_tb`
 --
 
@@ -128,12 +191,8 @@ CREATE TABLE `skills_tab_tb` (
 --
 
 INSERT INTO `skills_tab_tb` (`skill_id`, `category_id`, `skills_user_id`, `skill_name`, `proficiency_percentage`) VALUES
-(1, 1, 9999, 'RedHat ', 50),
-(2, 1, 9999, 'Linux', 90),
-(3, 2, 9999, 'PHP', 70),
-(4, 3, 9999, 'C#', 60),
-(5, 4, 9999, 'ETL', 60),
-(6, 5, 4951, 'asd ++', 100);
+(10, 1, 9999, 'testskill', 12),
+(12, 2, 9999, 'test2skill', 53);
 
 -- --------------------------------------------------------
 
@@ -153,11 +212,8 @@ CREATE TABLE `skill_categories_tab_tb` (
 --
 
 INSERT INTO `skill_categories_tab_tb` (`category_id`, `category_user_id`, `category_name`, `years_of_experience`) VALUES
-(1, 9999, 'System Administration', 1),
-(2, 9999, 'Web Development', 5),
-(3, 9999, 'Software Development', 15),
-(4, 9999, 'Data Engineering ', 2),
-(5, 4951, 'asd developer', 100);
+(1, 9999, 'Test', 12),
+(2, 9999, 'test2', 65);
 
 -- --------------------------------------------------------
 
@@ -218,6 +274,24 @@ ALTER TABLE `project_tab_tb`
   ADD PRIMARY KEY (`pT_id`);
 
 --
+-- Indexes for table `qualification_education_tab_tb`
+--
+ALTER TABLE `qualification_education_tab_tb`
+  ADD PRIMARY KEY (`edu_qua_id`);
+
+--
+-- Indexes for table `services_categories_tab_tb`
+--
+ALTER TABLE `services_categories_tab_tb`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `services_tab_tb`
+--
+ALTER TABLE `services_tab_tb`
+  ADD PRIMARY KEY (`service_id`);
+
+--
 -- Indexes for table `skills_tab_tb`
 --
 ALTER TABLE `skills_tab_tb`
@@ -268,16 +342,34 @@ ALTER TABLE `project_tab_tb`
   MODIFY `pT_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `qualification_education_tab_tb`
+--
+ALTER TABLE `qualification_education_tab_tb`
+  MODIFY `edu_qua_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `services_categories_tab_tb`
+--
+ALTER TABLE `services_categories_tab_tb`
+  MODIFY `category_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `services_tab_tb`
+--
+ALTER TABLE `services_tab_tb`
+  MODIFY `service_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `skills_tab_tb`
 --
 ALTER TABLE `skills_tab_tb`
-  MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `skill_categories_tab_tb`
 --
 ALTER TABLE `skill_categories_tab_tb`
-  MODIFY `category_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `category_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
