@@ -13,6 +13,8 @@ if(isset($_POST["action"])){
         updateContact($user_id);
     } else if($_POST["action"] == "skills"){
         updateSkills($user_id);
+    } else if($_POST["action"] == "services"){
+        updateServices($user_id);
     }
 }
 
@@ -22,6 +24,14 @@ if (isset($_POST['idSkill'])) {
 
 if (isset($_POST['idCategory'])) {
     removeSkillCategory();
+}
+
+if (isset($_POST['idService'])) {
+    removeService();
+}
+
+if (isset($_POST['idServiceCategory'])) {
+    removeServiceCategory();
 }
 
 
@@ -222,6 +232,145 @@ function removeSkillCategory(){
     }
 
     $stmtDeleteCategory = $connection->prepare("DELETE FROM skill_categories_tab_tb WHERE category_id = ?");
+    $stmtDeleteCategory->bind_param("i", $id);
+    $stmtDeleteCategory->execute();
+
+    if ($stmtDeleteCategory->affected_rows > 0) {
+        echo 'Removed Successfully';
+    } else {
+        // echo 'Removing Empty Skill';
+    }
+}
+
+function updateServices($user_id){
+    global $connection;
+
+    $servicesData = json_decode($_POST['services_data'], true);
+
+    foreach ($servicesData as $categoryData) {
+        $categoryName = $connection->real_escape_string($categoryData['service_category']);
+
+        // Check if the category already exists or needs to be inserted as a new category
+        if (isset($categoryData['service_category_id'])) {
+            $categoryId = $connection->real_escape_string($categoryData['service_category_id']);
+            
+            $stmtCategory = $connection->prepare("SELECT * FROM services_categories_tab_tb WHERE category_id = ?");
+            $stmtCategory->bind_param("i", $categoryId);
+            $stmtCategory->execute();
+            $result = $stmtCategory->get_result();
+
+            if ($result->num_rows > 0) {
+                // echo "Go to update skill category";
+                // echo "Update Skill category ID " . $categoryId . " ";
+                // echo "Update Skill category name " . $categoryName  . " ";
+                // echo "Update Skill category yoExp " . $yearsOfExperience  . " ";
+                // Category ID exists, perform an update
+                // Update skill category
+                $stmtCategory = $connection->prepare("UPDATE services_categories_tab_tb SET category_name = ? WHERE category_id = ? AND category_user_id = ?");
+                $stmtCategory->bind_param("sii", $categoryName, $categoryId, $user_id);
+                if (!$stmtCategory->execute()) {
+                        echo "Error updating service category: " . $stmtCategory->error;
+                        return;
+                    }
+
+                } else {
+                // echo "Go to add new skill category";
+                // echo "Insert skill category name " . $categoryName  . " ";
+                // echo "Insert skill category yoExp " . $yearsOfExperience  . " ";
+                // Category ID doesn't exist, perform an insert
+                // Insert new skill category
+                $stmtCategory = $connection->prepare("INSERT INTO services_categories_tab_tb (category_user_id, category_name) VALUES (?, ?)");
+                $stmtCategory->bind_param("is", $user_id, $categoryName);
+                if (!$stmtCategory->execute()) {
+                    echo "Error inserting service category: " . $stmtCategory->error;
+                    return;
+                }
+                $categoryId = $stmtCategory->insert_id;
+            }
+            
+        }
+    
+        
+        foreach ($categoryData['services'] as $serviceData) {
+            
+            $service_point = $connection->real_escape_string($serviceData['service_point']);
+
+            if (!empty($categoryId) && !empty($user_id) && !empty($service_point)) {
+                // Check if the service already exists or needs to be inserted as a new skill
+                if (isset($serviceData['service_id'])) {
+                    $serviceId = $connection->real_escape_string($serviceData['service_id']);
+                    // echo "Go to update service";
+                    // echo "Update service Id " . $serviceId . " ";
+                    // echo "Update service" . $service . " ";
+                    // Update service
+                    $stmtService = $connection->prepare("UPDATE services_tab_tb SET service_point = ? WHERE service_id = ? AND service_user_id = ? AND category_id = ?");
+                    $stmtService->bind_param("siii", $service_point, $serviceId, $user_id, $categoryId);
+                    if (!$stmtService->execute()) {
+                            echo "Error updating service: " . $stmtService->error;
+                        return;
+                    }
+                } else {
+                    // echo "Go to add new skill ";
+                    // echo "Insert skill name  " . $service . " ";
+                    // echo "Insert skill percentage  " . $proficiencyPercentage . " ";
+                    // Insert new skill
+                    $stmtService = $connection->prepare("INSERT INTO services_tab_tb (category_id, service_user_id, service_point) VALUES (?, ?, ?)");
+                    $stmtService->bind_param("iis", $categoryId, $user_id, $service_point);
+                    if (!$stmtService->execute()) {
+                        echo "Error inserting service: " . $stmtService->error;
+                        return;
+                    }
+                }
+                // End of emty checking
+            } 
+            // else {
+            //     echo "One or more values are empty. Process halted.";
+            //     return;
+            // }
+
+            
+        }
+    }
+
+    echo "Saved Successfully";
+}
+
+function removeService(){
+    global $connection;
+    $id = $_POST['idService'];
+
+    $stmtDelete = $connection->prepare("DELETE FROM services_tab_tb WHERE service_id = ?");
+    $stmtDelete->bind_param("i", $id);
+    $stmtDelete->execute();
+    // $result = $stmtDelete->get_result();
+
+    if ($stmtDelete->affected_rows > 0) {
+        echo 'Removed Successfully';
+    } else {
+        // echo 'Removing Empty Skill';
+    }
+}
+
+function removeServiceCategory(){
+    global $connection;
+    $id = $_POST['idServiceCategory'];
+
+    $stmtSelect = $connection->prepare("SELECT service_id FROM services_tab_tb WHERE category_id = ?");
+    $stmtSelect->bind_param("i", $id);
+    $stmtSelect->execute();
+    $result = $stmtSelect->get_result();
+
+    $skillsToDelete = array();
+    while ($row = $result->fetch_assoc()) {
+        $skillsToDelete[] = $row['service_id'];
+    }
+
+    if (!empty($skillsToDelete)) {
+        $stmtDeleteSkills = $connection->prepare("DELETE FROM services_tab_tb WHERE service_id IN (".implode(',', $skillsToDelete).")");
+        $stmtDeleteSkills->execute();
+    }
+
+    $stmtDeleteCategory = $connection->prepare("DELETE FROM services_categories_tab_tb WHERE category_id = ?");
     $stmtDeleteCategory->bind_param("i", $id);
     $stmtDeleteCategory->execute();
 

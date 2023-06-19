@@ -91,52 +91,6 @@
             $(this).before(categoryHtml);
         });
     });
-    
-    // ADD SERVICE TYPE BUTTON
-    $(document).ready(function() {
-        
-        $(".add-type-button").click(function() {
-            var categoryHtml = `<div class="service__category editor__border">
-                            
-                            <i class="uil uil-times editor-icon remove__button"></i>
-                            <div class="editor__content">
-                                <i class="uil uil-books editor-icon"></i>
-                                <label for="" class="editor__label">Service Type</label>
-                                <input type="text" class="editor__input" placeholder="Enter Service Type here" autocomplete="off">
-                            </div>
-
-                            <!-- Service I Offer -->
-                            <div class="service__offered editor__border">
-                                <i class="uil uil-times editor-icon remove__button"></i>
-                                <div class="editor__content">
-                                    <i class="uil uil-book editor-icon"></i>
-                                    <label for="" class="editor__label">Service</label>
-                                    <input type="text" class="editor__input" placeholder="Enter Service here" autocomplete="off">
-                                </div>
-                            </div>
-                            <i class="uil uil-plus editor-icon add__button add-service-button">Add New Service</i>
-
-                        </div>`;
-            $(this).before(categoryHtml);
-        });
-
-    });
-    
-    // ADD SERVICE BUTTON
-    $(document).ready(function() {
-        
-        $(document).on("click", ".add-service-button", function() {
-            var skillHtml = `<div class="service__offered editor__border">
-                                <i class="uil uil-times editor-icon remove__button"></i>
-                                <div class="editor__content">
-                                    <i class="uil uil-book editor-icon"></i>
-                                    <label for="" class="editor__label">Service</label>
-                                    <input type="text" class="editor__input" placeholder="Enter Service here" autocomplete="off">
-                                </div>
-                            </div>`;
-            $(this).before(skillHtml);
-        });
-    });
 
     // UPDATE HOME DATABASE TABLE
     function submitHomeData(){
@@ -333,6 +287,135 @@
             url: 'functionEditor.php',
             type: 'post',
             data: dataSkills,
+            success: function(response) {
+                alert(response);
+                if (response == "Saved Successfully") {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+    
+    // ADD AND REMOVE SERVICES BUTTON
+    $(document).ready(function(){
+        // ADD SERVICE TYPE BUTTON
+        $(".add-type-button").click(function() {
+            var categoryServiceHtml = `<div class="service__category editor__border">
+                            
+                            <i class="uil uil-times editor-icon remove__button"></i>
+                            <input type="hidden" name="ser_category_id" id="ser_categoryId" value="<?php echo $ser_category_id; ?>">
+                            <div class="editor__content">
+                                <i class="uil uil-books editor-icon"></i>
+                                <label for="service_category" class="editor__label">Service Type</label>
+                                <input name="service_category" id="service_category" type="text" class="editor__input" placeholder="Enter Service Type here" autocomplete="off">
+                            </div>
+
+                            <!-- Service I Offer -->
+                            <div class="service__offered editor__border">
+                                <i class="uil uil-times editor-icon remove__button"  data-id="<?php echo $service_id; ?>"></i>
+                                <div class="editor__content">
+                                    <i class="uil uil-book editor-icon"></i>
+                                    <label for="service_point" class="editor__label">Service</label>
+                                    <input name="service_point" id="service_point"  type="text" class="editor__input" placeholder="Enter Service here" autocomplete="off">
+                                </div>
+                            </div>
+                            <i class="uil uil-plus editor-icon add__button add-service-button">Add New Service</i>
+
+                        </div>`;
+            $(this).before(categoryServiceHtml);
+        });
+    
+
+        // ADD SERVICE BUTTON
+        $(document).on("click", ".add-service-button", function() {
+            var serviceHtml = `<div class="service__offered editor__border">
+                                <i class="uil uil-times editor-icon remove__button"  data-id="<?php echo $service_id; ?>"></i>
+                                <div class="editor__content">
+                                    <i class="uil uil-book editor-icon"></i>
+                                    <label for="service_point" class="editor__label">Service</label>
+                                    <input name="service_point" id="service_point" type="text" class="editor__input" placeholder="Enter Service here" autocomplete="off">
+                                </div>
+                            </div>`;
+            $(this).before(serviceHtml);
+        });
+
+        // REMOVE SERVICE BUTTON
+        $(document).on("click", ".remove_service__button", function() {
+            var id = $(this).data("id");
+            var elementService = $(this).closest(".service__offered");
+            
+            $.ajax({
+                url: "functionEditor.php",
+                method: "POST",
+                data: { idService: id},
+                success: function(response) {
+                    if (response === "Removed Successfully") {
+                        alert(response);
+                    }
+
+                    elementService.remove();
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+        
+        // REMOVE CATEGORY BUTTON
+        $(document).on("click", ".remove_service_type__button", function() {
+            var id = $(this).data("id");
+            var elementServiceCategory = $(this).closest(".service__category");
+            
+            $.ajax({
+                url: "functionEditor.php",
+                method: "POST",
+                data: { idServiceCategory: id },
+                success: function(response) {
+                    if (response === "Removed Successfully") {
+                        alert(response);
+                    }
+                    elementServiceCategory.remove();
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+    
+    // UPDATE SERVICES DATABASE TABLE
+    function submitServicesData(){
+        var servicesCategories = $('.service__category');
+        var servicesData = [];
+        servicesCategories.each(function() {
+            var serviceCategory = $(this);
+            var categoryData = {
+                service_category_id: serviceCategory.find('input[name="ser_category_id"]').val(),
+                service_category: serviceCategory.find('input[name="service_category"]').val(),
+                services: []
+            };
+
+            var services = serviceCategory.find('.service__offered');
+            services.each(function() {
+                var service = $(this);
+                var serviceData = {
+                    service_id: service.find('input[name="service_id"]').val(),
+                    service_point: service.find('input[name="service_point"]').val(),
+                };
+                categoryData.services.push(serviceData);
+            });
+
+            servicesData.push(categoryData);
+        });
+        var dataServices = {
+            action: 'services',
+            services_data: JSON.stringify(servicesData)
+        };
+
+        $.ajax({
+            url: 'functionEditor.php',
+            type: 'post',
+            data: dataServices,
             success: function(response) {
                 alert(response);
                 if (response == "Saved Successfully") {

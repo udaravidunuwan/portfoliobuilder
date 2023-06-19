@@ -506,33 +506,57 @@ else{
                 <form action="" class="editor__form editor__border" method="post">
                     <div class="editor__inputs ">
                         <input type="hidden" id="actionServices" value="services">
+
+                        <?php
+                        // Fetch sercive categories
+                        $result_services_categories = mysqli_query($connection, "SELECT * FROM services_categories_tab_tb WHERE category_user_id = $user_id");
+                        while ($stmt_serT = mysqli_fetch_assoc($result_services_categories)) {
+                            $ser_category_id = $stmt_serT["category_id"];
+                            $ser_category_name = $stmt_serT["category_name"];
+                            ?>
                         
                         <!-- Service Category -->
                         <div class="service__category editor__border">
                             
-                            <i class="uil uil-times editor-icon remove__button"></i>
+                            <i class="uil uil-times editor-icon remove__button remove_service_type__button"  data-id="<?php echo $ser_category_id; ?>"></i>
+                            <input type="hidden" name="ser_category_id" id="ser_categoryId" value="<?php echo $ser_category_id++; ?>">
                             <div class="editor__content">
                                 <i class="uil uil-books editor-icon"></i>
-                                <label for="" class="editor__label">Service Type</label>
-                                <input type="text" class="editor__input" placeholder="Enter Service Type here" autocomplete="off">
+                                <label for="service_category" class="editor__label">Service Type</label>
+                                <input name="service_category" id="service_category" type="text" class="editor__input" placeholder="Enter Service Type here" autocomplete="off" value="<?php echo $ser_category_name; ?>">
                             </div>
+
+                            <?php
+                                // Fetch services for the current category
+                                $result_services = mysqli_query($connection, "SELECT * FROM services_tab_tb WHERE service_user_id = $user_id AND category_id = $stmt_serT[category_id]");
+                                while ($stmt_seT = mysqli_fetch_assoc($result_services)) {
+                                    $service_id = $stmt_seT["service_id"];
+                                    $service = $stmt_seT["service_point"];
+                                    ?>
 
                             <!-- Service I Offer -->
                             <div class="service__offered editor__border">
-                                <i class="uil uil-times editor-icon remove__button"></i>
+                                <i class="uil uil-times editor-icon remove__button remove_service__button" data-id="<?php echo $service_id; ?>"></i>
+                                <input type="hidden" name="service_id" id="service_id" value="<?php echo $service_id++; ?>">
                                 <div class="editor__content">
                                     <i class="uil uil-book editor-icon"></i>
-                                    <label for="" class="editor__label">Service</label>
-                                    <input type="text" class="editor__input" placeholder="Enter Service here" autocomplete="off">
+                                    <label for="service_point" class="editor__label">Service</label>
+                                    <input name="service_point" id="service_point" type="text" class="editor__input" placeholder="Enter Service here" autocomplete="off" value="<?php echo $service; ?>">
                                 </div>
                             </div>
+                            <?php
+                                }
+                                ?>
                             <i class="uil uil-plus editor-icon add__button add-service-button">Add New Service</i>
 
                         </div>
+                        <?php
+                        }
+                        ?>
                         <i class="uil uil-plus editor-icon add__button add-type-button">Add New Service Type</i>
 
                         <div class="editor__save__button">
-                            <a href="#" class="button button--flex">
+                            <a href="#" class="button button--flex" onclick="event.preventDefault(); submitServicesData();">
                                   Save Changes
                                   <i class="uil uil-save button__icon"></i>
                             </a>

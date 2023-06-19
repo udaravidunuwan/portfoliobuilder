@@ -17,6 +17,14 @@ if(isset($_SESSION["user_id"])){
     // Retrieve all skills for the user
     $skillsQuery = mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id");
     $skills = mysqli_fetch_all($skillsQuery, MYSQLI_ASSOC);
+    
+    // Retrieve all service categories for the user
+    $serviceCategoriesQuery = mysqli_query($connection, "SELECT * FROM services_categories_tab_tb WHERE category_user_id = $user_id");
+    $serviceCategories = mysqli_fetch_all($serviceCategoriesQuery, MYSQLI_ASSOC);
+
+    // Retrieve all services for the user
+    $servicesQuery = mysqli_query($connection, "SELECT * FROM services_tab_tb WHERE service_user_id = $user_id");
+    $services = mysqli_fetch_all($servicesQuery, MYSQLI_ASSOC);
 
 
 }
@@ -481,11 +489,11 @@ else{
             <span class="section__subtitle">What I offer</span>
 
             <div class="services__container container grid">
-                <!-- SERVICES 1 -->
+            <?php foreach ($serviceCategories as $serviceCategory) { ?>
                 <div class="services__content">
                     <div>
                         <i class="uil uil-web-grid services__icon"></i>
-                        <h3 class="services__title">UI/UX <br> Designer</h3>
+                        <h3 class="services__title"><?php echo $serviceCategory["category_name"]; ?></h3>
                     </div>
                     
                     <span class="button button--flex button--small button--link services__button">
@@ -495,107 +503,23 @@ else{
 
                     <div class="services__model">
                         <div class="services__model-content">
-                            <h4 class="services__model-title">UI/UX <br> Designer</h4>
+                            <h4 class="services__model-title"><?php echo $serviceCategory["category_name"]; ?></h4>
                             <i class="uil uil-times services__model-close"></i>
 
                             <ul class="services__model-services grid">
+                            <?php foreach ($services as $service) {
+                        if ($service["category_id"] === $serviceCategory["category_id"]) { ?>
                                 <li class="services__model-service">
                                     <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I develop the user interface</p>
+                                    <p><?php echo $service["service_point"]; ?></p>
                                 </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>Web page Development</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I create element interactions</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I position your company brand</p>
-                                </li>
+                                <?php }
+                        } ?>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
-                <!-- SERVICES 2 -->
-                <div class="services__content">
-                    <div>
-                        <i class="uil uil-arrow services__icon"></i>
-                        <h3 class="services__title">Frontend <br> Developer</h3>
-                    </div>
-                    <span class="button button--flex button--small button--link services__button">
-                        View More
-                        <i class="uil uil-arrow-right button__icon"></i>
-                    </span>
-
-                    <div class="services__model">
-                        <div class="services__model-content">
-                            <h4 class="services__model-title">Frontend <br> Developer</h4>
-                            <i class="uil uil-times services__model-close"></i>
-
-                            <ul class="services__model-services grid">
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I develop the user interface</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>Web page Development</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I create element interactions</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I position your company brand</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- SERVICES 3 -->
-                <div class="services__content">
-                    <div>
-                        <i class="uil uil-pen services__icon"></i>
-                        <h3 class="services__title">Backend <br> Developer</h3>
-                    </div>
-                    <span class="button button--flex button--small button--link services__button">
-                        View More
-                        <i class="uil uil-arrow-right button__icon"></i>
-                    </span>
-
-                    <div class="services__model">
-                        <div class="services__model-content">
-                            <h4 class="services__model-title">Backend <br> Developer</h4>
-                            <i class="uil uil-times services__model-close"></i>
-
-                            <ul class="services__model-services grid">
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I develop the user interface</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>Web page Development</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I create element interactions</p>
-                                </li>
-                                <li class="services__model-service">
-                                    <i class="uil uil-check-circle services__model-icon"></i>
-                                    <p>I position your company brand</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
+                <?php } ?>
             </div>
         </section>
         
