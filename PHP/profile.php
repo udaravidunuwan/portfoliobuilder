@@ -345,143 +345,86 @@ else{
                 </div>
         
                 <div class="qualification__sections">
-                    <?php foreach ($educationQualification as $eduQua) { ?>
-                    <div class="qualification__content qualification__active " data-content id="education">
+                        <div class="qualification__content qualification__active" data-content id="education">
+                            <?php foreach ($educationQualification as $index => $eduQua) { ?>
+                                <div class="qualification__data">
+                                    <?php if ($index % 2 == 0) { ?>
+                                        <div>
+                                            <h3 class="qualification__title"><?php echo $eduQua["edu_qua_qualification"]; ?></h3>
+                                            <span class="qualification__subtitle"><?php echo $eduQua["edu_qua_city"]; ?> - <?php echo $eduQua["edu_qua_institution"]; ?></span>
+                                            <div class="qualification__calendar">
+                                                <i class="uil uil-calendar-alt"></i>
+                                                <?php echo $eduQua["edu_qua_year_from"]; ?> - <?php echo $eduQua["edu_qua_year_to"]; ?>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="qualification__rounder"></span>
+                                            <?php if ($index != count($educationQualification) - 1) { ?>
+                                                <span class="qualification__line"></span>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div></div>
+                                        <div>
+                                            <span class="qualification__rounder"></span>
+                                            <?php if ($index != count($educationQualification) - 1) { ?>
+                                                <span class="qualification__line"></span>
+                                            <?php } ?>
+                                        </div>
+                                        <div>
+                                            <h3 class="qualification__title"><?php echo $eduQua["edu_qua_qualification"]; ?></h3>
+                                            <span class="qualification__subtitle"><?php echo $eduQua["edu_qua_city"]; ?> - <?php echo $eduQua["edu_qua_institution"]; ?></span>
+                                            <div class="qualification__calendar">
+                                                <i class="uil uil-calendar-alt"></i>
+                                                <?php echo $eduQua["edu_qua_year_from"]; ?> - <?php echo $eduQua["edu_qua_year_to"]; ?>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+                        </div>
 
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title"><?php echo $eduQua["edu_qua_qualification"]; ?></h3>
-                                <span class="qualification__subtitle"><?php echo $eduQua["edu_qua_city"]; ?> - <?php echo $eduQua["edu_qua_institution"]; ?></span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    <?php echo $eduQua["edu_qua_year_from"]; ?> - <?php echo $eduQua["edu_qua_year_to"]; ?>
-                                </div>
-                            </div>
-    
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-                        
-                    <!--     
-                        <div class="qualification__data">
-                            <div></div>
-                            
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                            
-                            <div>
-                                <h3 class="qualification__title">Java Application Development</h3>
-                                <span class="qualification__subtitle">Badulla - Uva Wellassa University</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    2016 - 2017
-                                </div>
-                            </div>
-    
-                            
-                        </div>
-    
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">HND in Software Development</h3>
-                                <span class="qualification__subtitle">Colombo - ICBT</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    2020 - 2021
-                                </div>
-                            </div>
-    
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-                        
-                        <div class="qualification__data">
-                            <div></div>
-    
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                            
-                            <div>
-                                <h3 class="qualification__title">BSc in BISM</h3>
-                                <span class="qualification__subtitle">Colombo - ICBT</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    2022 - 2023
-                                </div>
-                            </div>
-    
-                            
-                    </div> -->
-                    </div>
-                    <?php } ?>
                     
-                    <?php foreach ($workQualification as $workQua) { ?>
                     <div class="qualification__content" data-content id="work">
-                        
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title"><?php echo $workQua["work_qua_qualification"]; ?></h3>
-                                <span class="qualification__subtitle"><?php echo $workQua["work_qua_city"]; ?> - <?php echo $workQua["work_qua_institution"]; ?></span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    <?php echo $workQua["work_qua_year_from"]; ?> - <?php echo $workQua["work_qua_year_to"]; ?>
-                                </div>
+
+                        <?php foreach ($workQualification as $index => $workQua) { ?>
+                            <div class="qualification__data">
+                                <?php if ($index % 2 == 0) { ?>
+                                    <div>
+                                        <h3 class="qualification__title"><?php echo $workQua["work_qua_qualification"]; ?></h3>
+                                        <span class="qualification__subtitle"><?php echo $workQua["work_qua_city"]; ?> - <?php echo $workQua["work_qua_institution"]; ?></span>
+                                        <div class="qualification__calendar">
+                                            <i class="uil uil-calendar-alt"></i>
+                                            <?php echo $workQua["work_qua_year_from"]; ?> - <?php echo $workQua["work_qua_year_to"]; ?>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="qualification__rounder"></span>
+                                        <?php if ($index != count($workQualification) - 1) { ?>
+                                            <span class="qualification__line"></span>
+                                        <?php } ?>
+                                    </div>
+                                <?php } else { ?>
+                                    <div></div>
+                                    <div>
+                                        <span class="qualification__rounder"></span>
+                                        <?php if ($index != count($workQualification) - 1) { ?>
+                                            <span class="qualification__line"></span>
+                                            <?php } ?>
+                                    </div>
+                                    <div>
+                                        <h3 class="qualification__title"><?php echo $workQua["work_qua_qualification"]; ?></h3>
+                                        <span class="qualification__subtitle"><?php echo $workQua["work_qua_city"]; ?> - <?php echo $workQua["work_qua_institution"]; ?></span>
+                                        <div class="qualification__calendar">
+                                            <i class="uil uil-calendar-alt"></i>
+                                            <?php echo $workQua["work_qua_year_from"]; ?> - <?php echo $workQua["work_qua_year_to"]; ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
-    
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-    
-                        
-                        <!-- <div class="qualification__data">
-                            <div></div>
-                            
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                            
-                            <div>
-                                <h3 class="qualification__title">Medical Scribing</h3>
-                                <span class="qualification__subtitle">MedSource Pvt Ltd - Colombo</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    2021 - 2022
-                                </div>
-                            </div>
-    
-                            
-                        </div>
-    
-                        
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Data Capture Assocate</h3>
-                                <span class="qualification__subtitle">Pro Account Lanka Pvt Ltd - Colombo</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    2022 - 2023
-                                </div>
-                            </div>
-    
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div> -->
+                        <?php } ?>
 
                     </div>
-                    <?php } ?>
                     
                 </div>
             </div>
