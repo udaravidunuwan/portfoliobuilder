@@ -457,9 +457,9 @@ function updateQualificationWork($user_id){
         $work_qua_year_to = $connection->real_escape_string($qualificationWorkData['work_qua_year_to']);
 
         // Check if the category already exists or needs to be inserted as a new category
-        if (isset($qualificationWorkData['work_qua_id '])) {
-            $work_qua_id  = $connection->real_escape_string($qualificationWorkData['work_qua_id ']);
-            
+        if (isset($qualificationWorkData['work_qua_id'])) {
+            $work_qua_id  = $connection->real_escape_string($qualificationWorkData['work_qua_id']);
+
             $stmtQuaWork = $connection->prepare("SELECT * FROM qualification_work_tab_tb WHERE work_qua_id = ?");
             $stmtQuaWork->bind_param("i", $work_qua_id );
             $stmtQuaWork->execute();
@@ -474,21 +474,17 @@ function updateQualificationWork($user_id){
                     }
 
                 } else {
-                echo "Go to add new work";
-                echo "Insert work id " . $work_qua_id ;
-                // Category ID doesn't exist, perform an insert
-                // Insert new skill category
-                // $stmtQuaWork = $connection->prepare("INSERT INTO qualification_work_tab_tb (work_qua_user_id , work_qua_qualification, work_qua_institution, work_qua_city, work_qua_year_from, work_qua_year_to) VALUES (?, ?, ?, ?, ?, ?)");
-                // $stmtQuaWork->bind_param("isssii", $user_id, $work_qua_qualification, $work_qua_institution, $work_qua_city, $work_qua_year_from, $work_qua_year_to);
-                // if (!$stmtQuaWork->execute()) {
-                //     echo "Error inserting skill category: " . $stmtQuaWork->error;
-                //     return;
-                // }
-                // $work_qua_id = $stmtQuaWork->insert_id;
+
+                $stmtQuaWork = $connection->prepare("INSERT INTO qualification_work_tab_tb (work_qua_user_id , work_qua_qualification, work_qua_institution, work_qua_city, work_qua_year_from, work_qua_year_to) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmtQuaWork->bind_param("isssii", $user_id, $work_qua_qualification, $work_qua_institution, $work_qua_city, $work_qua_year_from, $work_qua_year_to);
+                if (!$stmtQuaWork->execute()) {
+                    echo "Error inserting skill category: " . $stmtQuaWork->error;
+                    return;
+                }
+                $work_qua_id = $stmtQuaWork->insert_id;
             }
             
         }
-        
     }
 
     echo "Saved Successfully";

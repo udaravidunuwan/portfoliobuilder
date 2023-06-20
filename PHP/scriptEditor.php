@@ -633,12 +633,12 @@
                     <div class="editor__content ">
                         <i class="uil uil-building editor-icon"></i>
                         <label for="work_qua_institution" class="editor__label">Company</label>
-                        <input name="work_qua_institution" id="work_qua_institution" type="text" class="editor__input" placeholder="Enter URL here" autocomplete="off" value="">
+                        <input name="work_qua_institution" id="work_qua_institution" type="text" class="editor__input" placeholder="Enter Work Institution here" autocomplete="off" value="">
                     </div>
                     <div class="editor__content ">
                         <i class="uil uil-map-marker-alt editor-icon"></i>
                         <label for="work_qua_city" class="editor__label">City</label>
-                        <input name="work_qua_city" id="work_qua_city" type="text" class="editor__input" placeholder="Enter URL here"autocomplete="off" value="">
+                        <input name="work_qua_city" id="work_qua_city" type="text" class="editor__input" placeholder="Enter City here"autocomplete="off" value="">
                     </div>
                     <div class="editor__content">
                         <i class="uil uil-3-plus editor-icon" ></i>
@@ -722,7 +722,7 @@
         qualificationWork.each(function() {
             var workQualification = $(this);
             var qualificationWorkData = {
-                work_qua_id : workQualification.find('input[name="work_qua_id "]').val(),
+                work_qua_id : workQualification.find('input[name="work_qua_id"]').val(),
                 work_qua_qualification: workQualification.find('input[name="work_qua_qualification"]').val(),
                 work_qua_institution: workQualification.find('input[name="work_qua_institution"]').val(),
                 work_qua_city: workQualification.find('input[name="work_qua_city"]').val(),
@@ -736,7 +736,7 @@
             action: 'qualification_work',
             work_qua_data: JSON.stringify(workQuaData)
         };
-
+        
         $.ajax({
             url: 'functionEditor.php',
             type: 'post',

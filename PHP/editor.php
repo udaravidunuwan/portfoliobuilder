@@ -458,7 +458,7 @@ else{
                                 <?php
                             $result_qualification_work = mysqli_query($connection, "SELECT * FROM qualification_work_tab_tb WHERE work_qua_user_id = $user_id");
                             while ($stmt_workQuaT = mysqli_fetch_assoc($result_qualification_work)) {
-                                $work_qua_id  = $stmt_workQuaT["work_qua_id "];
+                                $work_qua_id  = $stmt_workQuaT["work_qua_id"];
                                 $work_qua_qualification = $stmt_workQuaT["work_qua_qualification"];
                                 $work_qua_institution = $stmt_workQuaT["work_qua_institution"];
                                 $work_qua_city = $stmt_workQuaT["work_qua_city"];
