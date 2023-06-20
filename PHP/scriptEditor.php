@@ -28,9 +28,6 @@
                 url: 'functionEditor.php',
                 type: 'post',
                 data: dataHome,
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
                 success: function(response){
                     alert(response);
                     if(response == "Saved Successfully"){

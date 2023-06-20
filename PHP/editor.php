@@ -123,7 +123,7 @@ else{
                 </div>
                 
                     
-                <form action="" class="editor__form editor__border" autocomplete="off" enctype="multipart/form-data">
+                <form action="" class="editor__form editor__border" autocomplete="off" >
                     <div class="editor__inputs ">
                     <input type="hidden" id="actionHome" value="home" >
                         <div class="editor__content">

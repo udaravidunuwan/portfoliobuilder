@@ -63,7 +63,6 @@ function updateHome($user_id){
     $result = $stmtHome->get_result();
 
     if ($result->num_rows > 0) {
-        
         $stmt = $connection->prepare("UPDATE home_tab_tb SET hT_first_name = ?, hT_last_name = ?, hT_designation = ?, hT_self_introduction = ?, hT_linkedIn_url = ?, hT_github_url = ? WHERE hT_user_id = ?");
         $stmt->bind_param("ssssssi", $first_name, $last_name, $designation, $self_intro, $linkedin, $github, $user_id);
         $stmt->execute();
