@@ -3,187 +3,7 @@
 
 <script type="text/javascript">
     // editor.php
-    // ADD EDUCATIONAL QUALIFICATION BUTTON
-        // $(document).ready(function() {
-            
-        //     $(".add-edu-qualification-button").click(function() {
-        //         var categoryHtml = `<div class="qualification__data editor__border">
-
-        //             <i class="uil uil-times editor-icon remove__button"></i>
-        //             <div class="editor__inputs ">
-        //                 <div class="editor__content ">
-        //                     <i class="uil uil-book-reader editor-icon"></i>
-        //                     <label for="" class="editor__label">Education Qualification</label>
-        //                     <input type="text" class="editor__input" placeholder="Enter Qualifiacation here" autocomplete="off">
-        //                 </div>
-        //                 <div class="editor__content ">
-        //                     <i class="uil uil-university editor-icon"></i>
-        //                     <label for="" class="editor__label">Institution</label>
-        //                     <input type="text" class="editor__input" placeholder="Enter Institution here" autocomplete="off">
-        //                 </div>
-        //                 <div class="editor__content ">
-        //                     <i class="uil uil-map-marker-alt editor-icon"></i>
-        //                     <label for="" class="editor__label">City</label>
-        //                     <input type="text" class="editor__input" placeholder="Enter City here" autocomplete="off">
-        //                 </div>
-        //                 <div class="editor__content">
-        //                     <i class="uil uil-3-plus editor-icon" ></i>
-        //                     <label for="yearFrom" class="editor__label">Year From</label>
-        //                     <select id="Education__yearFrom" name="yearFrom" class="editor__input year__from__to Education__yearFrom" > 
-        //                         <option value="" selected>Select</option>
-        //                     </select>
-        //                 </div>
-        //                 <div class="editor__content">
-        //                     <i class="uil uil-3-plus editor-icon" ></i>
-        //                     <label for="yearTo" class="editor__label">Year To</label>
-        //                     <select id="Education__yearTo" name="yearTo" class="editor__input year__from__to Education__yearTo"> 
-        //                         <option value="" selected>Select</option>
-        //                     </select>
-        //                 </div>
-                        
-        //             </div>
-
-        //         </div>`;
-        //         $(this).before(categoryHtml);
-        //     });
-    // });
-    
-    // // ADD WORK QUALIFICATION BUTTON
-        // $(document).ready(function() {
-            
-        //     $(".add-work-qualification-button").click(function() {
-        //         var categoryHtml = `<div class="qualification__data editor__border">
-
-        //             <i class="uil uil-times editor-icon remove__button"></i>
-        //             <div class="editor__inputs ">
-        //                 <div class="editor__content ">
-        //                     <i class="uil uil-book-reader editor-icon"></i>
-        //                     <label for="" class="editor__label">Work Qualification</label>
-        //                     <input type="text" class="editor__input" placeholder="Enter Quaification here" autocomplete="off">
-        //                 </div>
-        //                 <div class="editor__content ">
-        //                     <i class="uil uil-building editor-icon"></i>
-        //                     <label for="" class="editor__label">Company</label>
-        //                     <input type="text" class="editor__input" placeholder="Enter URL here" autocomplete="off">
-        //                 </div>
-        //                 <div class="editor__content ">
-        //                     <i class="uil uil-map-marker-alt editor-icon"></i>
-        //                     <label for="" class="editor__label">City</label>
-        //                     <input type="text" class="editor__input" placeholder="Enter URL here"autocomplete="off">
-        //                 </div>
-        //                 <div class="editor__content">
-        //                     <i class="uil uil-3-plus editor-icon" ></i>
-        //                     <label for="yearFrom" class="editor__label">Year From</label>
-        //                     <select id="Work__yearFrom" name="yearFrom" class="editor__input year__from__to Work__yearFrom"> 
-        //                         <option value="">Select</option>
-        //                     </select>
-        //                 </div>
-        //                 <div class="editor__content">
-        //                     <i class="uil uil-3-plus editor-icon" ></i>
-        //                     <label for="yearTo" class="editor__label">Year To</label>
-        //                     <select id="Work__yearTo" name="yearTo" class="editor__input year__from__to Work__yearTo"> 
-        //                         <option value="">Select</option>
-        //                     </select>
-        //                 </div>
-                        
-        //             </div>
-        //         </div>`;
-        //         $(this).before(categoryHtml);
-        //     });
-    // });
-
-    // $(document).ready(function() {
-        //     var startYear = 2005;
-        //     $(".add-edu-qualification-button").click(function () {
-        //         var categoryHtml = `
-        //             <div class="qualification__data editor__border">
-
-        //                 <i class="uil uil-times editor-icon remove__button"></i>
-        //                 <div class="editor__inputs ">
-        //                     <div class="editor__content ">
-        //                         <i class="uil uil-book-reader editor-icon"></i>
-        //                         <label for="" class="editor__label">Education Qualification</label>
-        //                         <input type="text" class="editor__input" placeholder="Enter Qualifiacation here" autocomplete="off">
-        //                     </div>
-        //                     <div class="editor__content ">
-        //                         <i class="uil uil-university editor-icon"></i>
-        //                         <label for="" class="editor__label">Institution</label>
-        //                         <input type="text" class="editor__input" placeholder="Enter Institution here" autocomplete="off">
-        //                     </div>
-        //                     <div class="editor__content ">
-        //                         <i class="uil uil-map-marker-alt editor-icon"></i>
-        //                         <label for="" class="editor__label">City</label>
-        //                         <input type="text" class="editor__input" placeholder="Enter City here" autocomplete="off">
-        //                     </div>
-        //                     <div class="editor__content">
-        //                         <i class="uil uil-3-plus editor-icon" ></i>
-        //                         <label for="yearFrom" class="editor__label">Year From</label>
-        //                         <select id="Education__yearFrom" name="yearFrom" class="editor__input year__from__to Education__yearFrom" > 
-        //                             <option value="" selected>Select</option>
-        //                         </select>
-        //                     </div>
-        //                     <div class="editor__content">
-        //                         <i class="uil uil-3-plus editor-icon" ></i>
-        //                         <label for="yearTo" class="editor__label">Year To</label>
-        //                         <select id="Education__yearTo" name="yearTo" class="editor__input year__from__to Education__yearTo"> 
-        //                             <option value="" selected>Select</option>
-        //                         </select>
-        //                     </div>
-                            
-        //                 </div>
-
-        //             </div>
-        //         `;
-        //         $(this).before(categoryHtml);
-        //         generateYearOptionsForNewElements(startYear, new Date().getFullYear());
-        //     });
-
-        //     $(".add-work-qualification-button").click(function () {
-        //         var categoryHtml = `
-        //             <div class="qualification__data editor__border">
-
-        //                 <i class="uil uil-times editor-icon remove__button"></i>
-        //                 <div class="editor__inputs ">
-        //                     <div class="editor__content ">
-        //                         <i class="uil uil-book-reader editor-icon"></i>
-        //                         <label for="" class="editor__label">Work Qualification</label>
-        //                         <input type="text" class="editor__input" placeholder="Enter Quaification here" autocomplete="off">
-        //                     </div>
-        //                     <div class="editor__content ">
-        //                         <i class="uil uil-building editor-icon"></i>
-        //                         <label for="" class="editor__label">Company</label>
-        //                         <input type="text" class="editor__input" placeholder="Enter URL here" autocomplete="off">
-        //                     </div>
-        //                     <div class="editor__content ">
-        //                         <i class="uil uil-map-marker-alt editor-icon"></i>
-        //                         <label for="" class="editor__label">City</label>
-        //                         <input type="text" class="editor__input" placeholder="Enter URL here"autocomplete="off">
-        //                     </div>
-        //                     <div class="editor__content">
-        //                         <i class="uil uil-3-plus editor-icon" ></i>
-        //                         <label for="yearFrom" class="editor__label">Year From</label>
-        //                         <select id="Work__yearFrom" name="yearFrom" class="editor__input year__from__to Work__yearFrom"> 
-        //                             <option value="">Select</option>
-        //                         </select>
-        //                     </div>
-        //                     <div class="editor__content">
-        //                         <i class="uil uil-3-plus editor-icon" ></i>
-        //                         <label for="yearTo" class="editor__label">Year To</label>
-        //                         <select id="Work__yearTo" name="yearTo" class="editor__input year__from__to Work__yearTo"> 
-        //                             <option value="">Select</option>
-        //                         </select>
-        //                     </div>
-                            
-        //                 </div>
-        //             </div>
-        //             `;
-        //         $(this).before(categoryHtml);
-        //         generateYearOptionsForNewElements(startYear, new Date().getFullYear());
-        //     });
-    // });
-    
-
-
+   
     // UPDATE HOME DATABASE TABLE
     function submitHomeData(){
         $(document).ready(function(){
@@ -208,6 +28,9 @@
                 url: 'functionEditor.php',
                 type: 'post',
                 data: dataHome,
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
                 success: function(response){
                     alert(response);
                     if(response == "Saved Successfully"){
@@ -773,7 +596,5 @@
             });
         });
     }
-
-    
 
 </script>

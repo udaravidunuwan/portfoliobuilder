@@ -7,9 +7,7 @@ if(isset($_SESSION["user_id"])){
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
     $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
-    $stmt_pT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM project_tab_tb WHERE pT_user_id = $user_id"));
-    // $stmt_scT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id"));
-    // $stmt_sT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id"));
+
     // Retrieve all skill categories for the user
     $skillCategoriesQuery = mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id");
     $skillCategories = mysqli_fetch_all($skillCategoriesQuery, MYSQLI_ASSOC);
@@ -471,7 +469,6 @@ else{
             </div>
         </section>
         
-
         <!-- PROJECT IN MIND -->
         <section class="project section">
             <div class="project__bg">
@@ -486,16 +483,10 @@ else{
                         </a>
                     </div>
 
-                    <img src="data:image/png;charset=UTF-8;base64,
-                    <?php if ($stmt_pT) {
-                            echo base64_encode($stmt_pT["pT_img"]);
-                        } else {
-                            echo "Img Not Found";
-                        } ?>" alt="" class="project__img">
+                    <img src="./assets/img/site/newproject.png" alt="" class="project__img">
                 </div>
             </div>
         </section>
-
 
         <!-- CONTCT ME -->
         <section class="contact section" id="contactme">

@@ -7,8 +7,6 @@ if(isset($_SESSION["user_id"])){
     $stmt_hT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM home_tab_tb WHERE hT_user_id = $user_id"));
     $stmt_aT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM about_tab_tb WHERE aT_user_id = $user_id"));
     $stmt_cT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM contact_tab_tb WHERE cT_user_id = $user_id"));
-    // $stmt_scT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skill_categories_tab_tb WHERE category_user_id = $user_id"));
-    // $stmt_sT = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM skills_tab_tb WHERE skills_user_id = $user_id"));
     
     
 }
@@ -125,7 +123,7 @@ else{
                 </div>
                 
                     
-                <form action="" class="editor__form editor__border" autocomplete="off">
+                <form action="" class="editor__form editor__border" autocomplete="off" enctype="multipart/form-data">
                     <div class="editor__inputs ">
                     <input type="hidden" id="actionHome" value="home" >
                         <div class="editor__content">
@@ -189,10 +187,8 @@ else{
                         </div>
                         <!-- LETTING THIS OUT FOR NOW -->
                         <div class="editor__content ">
-                            <input type="file" id="photoInput" class="editor__input" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__home'))">
-                            <div id="photoPreview__home" class="photo__preview__circle">
-
-                            </div>
+                            <input type="file" id="photoInput" name="photoInput" class="editor__input" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__home'))">
+                            <div id="photoPreview__home" class="photo__preview__circle"></div>
                         </div>
                         <div class="editor__save__button">
                             <a href="#" class="button button--flex" onclick="event.preventDefault(); submitHomeData();">
@@ -366,7 +362,6 @@ else{
             </div>
         </section>
 
-        
         <!-- QUALIFICATION -->
         <section class="qualification section" id="qualifications">
             <h2 class="section__title">Quaifications</h2>
@@ -592,42 +587,6 @@ else{
 
         </section>
         
-
-        <!-- PROJECT IN MIND -->
-        <section class="project section">
-            <h2 class="section__title">New Project</h2>
-            <span class="section__subtitle">Have you any project in mind?</span>
-            <div class="editor__container container ">
-
-
-                <form action="" class="editor__form editor__border" method="post">
-                    <div class="editor__inputs ">
-                        
-                        <div class="editor__content ">
-                            <?php if(!empty($statusMsg)){ ?>
-                                <p class="status <?php echo $status; ?>"><?php echo $statusMsg; ?></p>
-                                <?php  } ?>
-                            <input type="file" name="image" id="photoInput" class="editor__input file__upload__button" accept="image/*" onchange="previewPhoto(this, document.getElementById('photoPreview__new-project'))">
-                            <div id="photoPreview__new-project" class="photo__preview__circle">
-                            </div>
-                        </div>
-                        <div class="editor__save__button">
-                            <a href="#" class="button button--flex" id="project__save__btn" onclick="">
-                                  Save Changes
-                                  <i class="uil uil-save button__icon"></i>
-                            </a>
-                            <!-- <button type="submit" name="submit" class="button button--flex" id="project__save__btn" value="Upload">
-                                  Save Changes
-                                  <i class="uil uil-save button__icon"></i>
-                            </button> -->
-                        </div>
-                    </div>
-                    
-                </form>
-
-            </div>
-        </section>
-
         <!-- CONTCT ME -->
         <section class="contact section" id="contactme">
             <h2 class="section__title">Contact Me</h2>
@@ -684,14 +643,10 @@ else{
                 </form>
 
             </div>
-        </section>
-
-
-        
+        </section>       
 
     </main>
 
-   
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer__bg">
