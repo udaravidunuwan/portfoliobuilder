@@ -615,6 +615,71 @@
         });
     });
 
+    // ADD AND REMVOE WORK QUALIFICATION
+    $(document).ready(function() {
+        // ADD WORK QUALIFICATION BUTTON
+        $(document).on("click", ".add-work-qualification-button", function() {
+            var categoryHtml = `
+            <div class="qualification__data editor__border work_qualification__data">
+
+                <i class="uil uil-times editor-icon remove__button remove_qua_work__button" data-id="<?php echo $work_qua_id; ?>"></i>
+                <input type="hidden" name="work_qua_id" id="work_qua_id" value="<?php echo $work_qua_id++; ?>">
+                <div class="editor__inputs ">
+                    <div class="editor__content ">
+                        <i class="uil uil-book-reader editor-icon"></i>
+                        <label for="work_qua_qualification" class="editor__label">Work Qualification</label>
+                        <input name="work_qua_qualification" id="work_qua_qualification" type="text" class="editor__input" placeholder="Enter Quaification here" autocomplete="off" value="">
+                    </div>
+                    <div class="editor__content ">
+                        <i class="uil uil-building editor-icon"></i>
+                        <label for="work_qua_institution" class="editor__label">Company</label>
+                        <input name="work_qua_institution" id="work_qua_institution" type="text" class="editor__input" placeholder="Enter URL here" autocomplete="off" value="">
+                    </div>
+                    <div class="editor__content ">
+                        <i class="uil uil-map-marker-alt editor-icon"></i>
+                        <label for="work_qua_city" class="editor__label">City</label>
+                        <input name="work_qua_city" id="work_qua_city" type="text" class="editor__input" placeholder="Enter URL here"autocomplete="off" value="">
+                    </div>
+                    <div class="editor__content">
+                        <i class="uil uil-3-plus editor-icon" ></i>
+                        <label for="work_qua_year_from" class="editor__label">Year From</label>
+                        <input name="work_qua_year_from" id="work_qua_year_from" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023"  value="">
+                        
+                    </div>
+                    <div class="editor__content">
+                        <i class="uil uil-3-plus editor-icon" ></i>
+                        <label for="work_qua_year_to" class="editor__label">Year To</label>
+                        <input name="work_qua_year_to" id="work_qua_year_to" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023"  value="">
+                        
+                    </div>
+                    
+                </div>
+            </div>`;
+            $(this).before(categoryHtml);
+        });
+        
+        // REMOVE WORK QUALIFICATION
+        $(document).on("click", ".remove_qua_work__button", function() {
+            var id = $(this).data("id");
+            var elementWorkQualification = $(this).closest(".work_qualification__data");
+            
+            $.ajax({
+                url: "functionEditor.php",
+                method: "POST",
+                data: { idWorkQua: id },
+                success: function(response) {
+                    if (response === "Removed Successfully") {
+                        alert(response);
+                    }
+                    elementWorkQualification.remove();
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+
     // UPDATE EDUCATION QUALIFICATION DATABASE
     function submitEducationQualificationData(){
         var qualificationEdu = $('.education_qualification__data');
@@ -641,6 +706,41 @@
             url: 'functionEditor.php',
             type: 'post',
             data: dataQualificationEdu,
+            success: function(response) {
+                alert(response);
+                if (response == "Saved Successfully") {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+
+    // UPDATE WORK QUALIFICATION DATABASE
+    function submitWorkQualificationData(){
+        var qualificationWork = $('.work_qualification__data');
+        var workQuaData = [];
+        qualificationWork.each(function() {
+            var workQualification = $(this);
+            var qualificationWorkData = {
+                work_qua_id : workQualification.find('input[name="work_qua_id "]').val(),
+                work_qua_qualification: workQualification.find('input[name="work_qua_qualification"]').val(),
+                work_qua_institution: workQualification.find('input[name="work_qua_institution"]').val(),
+                work_qua_city: workQualification.find('input[name="work_qua_city"]').val(),
+                work_qua_year_from: workQualification.find('input[name="work_qua_year_from"]').val(),
+                work_qua_year_to: workQualification.find('input[name="work_qua_year_to"]').val(),
+            };
+
+            workQuaData.push(qualificationWorkData);
+        });
+        var dataQualificationWork = {
+            action: 'qualification_work',
+            work_qua_data: JSON.stringify(workQuaData)
+        };
+
+        $.ajax({
+            url: 'functionEditor.php',
+            type: 'post',
+            data: dataQualificationWork,
             success: function(response) {
                 alert(response);
                 if (response == "Saved Successfully") {

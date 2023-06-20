@@ -29,6 +29,10 @@ if(isset($_SESSION["user_id"])){
     // Retrieve all education qualifications for the user
     $educationQualificationQuery = mysqli_query($connection, "SELECT * FROM qualification_education_tab_tb WHERE edu_qua_user_id = $user_id");
     $educationQualification = mysqli_fetch_all($educationQualificationQuery, MYSQLI_ASSOC);
+    
+    // Retrieve all work qualifications for the user
+    $workQualificationQuery = mysqli_query($connection, "SELECT * FROM qualification_work_tab_tb WHERE work_qua_user_id = $user_id");
+    $workQualification = mysqli_fetch_all($workQualificationQuery, MYSQLI_ASSOC);
 
 }
 else{
@@ -341,7 +345,7 @@ else{
                 </div>
         
                 <div class="qualification__sections">
-                <?php foreach ($educationQualification as $eduQua) { ?>
+                    <?php foreach ($educationQualification as $eduQua) { ?>
                     <div class="qualification__content qualification__active " data-content id="education">
 
                         <div class="qualification__data">
@@ -417,19 +421,18 @@ else{
                             
                     </div> -->
                     </div>
-                <?php } ?>
+                    <?php } ?>
                     
-                    
-                    <!-- QUALIFICATION CONTENT 2 -->
+                    <?php foreach ($workQualification as $workQua) { ?>
                     <div class="qualification__content" data-content id="work">
-                        <!-- QUALIFICATION 1 -->
+                        
                         <div class="qualification__data">
                             <div>
-                                <h3 class="qualification__title">Software Developing Associate</h3>
-                                <span class="qualification__subtitle">Quomatrix - Bandarawela</span>
+                                <h3 class="qualification__title"><?php echo $workQua["work_qua_qualification"]; ?></h3>
+                                <span class="qualification__subtitle"><?php echo $workQua["work_qua_city"]; ?> - <?php echo $workQua["work_qua_institution"]; ?></span>
                                 <div class="qualification__calendar">
                                     <i class="uil uil-calendar-alt"></i>
-                                    2014 - 2016
+                                    <?php echo $workQua["work_qua_year_from"]; ?> - <?php echo $workQua["work_qua_year_to"]; ?>
                                 </div>
                             </div>
     
@@ -439,8 +442,8 @@ else{
                             </div>
                         </div>
     
-                        <!-- QUALIFICATION 2 -->
-                        <div class="qualification__data">
+                        
+                        <!-- <div class="qualification__data">
                             <div></div>
                             
                             <div>
@@ -460,7 +463,7 @@ else{
                             
                         </div>
     
-                        <!-- QUALIFICATION 3 -->
+                        
                         <div class="qualification__data">
                             <div>
                                 <h3 class="qualification__title">Data Capture Assocate</h3>
@@ -473,12 +476,12 @@ else{
     
                             <div>
                                 <span class="qualification__rounder"></span>
-                                <!-- <span class="qualification__line"></span> -->
+                                <span class="qualification__line"></span>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
-
+                    <?php } ?>
                     
                 </div>
             </div>

@@ -453,46 +453,59 @@ else{
                     
                     <div class="qualification__content" data-content id="work">
 
-                        <form action="" class="editor__form editor__border">
+                        <form action="" class="editor__form editor__border" method="post">
+                            <input type="hidden" id="actionQualificationWork" value="qualification_work">  
+                                <?php
+                            $result_qualification_work = mysqli_query($connection, "SELECT * FROM qualification_work_tab_tb WHERE work_qua_user_id = $user_id");
+                            while ($stmt_workQuaT = mysqli_fetch_assoc($result_qualification_work)) {
+                                $work_qua_id  = $stmt_workQuaT["work_qua_id "];
+                                $work_qua_qualification = $stmt_workQuaT["work_qua_qualification"];
+                                $work_qua_institution = $stmt_workQuaT["work_qua_institution"];
+                                $work_qua_city = $stmt_workQuaT["work_qua_city"];
+                                $work_qua_year_from = $stmt_workQuaT["work_qua_year_from"];
+                                $work_qua_year_to = $stmt_workQuaT["work_qua_year_to"];
+                                ?>
+                            <div class="qualification__data editor__border work_qualification__data">
 
-                            <div class="qualification__data editor__border">
-
-                                <i class="uil uil-times editor-icon remove__button"></i>
+                                <i class="uil uil-times editor-icon remove__button remove_qua_work__button" data-id="<?php echo $work_qua_id; ?>"></i>
+                                <input type="hidden" name="work_qua_id" id="work_qua_id" value="<?php echo $work_qua_id++; ?>">
                                 <div class="editor__inputs ">
                                     <div class="editor__content ">
                                         <i class="uil uil-book-reader editor-icon"></i>
-                                        <label for="" class="editor__label">Work Qualification</label>
-                                        <input type="text" class="editor__input" placeholder="Enter Quaification here" autocomplete="off">
+                                        <label for="work_qua_qualification" class="editor__label">Work Qualification</label>
+                                        <input name="work_qua_qualification" id="work_qua_qualification" type="text" class="editor__input" placeholder="Enter Quaification here" autocomplete="off" value="<?php echo $work_qua_qualification; ?>">
                                     </div>
                                     <div class="editor__content ">
                                         <i class="uil uil-building editor-icon"></i>
-                                        <label for="" class="editor__label">Company</label>
-                                        <input type="text" class="editor__input" placeholder="Enter URL here" autocomplete="off">
+                                        <label for="work_qua_institution" class="editor__label">Company</label>
+                                        <input name="work_qua_institution" id="work_qua_institution" type="text" class="editor__input" placeholder="Enter Work Institution here" autocomplete="off" value="<?php echo $work_qua_institution; ?>">
                                     </div>
                                     <div class="editor__content ">
                                         <i class="uil uil-map-marker-alt editor-icon"></i>
-                                        <label for="" class="editor__label">City</label>
-                                        <input type="text" class="editor__input" placeholder="Enter URL here"autocomplete="off">
+                                        <label for="work_qua_city" class="editor__label">City</label>
+                                        <input name="work_qua_city" id="work_qua_city" type="text" class="editor__input" placeholder="Enter City here"autocomplete="off" value="<?php echo $work_qua_city; ?>">
                                     </div>
                                     <div class="editor__content">
                                         <i class="uil uil-3-plus editor-icon" ></i>
-                                        <label for="work_year_from" class="editor__label">Year From</label>
-                                        <input name="work_year_from" id="work_year_from" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023" value="">
+                                        <label for="work_qua_year_from" class="editor__label">Year From</label>
+                                        <input name="work_qua_year_from" id="work_qua_year_from" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023"  value="<?php echo $work_qua_year_from; ?>">
                                         
                                     </div>
                                     <div class="editor__content">
                                         <i class="uil uil-3-plus editor-icon" ></i>
-                                        <label for="work_year_to" class="editor__label">Year To</label>
-                                        <input name="work_year_to" id="work_year_to" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023" value="">
+                                        <label for="work_qua_year_to" class="editor__label">Year To</label>
+                                        <input name="work_qua_year_to" id="work_qua_year_to" type="number" class="editor__input" placeholder="Enter year here" autocomplete="off" min="1990" max="2023"  value="<?php echo $work_qua_year_to; ?>">
                                         
                                     </div>
                                     
                                 </div>
                             </div>
-
+                            <?php
+                                }
+                                ?>
                             <i class="uil uil-plus editor-icon add__button add-work-qualification-button">Add New Qualification</i>
                             <div class="editor__save__button">
-                                <a href="#" class="button button--flex">
+                                <a href="#" class="button button--flex" onclick="event.preventDefault(); submitWorkQualificationData();">
                                         Save Changes
                                         <i class="uil uil-save button__icon"></i>
                                 </a>

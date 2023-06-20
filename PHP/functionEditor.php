@@ -17,6 +17,8 @@ if(isset($_POST["action"])){
         updateServices($user_id);
     } else if($_POST["action"] == "qualification_education"){
         updateQualificationEducation($user_id);
+    } else if($_POST["action"] == "qualification_work"){
+        updateQualificationWork($user_id);
     }
 }
 
@@ -38,6 +40,10 @@ if (isset($_POST['idServiceCategory'])) {
 
 if (isset($_POST['idEduQua'])) {
     removeEducationQualification();
+}
+
+if (isset($_POST['idWorkQua'])) {
+    removeWorkQualification();
 }
 
 
@@ -438,6 +444,56 @@ function updateQualificationEducation($user_id){
     echo "Saved Successfully";
 }
 
+function updateQualificationWork($user_id){
+    global $connection;
+
+    $workQuaData = json_decode($_POST['work_qua_data'], true);
+
+    foreach ($workQuaData as $qualificationWorkData) {
+        $work_qua_qualification = $connection->real_escape_string($qualificationWorkData['work_qua_qualification']);
+        $work_qua_institution = $connection->real_escape_string($qualificationWorkData['work_qua_institution']);
+        $work_qua_city = $connection->real_escape_string($qualificationWorkData['work_qua_city']);
+        $work_qua_year_from = $connection->real_escape_string($qualificationWorkData['work_qua_year_from']);
+        $work_qua_year_to = $connection->real_escape_string($qualificationWorkData['work_qua_year_to']);
+
+        // Check if the category already exists or needs to be inserted as a new category
+        if (isset($qualificationWorkData['work_qua_id '])) {
+            $work_qua_id  = $connection->real_escape_string($qualificationWorkData['work_qua_id ']);
+            
+            $stmtQuaWork = $connection->prepare("SELECT * FROM qualification_work_tab_tb WHERE work_qua_id = ?");
+            $stmtQuaWork->bind_param("i", $work_qua_id );
+            $stmtQuaWork->execute();
+            $result = $stmtQuaWork->get_result();
+
+            if ($result->num_rows > 0) {
+                $stmtQuaWork = $connection->prepare("UPDATE qualification_work_tab_tb SET work_qua_qualification = ?, work_qua_institution = ?, work_qua_city = ?, work_qua_year_from = ?, work_qua_year_to = ? WHERE work_qua_id  = ? AND work_qua_user_id = ?");
+                $stmtQuaWork->bind_param("sssiiii", $work_qua_qualification, $work_qua_institution, $work_qua_city, $work_qua_year_from, $work_qua_year_to, $work_qua_id , $user_id);
+                if (!$stmtQuaWork->execute()) {
+                        echo "Error updating skill category: " . $stmtQuaWork->error;
+                        return;
+                    }
+
+                } else {
+                echo "Go to add new work";
+                echo "Insert work id " . $work_qua_id ;
+                // Category ID doesn't exist, perform an insert
+                // Insert new skill category
+                // $stmtQuaWork = $connection->prepare("INSERT INTO qualification_work_tab_tb (work_qua_user_id , work_qua_qualification, work_qua_institution, work_qua_city, work_qua_year_from, work_qua_year_to) VALUES (?, ?, ?, ?, ?, ?)");
+                // $stmtQuaWork->bind_param("isssii", $user_id, $work_qua_qualification, $work_qua_institution, $work_qua_city, $work_qua_year_from, $work_qua_year_to);
+                // if (!$stmtQuaWork->execute()) {
+                //     echo "Error inserting skill category: " . $stmtQuaWork->error;
+                //     return;
+                // }
+                // $work_qua_id = $stmtQuaWork->insert_id;
+            }
+            
+        }
+        
+    }
+
+    echo "Saved Successfully";
+}
+
 function removeEducationQualification(){
     global $connection;
     $id = $_POST['idEduQua'];
@@ -447,6 +503,21 @@ function removeEducationQualification(){
     $stmtDeleteEduQua->execute();
 
     if ($stmtDeleteEduQua->affected_rows > 0) {
+        echo 'Removed Successfully';
+    } else {
+        // echo 'Removing Empty Skill';
+    }
+}
+
+function removeWorkQualification(){
+    global $connection;
+    $id = $_POST['idWorkQua'];
+
+    $stmtDeleteWorkQua = $connection->prepare("DELETE FROM qualification_work_tab_tb WHERE work_qua_id  = ?");
+    $stmtDeleteWorkQua->bind_param("i", $id);
+    $stmtDeleteWorkQua->execute();
+
+    if ($stmtDeleteWorkQua->affected_rows > 0) {
         echo 'Removed Successfully';
     } else {
         // echo 'Removing Empty Skill';
