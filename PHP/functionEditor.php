@@ -87,6 +87,12 @@ function updateAbout($user_id){
     $completedProjects = $_POST["completed_projects"];
     $companiesWorked = $_POST["companies_worked"];
 
+    if (isset($_FILES['photoInput']) && $_FILES['photoInput']['error'] === UPLOAD_ERR_OK) {
+        $photoData = file_get_contents($_FILES['photoInput']['tmp_name']);
+    } else {
+        $photoData = null;
+    }
+
     $stmtAbout = $connection->prepare("SELECT * FROM about_tab_tb WHERE aT_user_id = ?");
     $stmtAbout->bind_param("i", $user_id);
     $stmtAbout->execute();
@@ -94,14 +100,14 @@ function updateAbout($user_id){
 
     if ($result->num_rows > 0) {
         
-        $stmt = $connection->prepare("UPDATE about_tab_tb SET aT_about_user = ?, aT_Yo_Exp = ?, aT_No_Projects = ?, aT_No_companies = ? WHERE aT_user_id = ?");
-        $stmt->bind_param("ssssi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $user_id);
+        $stmt = $connection->prepare("UPDATE about_tab_tb SET aT_about_user = ?, aT_Yo_Exp = ?, aT_No_Projects = ?, aT_No_companies = ?, aT_about_img = ? WHERE aT_user_id = ?");
+        $stmt->bind_param("ssssbi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $photoData, $user_id);
         $stmt->execute();
         
     } else {
         
-        $stmt = $connection->prepare("INSERT INTO about_tab_tb (aT_about_user, aT_Yo_Exp, aT_No_Projects, aT_No_companies, aT_user_id) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $user_id);
+        $stmt = $connection->prepare("INSERT INTO about_tab_tb (aT_about_user, aT_Yo_Exp, aT_No_Projects, aT_No_companies, aT_about_img, aT_user_id) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssbi", $aboutUser, $yearsOfExperience, $completedProjects, $companiesWorked, $photoData, $user_id);
         $stmt->execute();
 
     }

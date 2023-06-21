@@ -47,8 +47,9 @@
                 years_of_experience: $('#years_of_experience').val(),
                 completed_projects: $('#completed_projects').val(),
                 companies_worked: $('#companies_worked').val(),
+                photoInput: $('#photoInput').prop('files')[0],
             };
-        
+            
             $.ajax({
                 url: 'functionEditor.php',
                 type: 'post',

@@ -176,7 +176,7 @@ else{
                                 <?php if ($stmt_hT) {
                                         echo base64_encode($stmt_hT["hT_profile_pic"]);
                                     } else {
-                                        echo "./assets/img/site/profile1.png";
+                                        // echo "./assets/img/site/profile1.png";
                                     } ?>
                                 "/>
                             </g>
@@ -272,11 +272,11 @@ else{
                         </div>
                     </div>
 
-                    <div class="about__buttons">
+                    <!-- <div class="about__buttons">
                         <a download="" href="./assets/pdf/Alexa-Cv.pdf" class="button button--flex">
                             Download CV <i class="uil uil-download-alt button__icon"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
