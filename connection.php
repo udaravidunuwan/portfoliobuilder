@@ -3,7 +3,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'project_portfolio_db';
+$database = 'portfoliobuilder_db';
 
 global $connection;
 $connection = mysqli_connect($host, $username, $password, $database);
